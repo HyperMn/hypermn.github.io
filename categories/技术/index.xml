@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术 on 个人随笔</title>
+    <link>http://www.hypermn.cn/categories/%E6%8A%80%E6%9C%AF/</link>
+    <description>Recent content in 技术 on 个人随笔</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2018-2022 HyperMn</copyright>
+    <lastBuildDate>Tue, 17 Aug 2021 12:49:05 +0800</lastBuildDate><atom:link href="http://www.hypermn.cn/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置</title>
+      <link>http://www.hypermn.cn/posts/centos7%E4%B8%8A%E8%BF%9B%E8%A1%8C%E5%85%AC%E7%BD%91%E5%8D%95%E5%AE%9E%E4%BE%8B%E7%9A%84coturn&#43;pixel-streaming%E7%9A%84%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 17 Aug 2021 12:49:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/posts/centos7%E4%B8%8A%E8%BF%9B%E8%A1%8C%E5%85%AC%E7%BD%91%E5%8D%95%E5%AE%9E%E4%BE%8B%E7%9A%84coturn&#43;pixel-streaming%E7%9A%84%E9%85%8D%E7%BD%AE/</guid>
+      <description>博主使用的服务器操作系统：CentOS7 x86_64  coturn安装与配置 安装需要的依赖包 GCC G++ OpenSSL Libevent-devel等 libevent   在http://libevent.org/下载libevent-2.1.8-stable.tar.gz（最新版即可，不必完全一致，但和coturn、openssl版本有一些对应关系）
+  tar -zxvf libevent-2.1.8-stable.tar.gz
+  cd libevent-2.1.8-stable
+  /configure
+  make
+  make install
+  默认安装在/usr/local/lib，也会输出“Libraries have been installed in: Path Name”，表明已经安装在了Path Name下。
+安装Coturn 其他博主多数推荐从GitHub下载coturn源码编译的方法，但是编译经常会报各种各样的错误，所以对于要求不高的用户，直接采用通过yum等方式安装本地包，在下方的网址下载对应的二进制包文件后本地安装即可。
+Coturn Download (APK, DEB, RPM, TXZ, XZ, ZST) (pkgs.org)
+Ubuntu系统自带apt-get，或者在安装了apt包管理器的情况下，也可以通过apt-get install coturn的方式直接安装，可能需要更换镜像源或apt-get upgrade来更新仓库。
+Coturn配置 参考了coturn穿透服务器搭建 - 简书 (jianshu.com)的做法
+  使用ifconfig命令检查网卡和私网地址
+  使用openssl req -x509 -newkey rsa:2048 -keyout /etc/turn_server_pkey.</description>
+    </item>
+    
+    <item>
+      <title>vs2017&#43;opencv4.2&#43;opencv_contrib配置教程</title>
+      <link>http://www.hypermn.cn/posts/vs2017&#43;opencv4.2&#43;opencv_contri%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Sat, 19 Dec 2020 13:43:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/posts/vs2017&#43;opencv4.2&#43;opencv_contri%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</guid>
+      <description>主要是结合了这两篇博文的方法，各有一些额外的坑没有提到。
+VS2019+opencv4.2.0+opencv contrib4.2.0
+opencv-contrib3.4.1编译及配置步骤，opencv_ffmpeg.dll、ippicv等失败的解决方法、
+ 博主机器环境：win10 64位+vs2017  准备工作 新版cmake下载安装   下载地址：https://cmake.org/download/
+  选择对应平台和版本的Installer即可
+  OpenCV和OpenCV_contrib下载   选择合适的OpenCV release版本（注意不是源代码版本！）此处是4.2release版本的github下载地址
+  在OpenCV_contrib的github仓库的Tag里选择和OpenCV版本号相同的OpenCV_contrib源代码版本，此处是4.2版本的github下载地址
+安装OpenCV   说是安装不如说是提取，用管理员权限打开下载好的OpenCV release版本，放在合适的位置，我的路径是D:\OpenCV，会自动在选择的文件下新建一个opencv文件夹。
+把opencv_contri的源代码解压到D:\OpenCV里，我们再手动新建一个build文件夹用于过会cmake编译
+完成之后的样子：
+cmake配置 打开cmake，填写一下source code和build路径，然后点击左下角configure
+之后会让你选择generator，选择vs2017，下方平台选择x64。
+一般由于网络原因，会遇到很多下载不了的文件。
+此时，可以给cmake命令挂个http代理，具体方法可以百度。
+如果没有挂代理的话（挂代理可以跳过本段了hhh），这时候就需要手动打开D:\OpenCV\build\CMakeDownloadLog.txt查看，引用下前面参考博客老哥的原文
+ 根据报错，解读信息：
+  的地址打开出错文件CMakeDownloadlog.txt。文件位置参照下图，也可以直接在安装目录搜索文件
+  文件具体名字，后面有版本号，一定要一一对应！！！
+  哈希值
+  下载地址
+   但是老哥说的有点复杂了，其实就是用4的地址下载，下载完的文件放在D:\OpenCV\opencv\sources\.cache里面的对应文件夹里面，并根据txt里的每个文件对应哈希值，改成文件夹里原来已有的文件名字，如下图（也是盗图）
+然后重新configure直到没有错误，我这里只有一个不需要的VTK的错误，而且描述称可以用选项来suppress it。
+那么就搜索opencv_e相关的选项，勾选opencv_enable_nonfree（不勾选的话没法使用一些申请过专利的库），
+也可以勾选opencv_world（可选），会生成opencv_world.lib，不过虽然方便，但是会在实际项目中造成冗余，添加不必要的库。
+填写contrib对应的路径，注意路径里的斜杠是/而不是\，否则会把‘’\O’识别成转义字符而出现解析错误。
+点击generate，静静等待generate done。应该还是有一些文件下载不成功，可以check一下是不是自己要用的，然后重复上文中的方法下载，这里没有我要用的，所以可以skip。
+然后点击open project，在打开的vs2017里面点击生成-批生成。在弹出的窗口里面选择的 debug 和release的ALL_BUILD和INATALL，然后点击“生成”。
+环境+项目配置 就快要胜利了！以下引用一下另一位博主的文章，快配完才发现这个博主已经写的很详细了，但是我还是踩了几个他文章里没讲到的坑&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>SCU疫情防控每日填报助手</title>
+      <link>http://www.hypermn.cn/posts/scu%E7%96%AB%E6%83%85%E9%98%B2%E6%8E%A7%E6%AF%8F%E6%97%A5%E5%A1%AB%E6%8A%A5%E5%8A%A9%E6%89%8B/</link>
+      <pubDate>Tue, 21 Apr 2020 14:00:37 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/posts/scu%E7%96%AB%E6%83%85%E9%98%B2%E6%8E%A7%E6%AF%8F%E6%97%A5%E5%A1%AB%E6%8A%A5%E5%8A%A9%E6%89%8B/</guid>
+      <description>川大疫情防控每日填报助手 GitHub仓库地址 川大疫情防控每日填报助手，用于解决忘记填写微信中身体状况每日打卡的问题。 本人不对因为滥用此程序造成的后果负责，请在合理且合法的范围内使用本程序。 本程序仅用于解决忘记打卡这一问题，如果身体状况发生变化或者地点发生变化，请务必在程序运行之前手动打卡。 理论上来说本程序适用于国内大多数高校的每日打卡，只需要替换代码中的提交网址并完成其他的适配性工作即可，其他学校有需求的同学可以修改本代码，但请遵守CC BY-NC-SA 3.0 许可协议。
+用法  修改脚本内的账号和密码 （可选）填写server酱的api，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用 放到服务器上，修改crontab，设定为每天八点半运行，注意需要修改以下命令的路径为实际路径。  30 8 * * * /usr/bin/python3 /root/ncov-scu/sub.py &amp;gt;&amp;gt;/tmp/yqfk.log 建议  定时时间设定到8:30，每天如果记起来了就手工填写，如果忘记了就由程序定时填写。填写的内容会和昨天的一致，地点也会保持昨天的地点不变。 脚本运行所在的服务器的地理位置不会影响打卡的位置。 如果手工完成了打卡，程序会显示今日已经打卡，不会影响之前手工打卡的结果。  注意  crontab会读取/etc/localtime的时区，而不是当前用户的时区，所以crontab里面的定时八点可能并不是UTC+8的早晨八点，解决方案是设置系统时区为UTC+8即可  TZ=Asia/Shanghai ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;amp;&amp;amp; echo $TZ &amp;gt; /etc/timezone 使用 GitHub Actions（推荐） 没有服务器的同学可以使用 GitHub Action 来进行运行, 使用步骤: - 克隆这个仓库到你名下 - fork的仓库默认禁用了workflow，需要手动打开：点击 actions选项卡，点击I understand my workflows, go ahead rand run them。 - 在仓库设置里面, 设置 secrets 如下 - SEP_USER_NAME: 你的账号 - SEP_PASSWD: 你的密码 - API_KEY: 你的通知 api key (强烈建议设置, 因为不设置这个 api key 你无法及时知晓运行状态) 参考截图设定以上三个secrets，API_KEY可选。 完成之后, 每天 UTC 0 点会触发github actions进行填报, (北京时间 8 点)。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>uncategorized on HyperMn&#39;s Notes</title>
+    <link>http://www.hypermn.cn/categories/uncategorized/</link>
+    <description>Recent content in uncategorized on HyperMn&#39;s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2018-2020 HyperMn</copyright>
+    <lastBuildDate>Fri, 22 May 2020 20:08:17 +0800</lastBuildDate><atom:link href="http://www.hypermn.cn/categories/uncategorized/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编译原理复习-(2)</title>
+      <link>http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-2/</link>
+      <pubDate>Fri, 22 May 2020 20:08:17 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-2/</guid>
+      <description>算法、常见题目 保留字和标识符的识别 处理很像标识符的保留字的方式： 初始化时就将各个保留字填入符号表中 为每个保留字建立单独的状态转换图（构建词法分析器的时候就是这种状态）
+基于状态图的词法分析器的体系结构 用变量state保存状态图当前状态的编号 用switch语句根据state的状态将我们转到对应于各个可能状态的相应代码段 一些改进策略：
+ 我们可以让词法分析器顺序地尝试各个词法单元的状态转换图。（但每个关键字，每种表示符都用各自独立的状态图，效率还是不高，可能会对很多字符串不断地重复操作） 可以并行地运行各个状态转换图，将下一个输入字符提供给所有的状态转换图，并使得每个状态转换图作出它应该执行的转换。（但是这样的话，由于每种分析器特点的不同，对这个字符流的操作要求就挺多的。为了实现这种并行，代码设计上和对内存空间可能都另有要求。 更好的方法是，也是通常最普遍的方式，就是将所有状态转换图合并为一个图。允许合并后的转换图尽量读取输入，直到不存在下一个状态为止  构造NFA，DFA，最小化（按照算法做） 构造NFA（使用Thompson结构）: 将NFA转换成DFA（子集构造）： 子集构造：参见Chapter_two(2).ppt 相关题目：2.1，2.12，2.16 等价NFA的开始状态A是ε-closure(0),即A={0,1,2,4,7}。 首先，标记A，计算Dtran[A,a]=ε-closure(move(A,a))=closure({3,8})={1,2,3,4,6,7,8}，我们记为集合B。接着计算Dtran[A,b]=&amp;hellip;=C。 然后继续计算Dtran[B,a],[B,b]&amp;hellip; 直到所有DFA状态被标记，我们得到了Dtran。 最小化DFA 首先把DFA状态划分为非接受状态和接受状态两个集合，然后根据每个状态在各输入符号的转移，如果转移后的状态所属集合的不同，则划入不同集合，重复多次直到不能再划分。 RE直接构造DFA 龙书3.9.1
+写最左推导，最右推导，画分析树和抽象语法树 相关题目：3.3
+写出给定程序的语法树，抽象语法树 相关题目：3.3
+二义性、结合性、优先级 可生成带有两个不同分析树的串的文法称作二义性文法（ambiguousgrammar） 相关题目：3.2 常见的二义性:悬挂else问题，算符优先级问题 左递归：左结合 右递归：右结合 优先级：越靠近终结符的优先级越高
+写出给定程序的递归下降分析程序（可能用伪代码，C程序），构造语法树 注意事项：在处理产生式A→ε时，可以忽略，或者使用A的Follow集合。不要试图去匹配ε（不然要被拉去登记的） 相关题目：4.2，4.3，4.4
+给定文法：消除左递归，提取公因子，求First Set，Follow Set，说明是否是LL(1)文法，构造LL(1)分析表，给出一个输入分析的动作 相关题目：4.7，4.8，4.10 消除左递归 替换为 提取左公因子 FIRST集合 FIRST(α)被定义为可从α推导得到的串的首符号的集合 1) 如果X是终结符，FIRST(X) = X 2) 如果X是非终结符，且X-&amp;gt;Y1Y2&amp;hellip;Yk是一个产生式，首先把FIRST(Y1)加入FIRST(X)，如果Y1能推出ε，那么把FIRST(Y2)加入FIRST(X)&amp;hellip;如果所有的Y1到Yk都能推出ε，那么我们把ε加入FIRST(X)。 3) 如果X-&amp;gt;ε是一个产生式，那么把ε加入FIRST(X)中
+FOLLOW集合 FOLLOW(A)被定义为可能在某些句型中紧跟在A右边的终结符号的集合，如果A是某些句型的最右符号，那么dollor(S那个符号)也在FOLLOW(A)中 1) 首先把dollor(S那个符号)加入FOLLOW(S)，S是开始符号 2) 如果存在产生式A-&amp;gt;αBβ，那么把{FIRST(β)-ε}加入FOLLOW(B) 3) 如果存在产生式A-&amp;gt;αB，或A-&amp;gt;αBβ且FIRST(β)包含ε，那么把FOLLOW(A)加入FOLLOW(B)
+LL1文法 构造 预测分析器，向前看一步。LL中第一个L表示从左向右扫描输入，第二个L表示产生最左推导。 LL1文法必须满足的条件： 接下来就是利用FIRST集合和FOLLOW集合的内容来构造预测分析表。我们可以进行如下处理 形如这个即可： 分析过程： 给定文法：求LR(0)的DFA，构造LR(0)和SLR(1)的分析表说明是否是LR(0)或SLR(1)文法（描述冲突）， 给定一个输入，写出LR(0),SLR(1)的分析步骤 相关题目：5.</description>
+    </item>
+    
+    <item>
+      <title>编译原理复习-(1)</title>
+      <link>http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-1/</link>
+      <pubDate>Mon, 18 May 2020 16:47:06 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-1/</guid>
+      <description>理论知识 编译的各个阶段 扫描程序(scanner) 在这个阶段编译器实际阅读源程序（通常以字符流的形式表示）。扫描程序执行词法分析（Lexical analysis）：它将字符序列收集到称作记号(token）的有意义单元中，记号同自然语言，如英语中的字词相似。
+语法分析程序(parser) 语法分析程序从扫描程序中获取记号形式的源代码，并完成定义程序结构的语法分析（syntax analysis），这与自然语言中句子的语法分析类似。语法分析定义了程序的结构元素及其关系。通常将语法分析的结果表示为分析树（parse tree）或语法树（syntax tree）。
+语义分析程序（semantic analyzer) 分析程序的静态语义，包括声明和类型检查。
+源代码优化程序（source code optimizer），代码生成器（code generator），目标代码优化程序（target code optimizer） 编译器的前端(front end),后端(back end), 趟(passes) 扫描程序、分析程序和语义分析程序是前端，代码生成器是后端。 在一个特定的实现中，多个步骤的活动可以被组合成一趟（pass）。每趟读入一个输入文件并产生一个输出文件。
+编译器  它是一种程序，能把源语言（高级语言）编写的程序翻译成等价的以目标语言（低级语言eg:汇编语言）编写的程序。
+ 优点： 在将输入映射到输出时，由编译器生成的机器语言目标程序通常比解释器快得多。
+解释器  根据用户提供的输入直接执行源程序中指定的操作。
+ 优点： 与编译器相比，解释器通常可以提供更好的错误诊断，因为它按语句执行源程序语句。
+串 以banana为例 前缀 ba 后缀 na 子串 ana 真前缀、真后缀、真子串 去除了ε和s本身 子序列 bnn
+上下文无关文法，最左推导，BNF，EBNF，乔姆斯基文法层次 一个上下文无关分发由终结符号、非终结符号、一个开始符号和一组产生式组成
+ 终结符号是组成串的基本符号。注意，术语”词法单元名字“是”终结符号“的同义词。 非终结符号是表示串的集合的语法变量 在一个文法中，某个非终结符号被指定为开始符号。且这个符号表示的串集合就是这个文法生成的语言 一个文法的产生式描述了将终结符号和非终结符号组成串的方法。每个产生式由下列元素组成    上下文无关文法说明程序设计语言的语法结构，利用了与正则表达式中极为类似的命名惯例和运算。 二者的主要区别在于上下文无关文法的规则是递归的（recursive）  符号表示的约定 终结符号：小写字母、运算符号、标点符号、数字、黑体字符串 非终结符：大写字母、字母S、小写斜体名 字母表中排在后面的大写字母表示文法符号。可表示非终结符号或终结符号，如XYZ。 字母表中排在后面的小写字母表示终结符号。 小写的希腊字母，α，β，γ表示文法符号串。 产生式可以分开写也可以并列 除非特别说明，第一个产生式的头就是开始符号。</description>
+    </item>
+    
+    <item>
+      <title>健身训练计划(转)</title>
+      <link>http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92%E8%BD%AC/</link>
+      <pubDate>Fri, 20 Mar 2020 14:27:17 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92%E8%BD%AC/</guid>
+      <description>内容转自微信公众号『卓叔增重』 大肌群：胸、肩、背、腿，小肌群：手臂、小腿、腰腹。 优先把大肌群练起来，顺便把小肌群带上。 周一：胸+肱三头肌 周三：背部+肱二头肌 周四：胸+肩 周五：背阔肌+大腿+小腿 每天的训练计划清单 每块肌肉的第一个动作，必须至少用15~20RM的小重量热身两组，并且适当拉伸肌肉，才能开始训练。 动作名称 组数，每组次数（力竭）
+周一：胸、肱三头肌 哑铃卧推 4组 8RM 上斜哑铃卧推 4组 12RM 平板哑铃飞鸟 4组 12RM 屈臂撑 3组 做到力竭 俯卧撑 3组 做到力竭 坐姿哑铃颈后臂屈伸 4组 8RM 背后屈臂撑 3组 做到力竭
+周三：背部、肱二头肌 宽握正手引体向上 共做30个，可分多组 斜凳哑铃划船 4组 8RM 俯身单臂哑铃划船 4组 12RM 反向划船 4组 12RM 哑铃硬拉 4组 8RM 哑铃弯举 3组 12RM 斜托哑铃弯举 3组 12RM
+周四：胸、肩 哑铃卧推 4组 12RM 上斜哑铃卧推 4组 12RM 坐姿哑铃推举 4组 8RM 阿诺德推举 4组 12RM 哑铃直立划船 4组 12RM 侧平举 3组 递减组 俯身侧平举 3组 递减组</description>
+    </item>
+    
+  </channel>
+</rss>

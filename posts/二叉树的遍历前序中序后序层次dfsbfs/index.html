@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html><head>
+<title>二叉树的遍历（前序、中序、后序、层次、DFS、BFS）</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="二叉树的遍历（前序、中序、后序、层次、DFS、BFS）" />
+<meta property="og:description" content="概念 前序遍历：根结点 &mdash;&gt; 左子树 &mdash;&gt; 右子树
+中序遍历：左子树&mdash;&gt; 根结点 &mdash;&gt; 右子树
+后序遍历：左子树 &mdash;&gt; 右子树 &mdash;&gt; 根结点
+层次遍历：只需按层次遍历即可
+一个例子  前序遍历：1 2 4 5 7 8 3 6 中序遍历：4 2 7 5 8 1 3 6 后序遍历：4 7 8 5 2 6 3 1 层次遍历：1 2 3 4 5 6 7 8  一、前序遍历  根据上文提到的遍历思路：根结点 &mdash;&gt; 左子树 &mdash;&gt; 右子树，很容易写出递归版本：  public void preOrderTraverse1(TreeNode root) { if (root != null) { System.out.print(root.val&#43;&#34; &#34;); preOrderTraverse1(root." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.hypermn.cn/posts/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%89%8D%E5%BA%8F%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E5%B1%82%E6%AC%A1dfsbfs/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-03-03T16:42:29+08:00" />
+<meta property="article:modified_time" content="2020-03-03T16:42:29+08:00" /><meta property="og:site_name" content="HyperMn&#39;s Notes" />
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="二叉树的遍历（前序、中序、后序、层次、DFS、BFS）"/>
+<meta name="twitter:description" content="概念 前序遍历：根结点 &mdash;&gt; 左子树 &mdash;&gt; 右子树
+中序遍历：左子树&mdash;&gt; 根结点 &mdash;&gt; 右子树
+后序遍历：左子树 &mdash;&gt; 右子树 &mdash;&gt; 根结点
+层次遍历：只需按层次遍历即可
+一个例子  前序遍历：1 2 4 5 7 8 3 6 中序遍历：4 2 7 5 8 1 3 6 后序遍历：4 7 8 5 2 6 3 1 层次遍历：1 2 3 4 5 6 7 8  一、前序遍历  根据上文提到的遍历思路：根结点 &mdash;&gt; 左子树 &mdash;&gt; 右子树，很容易写出递归版本：  public void preOrderTraverse1(TreeNode root) { if (root != null) { System.out.print(root.val&#43;&#34; &#34;); preOrderTraverse1(root."/>
+
+
+
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+
+
+
+<link rel="icon" href="http://image.hypermn.cn/favicon.jpg">
+
+
+
+
+<link rel="stylesheet" href="http://www.hypermn.cn/scss/journal.min.c116bc90d171283f099f173854157ec8f183f9073b93443b2c8ad82899ee9025.css" integrity="sha256-wRa8kNFxKD8Jnxc4VBV&#43;yPGD&#43;Qc7k0Q7LIrYKJnukCU=" media="screen">
+
+
+
+<link rel="stylesheet" href="http://www.hypermn.cn/scss/dark-mode.min.552aae4638a84aa57cf0b195750a49ea9131d3bb621d1ed3ebc9b14b18166536.css" integrity="sha256-VSquRjioSqV88LGVdQpJ6pEx07tiHR7T68mxSxgWZTY=" media="screen">
+
+
+<script src="http://www.hypermn.cn//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://google-fonts.mirrors.sjtug.sjtu.edu.cn/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="http://www.hypermn.cn//js/toc-collapse.js"></script>
+  
+
+
+
+
+
+
+
+<script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://www.hypermn.cn/">
+    
+        <div class="nav-title">
+            个人随笔
+        </div>
+        
+        <div class="nav-subtitle">
+            只言片语，汇聚于此
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                归档
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/link-exchange">
+                友情链接
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about">
+                关于
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2018-2022 HyperMn
+	
+<br><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer noopener">蜀ICP备20002998</a>
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%a6%82%e5%bf%b5" onclick="onNavClick(`#概念-nav`)" id="概念-nav">
+									概念
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e4%b8%aa%e4%be%8b%e5%ad%90" onclick="onNavClick(`#一个例子-nav`)" id="一个例子-nav">
+									一个例子
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e5%89%8d%e5%ba%8f%e9%81%8d%e5%8e%86" onclick="onNavClick(`#一前序遍历-nav`)" id="一前序遍历-nav">
+									一、前序遍历
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e4%b8%ad%e5%ba%8f%e9%81%8d%e5%8e%86" onclick="onNavClick(`#二中序遍历-nav`)" id="二中序遍历-nav">
+									二、中序遍历
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%b8%89%e5%90%8e%e5%ba%8f%e9%81%8d%e5%8e%86" onclick="onNavClick(`#三后序遍历-nav`)" id="三后序遍历-nav">
+									三、后序遍历
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%9b%9b%e5%b1%82%e6%ac%a1%e9%81%8d%e5%8e%86" onclick="onNavClick(`#四层次遍历-nav`)" id="四层次遍历-nav">
+									四、层次遍历
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e9%81%8d%e5%8e%86dfs%e4%b8%8e%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e9%81%8d%e5%8e%86bfs" onclick="onNavClick(`#二叉树的深度优先遍历dfs与广度优先遍历bfs-nav`)" id="二叉树的深度优先遍历dfs与广度优先遍历bfs-nav">
+									二叉树的深度优先遍历（DFS）与广度优先遍历（BFS）
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    归档
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/link-exchange">
+                    友情链接
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about">
+                    关于
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%a6%82%e5%bf%b5" onclick="onNavClick(`#概念-nav`)" id="概念-nav">
+									概念
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e4%b8%aa%e4%be%8b%e5%ad%90" onclick="onNavClick(`#一个例子-nav`)" id="一个例子-nav">
+									一个例子
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e5%89%8d%e5%ba%8f%e9%81%8d%e5%8e%86" onclick="onNavClick(`#一前序遍历-nav`)" id="一前序遍历-nav">
+									一、前序遍历
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e4%b8%ad%e5%ba%8f%e9%81%8d%e5%8e%86" onclick="onNavClick(`#二中序遍历-nav`)" id="二中序遍历-nav">
+									二、中序遍历
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%b8%89%e5%90%8e%e5%ba%8f%e9%81%8d%e5%8e%86" onclick="onNavClick(`#三后序遍历-nav`)" id="三后序遍历-nav">
+									三、后序遍历
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%9b%9b%e5%b1%82%e6%ac%a1%e9%81%8d%e5%8e%86" onclick="onNavClick(`#四层次遍历-nav`)" id="四层次遍历-nav">
+									四、层次遍历
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e9%81%8d%e5%8e%86dfs%e4%b8%8e%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e9%81%8d%e5%8e%86bfs" onclick="onNavClick(`#二叉树的深度优先遍历dfs与广度优先遍历bfs-nav`)" id="二叉树的深度优先遍历dfs与广度优先遍历bfs-nav">
+									二叉树的深度优先遍历（DFS）与广度优先遍历（BFS）
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="http://www.hypermn.cn/">
+            个人随笔
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://www.hypermn.cn/">
+        <div class="single-column-header-title">个人随笔</div>
+        
+        <div class="single-column-header-subtitle">只言片语，汇聚于此</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    二叉树的遍历（前序、中序、后序、层次、DFS、BFS）
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-03-03 16:42
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/">[算法]</a>
+                                &nbsp;
+                        
+
+                        
+                        
+                            <i class="material-icons" style="">schedule</i>
+                            
+
+                            
+                            
+
+                            
+                            7 min
+                            
+                            23 s.
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="概念">概念</h1>
+<p>前序遍历：根结点 &mdash;&gt; 左子树 &mdash;&gt; 右子树</p>
+<p>中序遍历：左子树&mdash;&gt; 根结点 &mdash;&gt; 右子树</p>
+<p>后序遍历：左子树 &mdash;&gt; 右子树 &mdash;&gt; 根结点</p>
+<p>层次遍历：只需按层次遍历即可</p>
+<h1 id="一个例子">一个例子</h1>
+<p><img src="https://img-blog.csdn.net/20150204101904649?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXlfSm9icw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<ul>
+<li>前序遍历：1  2  4  5  7  8  3  6</li>
+<li>中序遍历：4  2  7  5  8  1  3  6</li>
+<li>后序遍历：4  7  8  5  2  6  3  1</li>
+<li>层次遍历：1  2  3  4  5  6  7  8</li>
+</ul>
+<h2 id="一前序遍历">一、前序遍历</h2>
+<ol>
+<li>根据上文提到的遍历思路：根结点 &mdash;&gt; 左子树 &mdash;&gt; 右子树，很容易写出递归版本：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">preOrderTraverse1</span>(TreeNode root) {
+    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">!=</span> null) {
+        System.out.print(root.val<span style="color:#f92672">+</span><span style="color:#e6db74">&#34; &#34;</span>);
+        preOrderTraverse1(root.left);
+        preOrderTraverse1(root.right);
+    }
+}
+</code></pre></div><ol start="2">
+<li>现在讨论非递归的版本： 根据前序遍历的顺序，优先访问根结点，然后在访问左子树和右子树。所以，对于任意结点node，第一部分即直接访问之，之后在判断左子树是否为空，不为空时即重复上面的步骤，直到其为空。若为空，则需要访问右子树。注意，在访问过左孩子之后，需要反过来访问其右孩子，所以，需要栈这种数据结构的支持。对于任意一个结点node，具体步骤如下： a)访问之，并把结点node入栈，当前结点置为左孩子； b)判断结点node是否为空，若为空，则取出栈顶结点并出栈，将右孩子置为当前结点；否则重复a)步直到当前结点为空或者栈为空（可以发现栈中的结点就是为了访问右孩子才存储的） 代码如下：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">preOrderTraverse2</span>(TreeNode root) {
+        LinkedList stack <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList();
+        TreeNode pNode <span style="color:#f92672">=</span> root;
+        <span style="color:#66d9ef">while</span> (pNode <span style="color:#f92672">!=</span> null  <span style="color:#f92672">!</span>stack.isEmpty()) {
+            <span style="color:#66d9ef">if</span> (pNode <span style="color:#f92672">!=</span> null) {
+                System.out.print(pNode.val<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;  &#34;</span>);
+                stack.push(pNode);
+                pNode <span style="color:#f92672">=</span> pNode.left;
+            } <span style="color:#66d9ef">else</span> { <span style="color:#75715e">//pNode == null &amp;&amp; !stack.isEmpty()
+</span><span style="color:#75715e"></span>                TreeNode node <span style="color:#f92672">=</span> stack.pop();
+                pNode <span style="color:#f92672">=</span> node.right;
+            }
+        }
+    }
+</code></pre></div><h2 id="二中序遍历">二、中序遍历</h2>
+<ol>
+<li>根据上文提到的遍历思路：左子树 &mdash;&gt; 根结点 &mdash;&gt; 右子树，很容易写出递归版本：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">inOrderTraverse1</span>(TreeNode root) {
+        <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">!=</span> null) {
+            inOrderTraverse1(root.left);
+            System.out.print(root.val<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;  &#34;</span>);
+            inOrderTraverse1(root.right);
+        }
+    }
+</code></pre></div><ol start="2">
+<li>非递归实现，有了上面前序的解释，中序也就比较简单了，相同的道理。只不过访问的顺序移到出栈时。代码如下：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">inOrderTraverse2</span>(TreeNode root) {
+        LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> stack <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+        TreeNode pNode <span style="color:#f92672">=</span> root;
+        <span style="color:#66d9ef">while</span> (pNode <span style="color:#f92672">!=</span> null  <span style="color:#f92672">!</span>stack.isEmpty()) {
+            <span style="color:#66d9ef">if</span> (pNode <span style="color:#f92672">!=</span> null) {
+                stack.push(pNode);
+                pNode <span style="color:#f92672">=</span> pNode.left;
+            } <span style="color:#66d9ef">else</span> { <span style="color:#75715e">//pNode == null &amp;&amp; !stack.isEmpty()
+</span><span style="color:#75715e"></span>                TreeNode node <span style="color:#f92672">=</span> stack.pop();
+                System.out.print(node.val<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;  &#34;</span>);
+                pNode <span style="color:#f92672">=</span> node.right;
+            }
+        }
+    }
+</code></pre></div><h2 id="三后序遍历">三、后序遍历</h2>
+<ol>
+<li>根据上文提到的遍历思路：左子树 &mdash;&gt; 右子树 &mdash;&gt; 根结点，很容易写出递归版本：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">postOrderTraverse1</span>(TreeNode root) {
+        <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">!=</span> null) {
+            postOrderTraverse1(root.left);
+            postOrderTraverse1(root.right);
+            System.out.print(root.val<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;  &#34;</span>);
+        }
+    }
+</code></pre></div><ol start="2">
+<li>非递归的代码，暂且不写</li>
+</ol>
+<h2 id="四层次遍历">四、层次遍历</h2>
+<p>层次遍历的代码比较简单，只需要一个队列即可，先在队列中加入根结点。之后对于任意一个结点来说，在其出队列的时候，访问之。同时如果左孩子和右孩子有不为空的，入队列。代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">levelTraverse</span>(TreeNode root) {
+        <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> null) {
+            <span style="color:#66d9ef">return</span>;
+        }
+        LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+        queue.offer(root);
+        <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>queue.isEmpty()) {
+            TreeNode node <span style="color:#f92672">=</span> queue.poll();
+            System.out.print(node.val<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;  &#34;</span>);
+            <span style="color:#66d9ef">if</span> (node.left <span style="color:#f92672">!=</span> null) {
+                queue.offer(node.left);
+            }
+            <span style="color:#66d9ef">if</span> (node.right <span style="color:#f92672">!=</span> null) {
+                queue.offer(node.right);
+            }
+        }
+    }
+</code></pre></div><h1 id="二叉树的深度优先遍历dfs与广度优先遍历bfs">二叉树的深度优先遍历（DFS）与广度优先遍历（BFS）</h1>
+<ul>
+<li>
+<p>深度优先遍历：从根节点出发，沿着左子树方向进行纵向遍历，直到找到叶子节点为止。然后回溯到前一个节点，进行右子树节点的遍历，直到遍历完所有可达节点为止。</p>
+</li>
+<li>
+<p>广度优先遍历：从根节点出发，在横向遍历二叉树层段节点的基础上纵向遍历二叉树的层次。</p>
+</li>
+</ul>
+<p>DFS:ABDECFG BFS:ABCDEFG</p>
+<ul>
+<li>
+<p>DFS实现： 数据结构：栈 父节点入栈，父节点出栈，先右子节点入栈，后左子节点入栈。递归遍历全部节点即可</p>
+</li>
+<li>
+<p>BFS实现： 数据结构：队列 父节点入队，父节点出队列，先左子节点入队，后右子节点入队。递归遍历全部节点即可</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;malloc.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Stack&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Queue&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Node</span> {
+    <span style="color:#66d9ef">char</span> data;
+    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Node</span> <span style="color:#f92672">*</span>lchild;
+    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Node</span> <span style="color:#f92672">*</span>rchild;
+} <span style="color:#f92672">*</span>Tree;
+<span style="color:#75715e">//Tree 是一个node指针的类型定义
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">//全局索引变量
+</span><span style="color:#75715e">//二叉树构造器,按先序遍历顺序构造二叉树
+</span><span style="color:#75715e">//无左子树或右子树用&#39;#&#39;表示
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">treeNodeConstructor</span>(Tree <span style="color:#f92672">&amp;</span>root, <span style="color:#66d9ef">char</span> data[]){
+    <span style="color:#66d9ef">char</span> e <span style="color:#f92672">=</span> data[index<span style="color:#f92672">++</span>];
+    <span style="color:#66d9ef">if</span>(e <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;#&#39;</span>){
+        root <span style="color:#f92672">=</span> NULL;
+    }<span style="color:#66d9ef">else</span>{
+        root <span style="color:#f92672">=</span> (Node <span style="color:#f92672">*</span>)malloc(<span style="color:#66d9ef">sizeof</span>(Node));
+        root<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> e;
+        treeNodeConstructor(root<span style="color:#f92672">-&gt;</span>lchild, data);  <span style="color:#75715e">//递归构建左子树
+</span><span style="color:#75715e"></span>        treeNodeConstructor(root<span style="color:#f92672">-&gt;</span>rchild, data);  <span style="color:#75715e">//递归构建右子树
+</span><span style="color:#75715e"></span>    }
+}
+<span style="color:#75715e">//深度优先遍历
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">depthFirstSearch</span>(Tree root){
+    stack<span style="color:#f92672">&lt;</span>Node <span style="color:#f92672">*&gt;</span> nodeStack;  <span style="color:#75715e">//使用C++的STL标准模板库
+</span><span style="color:#75715e"></span>    nodeStack.push(root);
+    Node <span style="color:#f92672">*</span>node;
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>nodeStack.empty()){
+        node <span style="color:#f92672">=</span> nodeStack.top();
+        cout<span style="color:#f92672">&lt;&lt;</span>node<span style="color:#f92672">-&gt;</span>data;<span style="color:#75715e">//遍历根结点
+</span><span style="color:#75715e"></span>        nodeStack.pop();
+        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>rchild){
+            nodeStack.push(node<span style="color:#f92672">-&gt;</span>rchild);  <span style="color:#75715e">//先将右子树压栈
+</span><span style="color:#75715e"></span>        }
+        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>lchild){
+            nodeStack.push(node<span style="color:#f92672">-&gt;</span>lchild);  <span style="color:#75715e">//再将左子树压栈
+</span><span style="color:#75715e"></span>        }
+    }
+}
+
+<span style="color:#75715e">//广度优先遍历
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">breadthFirstSearch</span>(Tree root){
+    queue<span style="color:#f92672">&lt;</span>Node <span style="color:#f92672">*&gt;</span> nodeQueue;  <span style="color:#75715e">//使用C++的STL标准模板库
+</span><span style="color:#75715e"></span>    nodeQueue.push(root);
+    Node <span style="color:#f92672">*</span>node;
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>nodeQueue.empty()){
+        node <span style="color:#f92672">=</span> nodeQueue.front();
+        nodeQueue.pop();
+        cout<span style="color:#f92672">&lt;&lt;</span>node<span style="color:#f92672">-&gt;</span>data;<span style="color:#75715e">//遍历根结点
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>lchild){
+            nodeQueue.push(node<span style="color:#f92672">-&gt;</span>lchild);  <span style="color:#75715e">//先将左子树入队
+</span><span style="color:#75715e"></span>        }
+        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>rchild){
+            nodeQueue.push(node<span style="color:#f92672">-&gt;</span>rchild);  <span style="color:#75715e">//再将右子树入队
+</span><span style="color:#75715e"></span>        }
+    }
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">//上图所示的二叉树先序遍历序列,其中用&#39;#&#39;表示结点无左子树或无右子树
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> data[<span style="color:#ae81ff">15</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;B&#39;</span>, <span style="color:#e6db74">&#39;D&#39;</span>, <span style="color:#e6db74">&#39;#&#39;</span>, <span style="color:#e6db74">&#39;#&#39;</span>, <span style="color:#e6db74">&#39;E&#39;</span>, <span style="color:#e6db74">&#39;#&#39;</span>, <span style="color:#e6db74">&#39;#&#39;</span>, <span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">&#39;F&#39;</span>,<span style="color:#e6db74">&#39;#&#39;</span>, <span style="color:#e6db74">&#39;#&#39;</span>, <span style="color:#e6db74">&#39;G&#39;</span>, <span style="color:#e6db74">&#39;#&#39;</span>, <span style="color:#e6db74">&#39;#&#39;</span>};
+    Tree tree;
+    treeNodeConstructor(tree, data);
+    printf(<span style="color:#e6db74">&#34;深度优先遍历二叉树结果: &#34;</span>);
+    depthFirstSearch(tree);
+    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">广度优先遍历二叉树结果: &#34;</span>);
+    breadthFirstSearch(tree);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p><strong>转载自CSDN博主「zydoer」、</strong> <strong>「mingwanganyu」</strong></p>
+<p><a href="https://blog.csdn.net/mingwanganyu/article/details/72033122">https://blog.csdn.net/mingwanganyu/article/details/72033122</a></p>
+<p><a href="https://blog.csdn.net/My_Jobs/article/details/43451187">https://blog.csdn.net/My_Jobs/article/details/43451187</a></p>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2020-03-03</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92%E8%BD%AC/">
+			下回<br>健身训练计划(转)
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://www.hypermn.cn/posts/%E5%9B%9B%E5%B9%B4%E4%B8%80%E6%A2%A6%E4%BB%8E%E5%8C%96%E5%AD%A6%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA/">
+			上回<br>四年一梦，从化学，到计算机。
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+  <span id="/posts/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%89%8D%E5%BA%8F%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E5%B1%82%E6%AC%A1dfsbfs/" class="leancloud_visitors" data-flag-title="二叉树的遍历（前序、中序、后序、层次、DFS、BFS）">
+    <span class="post-meta-item-text">本文被阅读了</span>
+    <span class="leancloud-visitors-count">-1</span>
+    <span class="post-meta-item-text">次</span>
+    <p></p>
+  </span>
+<div id="vcomments"></div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2018-2022 HyperMn
+	
+<br><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer noopener">蜀ICP备20002998</a></div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+            new Valine({
+                el: '#vcomments',
+                appId: "z8RPLrUV3Mg90N0lQhn2Hh2O-gzGzoHsz",
+                appKey: "8vyFp2xk0ykpK907xTWwf2zv",
+		avatar_cdn: 'https:\/\/cdn.v2ex.com\/gravatar\/',
+                requiredFields: ['nick'],
+                enableQQ: true,
+                recordIP: true,
+		avatar: 'mp',
+		visitor:  true ,
+		placeholder: '说点什么吧...',
+		notify:  false ,
+		verify:  false 
+            })
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="http://www.hypermn.cn//js/journal.js"></script>
+    </body>
+</html>

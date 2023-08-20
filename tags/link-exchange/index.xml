@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>link-exchange on 个人随笔</title>
+    <link>http://www.hypermn.cn/tags/link-exchange/</link>
+    <description>Recent content in link-exchange on 个人随笔</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2018-2022 HyperMn</copyright>
+    <lastBuildDate>Mon, 30 Nov 2020 11:25:50 +0800</lastBuildDate><atom:link href="http://www.hypermn.cn/tags/link-exchange/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>友情链接</title>
+      <link>http://www.hypermn.cn/link-exchange/</link>
+      <pubDate>Mon, 30 Nov 2020 11:25:50 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/link-exchange/</guid>
+      <description>一个兆基 | 王兆基写字的地方 https://zhaoji.wang/</description>
+    </item>
+    
+  </channel>
+</rss>

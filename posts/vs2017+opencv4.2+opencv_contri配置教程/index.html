@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html><head>
+<title>vs2017&#43;opencv4.2&#43;opencv_contrib配置教程</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="vs2017&#43;opencv4.2&#43;opencv_contrib配置踩坑记录">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="vs2017&#43;opencv4.2&#43;opencv_contrib配置教程" />
+<meta property="og:description" content="vs2017&#43;opencv4.2&#43;opencv_contrib配置踩坑记录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.hypermn.cn/posts/vs2017&#43;opencv4.2&#43;opencv_contri%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-12-19T13:43:05+08:00" />
+<meta property="article:modified_time" content="2020-12-19T13:43:05+08:00" /><meta property="og:site_name" content="HyperMn&#39;s Notes" />
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vs2017&#43;opencv4.2&#43;opencv_contrib配置教程"/>
+<meta name="twitter:description" content="vs2017&#43;opencv4.2&#43;opencv_contrib配置踩坑记录"/>
+
+
+
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+
+
+
+<link rel="icon" href="http://image.hypermn.cn/favicon.jpg">
+
+
+
+
+<link rel="stylesheet" href="http://www.hypermn.cn/scss/journal.min.c116bc90d171283f099f173854157ec8f183f9073b93443b2c8ad82899ee9025.css" integrity="sha256-wRa8kNFxKD8Jnxc4VBV&#43;yPGD&#43;Qc7k0Q7LIrYKJnukCU=" media="screen">
+
+
+
+<link rel="stylesheet" href="http://www.hypermn.cn/scss/dark-mode.min.552aae4638a84aa57cf0b195750a49ea9131d3bb621d1ed3ebc9b14b18166536.css" integrity="sha256-VSquRjioSqV88LGVdQpJ6pEx07tiHR7T68mxSxgWZTY=" media="screen">
+
+
+<script src="http://www.hypermn.cn//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://google-fonts.mirrors.sjtug.sjtu.edu.cn/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="http://www.hypermn.cn//js/toc-collapse.js"></script>
+  
+
+
+
+
+
+
+
+<script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://www.hypermn.cn/">
+    
+        <div class="nav-title">
+            个人随笔
+        </div>
+        
+        <div class="nav-subtitle">
+            只言片语，汇聚于此
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                归档
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/link-exchange">
+                友情链接
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about">
+                关于
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2018-2022 HyperMn
+	
+<br><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer noopener">蜀ICP备20002998</a>
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c" onclick="onNavClick(`#准备工作-nav`)" id="准备工作-nav">
+									准备工作
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e6%96%b0%e7%89%88cmake%e4%b8%8b%e8%bd%bd%e5%ae%89%e8%a3%85" onclick="onNavClick(`#新版cmake下载安装-nav`)" id="新版cmake下载安装-nav">
+									新版cmake下载安装
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#opencv%e5%92%8copencv_contrib%e4%b8%8b%e8%bd%bd" onclick="onNavClick(`#opencv和opencv_contrib下载-nav`)" id="opencv和opencv_contrib下载-nav">
+									OpenCV和OpenCV_contrib下载
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%ae%89%e8%a3%85opencv" onclick="onNavClick(`#安装opencv-nav`)" id="安装opencv-nav">
+									安装OpenCV
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#cmake%e9%85%8d%e7%bd%ae" onclick="onNavClick(`#cmake配置-nav`)" id="cmake配置-nav">
+									cmake配置
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%8e%af%e5%a2%83%e9%a1%b9%e7%9b%ae%e9%85%8d%e7%bd%ae" onclick="onNavClick(`#环境项目配置-nav`)" id="环境项目配置-nav">
+									环境&#43;项目配置
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e9%85%8d%e7%bd%ae%e7%b3%bb%e7%bb%9f%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f" onclick="onNavClick(`#配置系统环境变量-nav`)" id="配置系统环境变量-nav">
+									配置系统环境变量
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%87%8d%e6%96%b0%e9%85%8d%e7%bd%ae%e9%a1%b9%e7%9b%ae%e7%8e%af%e5%a2%83" onclick="onNavClick(`#重新配置项目环境-nav`)" id="重新配置项目环境-nav">
+									重新配置项目环境
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93" onclick="onNavClick(`#结-nav`)" id="结-nav">
+									结
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    归档
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/link-exchange">
+                    友情链接
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about">
+                    关于
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c" onclick="onNavClick(`#准备工作-nav`)" id="准备工作-nav">
+									准备工作
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e6%96%b0%e7%89%88cmake%e4%b8%8b%e8%bd%bd%e5%ae%89%e8%a3%85" onclick="onNavClick(`#新版cmake下载安装-nav`)" id="新版cmake下载安装-nav">
+									新版cmake下载安装
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#opencv%e5%92%8copencv_contrib%e4%b8%8b%e8%bd%bd" onclick="onNavClick(`#opencv和opencv_contrib下载-nav`)" id="opencv和opencv_contrib下载-nav">
+									OpenCV和OpenCV_contrib下载
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%ae%89%e8%a3%85opencv" onclick="onNavClick(`#安装opencv-nav`)" id="安装opencv-nav">
+									安装OpenCV
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#cmake%e9%85%8d%e7%bd%ae" onclick="onNavClick(`#cmake配置-nav`)" id="cmake配置-nav">
+									cmake配置
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%8e%af%e5%a2%83%e9%a1%b9%e7%9b%ae%e9%85%8d%e7%bd%ae" onclick="onNavClick(`#环境项目配置-nav`)" id="环境项目配置-nav">
+									环境&#43;项目配置
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e9%85%8d%e7%bd%ae%e7%b3%bb%e7%bb%9f%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f" onclick="onNavClick(`#配置系统环境变量-nav`)" id="配置系统环境变量-nav">
+									配置系统环境变量
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%87%8d%e6%96%b0%e9%85%8d%e7%bd%ae%e9%a1%b9%e7%9b%ae%e7%8e%af%e5%a2%83" onclick="onNavClick(`#重新配置项目环境-nav`)" id="重新配置项目环境-nav">
+									重新配置项目环境
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93" onclick="onNavClick(`#结-nav`)" id="结-nav">
+									结
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="http://www.hypermn.cn/">
+            个人随笔
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://www.hypermn.cn/">
+        <div class="single-column-header-title">个人随笔</div>
+        
+        <div class="single-column-header-subtitle">只言片语，汇聚于此</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    vs2017&#43;opencv4.2&#43;opencv_contrib配置教程
+                    
+                    <div class="post-subtitle">
+                        vs2017&#43;opencv4.2&#43;opencv_contrib配置踩坑记录
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-12-19 13:43
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/">[技术]</a>
+                                &nbsp;
+                        
+
+                        
+                        
+                            <i class="material-icons" style="">schedule</i>
+                            
+
+                            
+                            
+
+                            
+                            10 min
+                            
+                            4 s.
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <p>主要是结合了这两篇博文的方法，各有一些额外的坑没有提到。</p>
+<p><a href="https://blog.csdn.net/weixin_44327116/article/details/110129723">VS2019+opencv4.2.0+opencv contrib4.2.0</a></p>
+<p><a href="https://www.pianshen.com/article/4295962091/">opencv-contrib3.4.1编译及配置步骤，opencv_ffmpeg.dll、ippicv等失败的解决方法</a>、</p>
+<ul>
+<li>博主机器环境：win10 64位+vs2017</li>
+</ul>
+<h1 id="准备工作">准备工作</h1>
+<h2 id="新版cmake下载安装">新版cmake下载安装</h2>
+<ul>
+<li>
+<p>下载地址：<a href="https://cmake.org/download/">https://cmake.org/download/</a></p>
+</li>
+<li>
+<p>选择对应平台和版本的Installer即可</p>
+<p><img src="http://image.hypermn.cn/image-20201219135202397.png" alt="image-20201219135202397"></p>
+</li>
+</ul>
+<h2 id="opencv和opencv_contrib下载">OpenCV和OpenCV_contrib下载</h2>
+<ul>
+<li>
+<p>选择合适的OpenCV <strong>release版本</strong>（注意<strong>不是</strong>源代码版本！）此处是4.2release版本的<a href="https://github.com/opencv/opencv/releases/tag/4.2.0">github下载地址</a></p>
+</li>
+<li>
+<p>在OpenCV_contrib的github仓库的<strong>Tag</strong>里选择和OpenCV版本号<strong>相同</strong>的OpenCV_contrib源代码版本，此处是4.2版本的<a href="https://github.com/opencv/opencv_contrib/releases/tag/4.2.0">github下载地址</a></p>
+<h1 id="安装opencv">安装OpenCV</h1>
+</li>
+</ul>
+<p>说是安装不如说是提取，<strong>用管理员权限</strong>打开下载好的OpenCV release版本，放在合适的位置，我的路径是<code>D:\OpenCV</code>，会自动在选择的文件下新建一个opencv文件夹。</p>
+<p>把opencv_contri的源代码解压到<code>D:\OpenCV</code>里，我们再手动新建一个build文件夹用于过会cmake编译</p>
+<p>完成之后的样子：</p>
+<p><img src="http://image.hypermn.cn/image-20201219140411564.png" alt="image-20201219140411564"></p>
+<h1 id="cmake配置">cmake配置</h1>
+<p>打开cmake，填写一下source code和build路径，然后点击左下角configure</p>
+<p><img src="http://image.hypermn.cn/image-20201219140807288.png" alt="image-20201219140807288"></p>
+<p>之后会让你选择generator，选择vs2017，下方平台选择x64。</p>
+<p><img src="http://image.hypermn.cn/image-20201219183749486.png" alt="image-20201219183749486"></p>
+<p>一般由于网络原因，会遇到很多下载不了的文件。</p>
+<p>此时，可以给cmake命令挂个http代理，具体方法可以百度。</p>
+<p>如果没有挂代理的话（挂代理可以跳过本段了hhh），这时候就需要手动打开<code>D:\OpenCV\build\CMakeDownloadLog.txt</code>查看，引用下前面参考博客老哥的原文</p>
+<blockquote>
+<p>根据报错，解读信息：</p>
+<ol>
+<li>
+<p>的地址打开出错文件CMakeDownloadlog.txt。文件位置参照下图，也可以直接在安装目录搜索文件</p>
+</li>
+<li>
+<p>文件具体名字，后面有版本号，一定要一一对应！！！</p>
+</li>
+<li>
+<p>哈希值</p>
+</li>
+<li>
+<p>下载地址</p>
+</li>
+</ol>
+<p><img src="https://www.pianshen.com/images/653/9a23fe9f1c952a1b0fe37c82f77d4bed.png" alt="img"></p>
+</blockquote>
+<p>但是老哥说的有点复杂了，其实就是用4的地址下载，下载完的文件放在<code>D:\OpenCV\opencv\sources\.cache</code>里面的对应文件夹里面，并根据txt里的每个文件对应哈希值，改成文件夹里原来已有的文件名字，如下图（也是盗图）</p>
+<p><img src="https://www.pianshen.com/images/797/b180f38ba2688ab65b7f73f7938f5a95.png" alt="img"></p>
+<p>然后重新configure直到没有错误，我这里只有一个不需要的VTK的错误，而且描述称可以用选项来suppress it。</p>
+<p>那么就搜索opencv_e相关的选项，勾选opencv_enable_nonfree（不勾选的话没法使用一些申请过专利的库），</p>
+<p>也可以勾选opencv_world（可选），会生成opencv_world.lib，不过虽然方便，但是会在实际项目中造成冗余，添加不必要的库。</p>
+<p>填写contrib对应的路径，<strong>注意</strong>路径里的斜杠是<code>/</code>而不是<code>\</code>，否则会把‘’\O’识别成转义字符而出现解析错误。</p>
+<p><img src="http://image.hypermn.cn/image-20201219144550788.png" alt="image-20201219144550788"></p>
+<p>点击generate，静静等待generate done。应该还是有一些文件下载不成功，可以check一下是不是自己要用的，然后重复上文中的方法下载，这里没有我要用的，所以可以skip。</p>
+<p>然后点击open project，在打开的vs2017里面点击生成-批生成。在弹出的窗口里面选择的 debug 和release的ALL_BUILD和INATALL，然后点击“生成”。</p>
+<p><img src="http://image.hypermn.cn/image-20201219151326616.png" alt="image-20201219151326616"></p>
+<h1 id="环境项目配置">环境+项目配置</h1>
+<p>就快要胜利了！以下引用一下另一位博主的<a href="https://blog.csdn.net/weijifen000/article/details/93377143">文章</a>，快配完才发现这个博主已经写的很详细了，但是我还是踩了几个他文章里没讲到的坑&hellip;</p>
+<p><code>注意修改下方路径以及lib的版本号为自己需要的路径/版本！</code></p>
+<blockquote>
+<h2 id="配置系统环境变量">配置系统环境变量</h2>
+<p>生成结束之后，需要修改环境变量。</p>
+<p>环境变量在<code>“此电脑”-&gt;“属性”-&gt;“高级系统设置”-&gt;“环境变量”</code>，在用户变量里面的 Path 变量后面添加<code>之前CMake设置的build目录\install\x64\vc16\bin</code>，确定，退出。</p>
+<p>如果 visual studio 在修改环境变量之前就打开了，需要重启visual studio</p>
+<h2 id="重新配置项目环境">重新配置项目环境</h2>
+<p>visual studio 中右击项目-&gt;“属性”，
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3MS5zaW5haW1nLmNuL2xhcmdlLzAwNjJhSU9FbHkxZzRhZWgyZWY2ZGozMGFjMGpqcTN6LmpwZw" alt="img">
+首先可以选择“所有配置” “所有平台”，编辑包含目录和库目录
+包含目录编辑为</p>
+<pre><code>生成的 build 目录\install\include
+生成的 build 目录\install\include\opencv2
+</code></pre><p>库目录编辑为：</p>
+<pre><code>生成的 build 目录\install\x64\vc15\lib
+（vc15对应vs2017，vc16对应2019，其余版本类推）
+</code></pre><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3MS5zaW5haW1nLmNuL2xhcmdlLzAwNjJhSU9FbHkxZzRhZW00Y2g4Z2ozMG9tMGdvZGgyLmpwZw" alt="img">
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3MS5zaW5haW1nLmNuL2xhcmdlLzAwNjJhSU9FbHkxZzRhZW9rdGlobWozMGo2MGJrMHRsLmpwZw" alt="img">
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3MS5zaW5haW1nLmNuL2xhcmdlLzAwNjJhSU9FbHkxZzRhZXN3YTZodWozMG9hMGJtanNmLmpwZw" alt="img">
+编辑包含目录和库目录之后，需要添加附加依赖项，此时需要分别针对 debug 和release两种模式添加。
+打开 <code>生成的build目录\install\x64\vc15\lib</code>可以发现每个lib文件都有两种，一种是以<code>d.lib</code>结尾，另一种只比前一种少了一个d,只以<code>.lib</code>结尾。debug模式需要<code>d.lib</code>结尾文件，release模式需要<code>.lib</code>结尾文件，任何一种模式配置错误，就不能以该模式运行opencv。
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3MS5zaW5haW1nLmNuL2xhcmdlLzAwNjJhSU9FbHkxZzRhZXdwZGZiamozMGszMGlsanRrLmpwZw" alt="img">
+所以需要在编辑附加依赖项时添加各自需要的文件名。
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3MS5zaW5haW1nLmNuL2xhcmdlLzAwNjJhSU9FbHkxZzRhZjJkeHFpNGozMG9qMGdvZ21wLmpwZw" alt="img">
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3MS5zaW5haW1nLmNuL2xhcmdlLzAwNjJhSU9FbHkxZzRhZjRobDBkZGozMG8zMGdmcTRhLmpwZw" alt="img"></p>
+</blockquote>
+<p>420debug版本的lib：</p>
+<pre><code>opencv_aruco420d.lib
+opencv_bgsegm420d.lib
+opencv_bioinspired420d.lib
+opencv_calib3d420d.lib
+opencv_ccalib420d.lib
+opencv_core420d.lib
+opencv_datasets420d.lib
+opencv_dnn420d.lib
+opencv_dnn_objdetect420d.lib
+opencv_dpm420d.lib
+opencv_face420d.lib
+opencv_features2d420d.lib
+opencv_flann420d.lib
+opencv_fuzzy420d.lib
+opencv_gapi420d.lib
+opencv_hfs420d.lib
+opencv_highgui420d.lib
+opencv_imgcodecs420d.lib
+opencv_imgproc420d.lib
+opencv_img_hash420d.lib
+opencv_line_descriptor420d.lib
+opencv_ml420d.lib
+opencv_objdetect420d.lib
+opencv_optflow420d.lib
+opencv_phase_unwrapping420d.lib
+opencv_photo420d.lib
+opencv_plot420d.lib
+opencv_reg420d.lib
+opencv_rgbd420d.lib
+opencv_saliency420d.lib
+opencv_shape420d.lib
+opencv_stereo420d.lib
+opencv_structured_light420d.lib
+opencv_superres420d.lib
+opencv_surface_matching420d.lib
+opencv_text420d.lib
+opencv_tracking420d.lib
+opencv_video420d.lib
+opencv_videoio420d.lib
+opencv_videostab420d.lib
+opencv_ximgproc420d.lib
+opencv_xobjdetect420d.lib
+opencv_xphoto420d.lib
+</code></pre><p>420release版本的lib：</p>
+<pre><code>opencv_aruco420.lib
+opencv_bgsegm420.lib
+opencv_bioinspired420.lib
+opencv_calib3d420.lib
+opencv_ccalib420.lib
+opencv_core420.lib
+opencv_datasets420.lib
+opencv_dnn420.lib
+opencv_dnn_objdetect420.lib
+opencv_dpm420.lib
+opencv_face420.lib
+opencv_features2d420.lib
+opencv_flann420.lib
+opencv_fuzzy420.lib
+opencv_gapi420.lib
+opencv_hfs420.lib
+opencv_highgui420.lib
+opencv_imgcodecs420.lib
+opencv_imgproc420.lib
+opencv_img_hash420.lib
+opencv_line_descriptor420.lib
+opencv_ml420.lib
+opencv_objdetect420.lib
+opencv_optflow420.lib
+opencv_phase_unwrapping420.lib
+opencv_photo420.lib
+opencv_plot420.lib
+opencv_reg420.lib
+opencv_rgbd420.lib
+opencv_saliency420.lib
+opencv_shape420.lib
+opencv_stereo420.lib
+opencv_structured_light420.lib
+opencv_superres420.lib
+opencv_surface_matching420.lib
+opencv_text420.lib
+opencv_tracking420.lib
+opencv_video420.lib
+opencv_videoio420.lib
+opencv_videostab420.lib
+opencv_ximgproc420.lib
+opencv_xobjdetect420.lib
+opencv_xphoto420.lib
+</code></pre><h1 id="结">结</h1>
+<p>环境配好了就可以跑测试代码试一下了！</p>
+<p>花了一天多时间用在配opencv的cpp环境，踩了无数坑，怨念太深了。<del>GFW还是太阻碍技术进步了</del></p>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2020-12-19</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="http://www.hypermn.cn/posts/2020%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+			下回<br>2020年度总结
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://www.hypermn.cn/posts/%E5%85%B3%E4%BA%8E%E5%B7%9D%E5%A4%A7%E4%BF%9D%E7%A0%94%E7%9A%84%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/">
+			上回<br>疫情时期的川大保研心路历程分享
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+  <span id="/posts/vs2017&#43;opencv4.2&#43;opencv_contri%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" class="leancloud_visitors" data-flag-title="vs2017&#43;opencv4.2&#43;opencv_contrib配置教程">
+    <span class="post-meta-item-text">本文被阅读了</span>
+    <span class="leancloud-visitors-count">-1</span>
+    <span class="post-meta-item-text">次</span>
+    <p></p>
+  </span>
+<div id="vcomments"></div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2018-2022 HyperMn
+	
+<br><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer noopener">蜀ICP备20002998</a></div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+            new Valine({
+                el: '#vcomments',
+                appId: "z8RPLrUV3Mg90N0lQhn2Hh2O-gzGzoHsz",
+                appKey: "8vyFp2xk0ykpK907xTWwf2zv",
+		avatar_cdn: 'https:\/\/cdn.v2ex.com\/gravatar\/',
+                requiredFields: ['nick'],
+                enableQQ: true,
+                recordIP: true,
+		avatar: 'mp',
+		visitor:  true ,
+		placeholder: '说点什么吧...',
+		notify:  false ,
+		verify:  false 
+            })
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="http://www.hypermn.cn//js/journal.js"></script>
+    </body>
+</html>

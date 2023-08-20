@@ -1,0 +1,322 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>个人随笔</title>
+    <link>http://www.hypermn.cn/</link>
+    <description>Recent content on 个人随笔</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2018-2022 HyperMn</copyright>
+    <lastBuildDate>Wed, 10 Aug 2022 23:59:59 +0800</lastBuildDate>
+    
+        <atom:link href="http://www.hypermn.cn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>二叉树的遍历（前序、中序、后序、层次、DFS、BFS）</title>
+        <link>http://www.hypermn.cn/posts/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%89%8D%E5%BA%8F%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E5%B1%82%E6%AC%A1dfsbfs/</link>
+        <pubDate>Tue, 03 Mar 2020 16:42:29 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%89%8D%E5%BA%8F%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E5%B1%82%E6%AC%A1dfsbfs/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%89%8D%E5%BA%8F%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E5%B1%82%E6%AC%A1dfsbfs/ -&lt;h1 id=&#34;概念&#34;&gt;概念&lt;/h1&gt;
+&lt;p&gt;前序遍历：根结点 &amp;mdash;&amp;gt; 左子树 &amp;mdash;&amp;gt; 右子树&lt;/p&gt;
+&lt;p&gt;中序遍历：左子树&amp;mdash;&amp;gt; 根结点 &amp;mdash;&amp;gt; 右子树&lt;/p&gt;
+&lt;p&gt;后序遍历：左子树 &amp;mdash;&amp;gt; 右子树 &amp;mdash;&amp;gt; 根结点&lt;/p&gt;
+&lt;p&gt;层次遍历：只需按层次遍历即可&lt;/p&gt;
+&lt;h1 id=&#34;一个例子&#34;&gt;一个例子&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdn.net/20150204101904649?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTXlfSm9icw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;前序遍历：1  2  4  5  7  8  3  6&lt;/li&gt;
+&lt;li&gt;中序遍历：4  2  7  5  8  1  3  6&lt;/li&gt;
+&lt;li&gt;后序遍历：4  7  8  5  2  6  3  1&lt;/li&gt;
+&lt;li&gt;层次遍历：1  2  3  4  5  6  7  8&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;一前序遍历&#34;&gt;一、前序遍历&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;根据上文提到的遍历思路：根结点 &amp;mdash;&amp;gt; 左子树 &amp;mdash;&amp;gt; 右子树，很容易写出递归版本：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;preOrderTraverse1&lt;/span&gt;(TreeNode root) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (root &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; null) {
+        System.out.print(root.val&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;);
+        preOrderTraverse1(root.left);
+        preOrderTraverse1(root.right);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;现在讨论非递归的版本： 根据前序遍历的顺序，优先访问根结点，然后在访问左子树和右子树。所以，对于任意结点node，第一部分即直接访问之，之后在判断左子树是否为空，不为空时即重复上面的步骤，直到其为空。若为空，则需要访问右子树。注意，在访问过左孩子之后，需要反过来访问其右孩子，所以，需要栈这种数据结构的支持。对于任意一个结点node，具体步骤如下： a)访问之，并把结点node入栈，当前结点置为左孩子； b)判断结点node是否为空，若为空，则取出栈顶结点并出栈，将右孩子置为当前结点；否则重复a)步直到当前结点为空或者栈为空（可以发现栈中的结点就是为了访问右孩子才存储的） 代码如下：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;preOrderTraverse2&lt;/span&gt;(TreeNode root) {
+        LinkedList stack &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; LinkedList();
+        TreeNode pNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (pNode &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; null  &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;stack.isEmpty()) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (pNode &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; null) {
+                System.out.print(pNode.val&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  &amp;#34;&lt;/span&gt;);
+                stack.push(pNode);
+                pNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pNode.left;
+            } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; { &lt;span style=&#34;color:#75715e&#34;&gt;//pNode == null &amp;amp;&amp;amp; !stack.isEmpty()
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;                TreeNode node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stack.pop();
+                pNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; node.right;
+            }
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;二中序遍历&#34;&gt;二、中序遍历&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;根据上文提到的遍历思路：左子树 &amp;mdash;&amp;gt; 根结点 &amp;mdash;&amp;gt; 右子树，很容易写出递归版本：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inOrderTraverse1&lt;/span&gt;(TreeNode root) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (root &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; null) {
+            inOrderTraverse1(root.left);
+            System.out.print(root.val&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  &amp;#34;&lt;/span&gt;);
+            inOrderTraverse1(root.right);
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;非递归实现，有了上面前序的解释，中序也就比较简单了，相同的道理。只不过访问的顺序移到出栈时。代码如下：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inOrderTraverse2&lt;/span&gt;(TreeNode root) {
+        LinkedList&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;TreeNode&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; stack &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; LinkedList&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;();
+        TreeNode pNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (pNode &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; null  &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;stack.isEmpty()) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (pNode &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; null) {
+                stack.push(pNode);
+                pNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pNode.left;
+            } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; { &lt;span style=&#34;color:#75715e&#34;&gt;//pNode == null &amp;amp;&amp;amp; !stack.isEmpty()
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;                TreeNode node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stack.pop();
+                System.out.print(node.val&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  &amp;#34;&lt;/span&gt;);
+                pNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; node.right;
+            }
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;三后序遍历&#34;&gt;三、后序遍历&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;根据上文提到的遍历思路：左子树 &amp;mdash;&amp;gt; 右子树 &amp;mdash;&amp;gt; 根结点，很容易写出递归版本：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;postOrderTraverse1&lt;/span&gt;(TreeNode root) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (root &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; null) {
+            postOrderTraverse1(root.left);
+            postOrderTraverse1(root.right);
+            System.out.print(root.val&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  &amp;#34;&lt;/span&gt;);
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;非递归的代码，暂且不写&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;四层次遍历&#34;&gt;四、层次遍历&lt;/h2&gt;
+&lt;p&gt;层次遍历的代码比较简单，只需要一个队列即可，先在队列中加入根结点。之后对于任意一个结点来说，在其出队列的时候，访问之。同时如果左孩子和右孩子有不为空的，入队列。代码如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;levelTraverse&lt;/span&gt;(TreeNode root) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (root &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; null) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+        }
+        LinkedList&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;TreeNode&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; queue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; LinkedList&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;();
+        queue.offer(root);
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;queue.isEmpty()) {
+            TreeNode node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; queue.poll();
+            System.out.print(node.val&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  &amp;#34;&lt;/span&gt;);
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (node.left &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; null) {
+                queue.offer(node.left);
+            }
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (node.right &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; null) {
+                queue.offer(node.right);
+            }
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;二叉树的深度优先遍历dfs与广度优先遍历bfs&#34;&gt;二叉树的深度优先遍历（DFS）与广度优先遍历（BFS）&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;深度优先遍历：从根节点出发，沿着左子树方向进行纵向遍历，直到找到叶子节点为止。然后回溯到前一个节点，进行右子树节点的遍历，直到遍历完所有可达节点为止。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;广度优先遍历：从根节点出发，在横向遍历二叉树层段节点的基础上纵向遍历二叉树的层次。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;DFS:ABDECFG BFS:ABCDEFG&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;DFS实现： 数据结构：栈 父节点入栈，父节点出栈，先右子节点入栈，后左子节点入栈。递归遍历全部节点即可&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;BFS实现： 数据结构：队列 父节点入队，父节点出队列，先左子节点入队，后右子节点入队。递归遍历全部节点即可&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;malloc.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;Stack&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;Queue&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Node&lt;/span&gt; {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; data;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Node&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;lchild;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Node&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;rchild;
+} &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;Tree;
+&lt;span style=&#34;color:#75715e&#34;&gt;//Tree 是一个node指针的类型定义
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;//全局索引变量
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//二叉树构造器,按先序遍历顺序构造二叉树
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//无左子树或右子树用&amp;#39;#&amp;#39;表示
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;treeNodeConstructor&lt;/span&gt;(Tree &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;root, &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; data[]){
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; e &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data[index&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;];
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(e &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;){
+        root &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; NULL;
+    }&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;{
+        root &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (Node &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;)malloc(&lt;span style=&#34;color:#66d9ef&#34;&gt;sizeof&lt;/span&gt;(Node));
+        root&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; e;
+        treeNodeConstructor(root&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;lchild, data);  &lt;span style=&#34;color:#75715e&#34;&gt;//递归构建左子树
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        treeNodeConstructor(root&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;rchild, data);  &lt;span style=&#34;color:#75715e&#34;&gt;//递归构建右子树
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    }
+}
+&lt;span style=&#34;color:#75715e&#34;&gt;//深度优先遍历
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;depthFirstSearch&lt;/span&gt;(Tree root){
+    stack&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Node &lt;span style=&#34;color:#f92672&#34;&gt;*&amp;gt;&lt;/span&gt; nodeStack;  &lt;span style=&#34;color:#75715e&#34;&gt;//使用C++的STL标准模板库
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    nodeStack.push(root);
+    Node &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;node;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;nodeStack.empty()){
+        node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nodeStack.top();
+        cout&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;data;&lt;span style=&#34;color:#75715e&#34;&gt;//遍历根结点
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        nodeStack.pop();
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;rchild){
+            nodeStack.push(node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;rchild);  &lt;span style=&#34;color:#75715e&#34;&gt;//先将右子树压栈
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        }
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;lchild){
+            nodeStack.push(node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;lchild);  &lt;span style=&#34;color:#75715e&#34;&gt;//再将左子树压栈
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        }
+    }
+}
+
+&lt;span style=&#34;color:#75715e&#34;&gt;//广度优先遍历
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;breadthFirstSearch&lt;/span&gt;(Tree root){
+    queue&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Node &lt;span style=&#34;color:#f92672&#34;&gt;*&amp;gt;&lt;/span&gt; nodeQueue;  &lt;span style=&#34;color:#75715e&#34;&gt;//使用C++的STL标准模板库
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    nodeQueue.push(root);
+    Node &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;node;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;nodeQueue.empty()){
+        node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nodeQueue.front();
+        nodeQueue.pop();
+        cout&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;data;&lt;span style=&#34;color:#75715e&#34;&gt;//遍历根结点
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;lchild){
+            nodeQueue.push(node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;lchild);  &lt;span style=&#34;color:#75715e&#34;&gt;//先将左子树入队
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        }
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;rchild){
+            nodeQueue.push(node&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;rchild);  &lt;span style=&#34;color:#75715e&#34;&gt;//再将右子树入队
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        }
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+    &lt;span style=&#34;color:#75715e&#34;&gt;//上图所示的二叉树先序遍历序列,其中用&amp;#39;#&amp;#39;表示结点无左子树或无右子树
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; data[&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;B&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;E&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;F&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;G&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;};
+    Tree tree;
+    treeNodeConstructor(tree, data);
+    printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;深度优先遍历二叉树结果: &amp;#34;&lt;/span&gt;);
+    depthFirstSearch(tree);
+    printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;广度优先遍历二叉树结果: &amp;#34;&lt;/span&gt;);
+    breadthFirstSearch(tree);
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;转载自CSDN博主「zydoer」、&lt;/strong&gt; &lt;strong&gt;「mingwanganyu」&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/mingwanganyu/article/details/72033122&#34;&gt;https://blog.csdn.net/mingwanganyu/article/details/72033122&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/My_Jobs/article/details/43451187&#34;&gt;https://blog.csdn.net/My_Jobs/article/details/43451187&lt;/a&gt;&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%89%8D%E5%BA%8F%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E5%B1%82%E6%AC%A1dfsbfs/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>四年一梦，从化学，到计算机。</title>
+        <link>http://www.hypermn.cn/posts/%E5%9B%9B%E5%B9%B4%E4%B8%80%E6%A2%A6%E4%BB%8E%E5%8C%96%E5%AD%A6%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA/</link>
+        <pubDate>Sat, 29 Feb 2020 19:24:12 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E5%9B%9B%E5%B9%B4%E4%B8%80%E6%A2%A6%E4%BB%8E%E5%8C%96%E5%AD%A6%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E5%9B%9B%E5%B9%B4%E4%B8%80%E6%A2%A6%E4%BB%8E%E5%8C%96%E5%AD%A6%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA/ -&lt;p&gt;今天，2020年2月29日。久违的四年（或更久）一度的日子，但其实没什么特别之处，按理说只是一个天文学和进制而人为制造的一个日子。这几年关于闰年的记忆不多，无非就是在上c语言课的时候做的经典语法题，判断闰年。空间里不少人去翻那年今日，大多也就是2016年的2月29日。我也跟风去看，发现16年的今天并没有发说说，16年2月28日倒是发过一条说说。内容是Kitty学长和化竞吧命题组（?)在等巴基斯坦的IChO预备题出来，不过下午六点也还显示着“Will Available Soon&amp;hellip;”&lt;/p&gt;
+&lt;p&gt;昨天和朋友聊天，她说如果当初选了理科一切会不会不一样，我是不敢去想象选文科的我会怎么样，想了一万个理由也是没有动力去学文的。那四年前我又在干些什么呢，四年前的寒假应该在学习化学竞赛，但最后只是随意的看了看大本，然后回来后的有机还是只能考30多分&amp;hellip;半年后的暑假，我的最后一次竞赛考试大概只差了几分就能进省队。想来想去可能还是有机学的太差了，第一题送分大概也只拿了一半，后面有题跟画图联考里的某道有机很像，几乎是原题，也是人名反应里的，仗着一点记性混了几分。然后就是结构整道题估计零分，我也不知道让我写磷氧化合物然后磷氧比是几比几之间的时候我写了一个什么磷酸我是怎么想的，可能这就是脑残当场发作吧。&lt;/p&gt;
+&lt;p&gt;现在来看高中期间最后悔的一件事大概是学了化学竞赛而没有学信息学竞赛，我倒是一直想读计算机，无关风向或者就业。而且如果把化学省一换成OI省一大概sysu的降分就能从20变成一本线（&lt;del&gt;学了半年算法后再来看感觉还是太天真了23333&lt;/del&gt;）。但细想也没有什么可后悔的，因为没有教练我恐怕没什么坚持下去的动力。化学竞赛都是靠着教练、同学、还有认识的不少圈中朋友互相勉励才得以坚持，一个人去打OI，估计很可能会省二滚粗。(去看了下noip提高组题目，好像新疆这种菜鸡省份拿省一两道题全ac就行&amp;hellip;?)&lt;/p&gt;
+&lt;p&gt;四年之间，自认多是闲云野鹤般的生活。学习上用功还是集中在期末（从成绩上看前一年半期末都不怎么用功&amp;hellip;或者用错了方向），学期中往往沉迷于其他事了，从高中就接触过极刻苦的朋友们，我至今还对“蟹壳”的回忆录有着极深的印象，那种持续高热情地保持学习的状态，我只能望尘莫及。从这么些年的生活阅历，我隐隐地感觉得到，勤奋也是一种能力，一种我没法长期具备的能力。他们能数年如一日的早起，规律地饮食，自习，啃完山一般的书籍，我对他们确实五体投地。人和人的差距，确乎比人和狗大。&lt;/p&gt;
+&lt;p&gt;回家之后，同学们的话题就总离不开考研。我对考试一向没什么信心，能保我一定不会去考，可惜成绩也不能在保研与否上给个准信&amp;hellip;如今，临到毕业了，才开始认真地考虑出路问题。 不得不说计算机这个专业虽然时常给我带来很大的痛苦，但关乎恰饭能力上，在这个时代实在是数一数二的，就算没得学上也总归留了得以生存的后路。这学期就努力争取保研的事吧orz，希望船到桥头自然直。&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E5%9B%9B%E5%B9%B4%E4%B8%80%E6%A2%A6%E4%BB%8E%E5%8C%96%E5%AD%A6%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>由COVID-19引发的一些想法</title>
+        <link>http://www.hypermn.cn/posts/%E7%94%B1covid-19%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/</link>
+        <pubDate>Wed, 19 Feb 2020 00:53:54 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E7%94%B1covid-19%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E7%94%B1covid-19%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/ -&lt;p&gt;从19年12月开始，零零碎碎听闻了武汉新型冠状病毒的新闻，从12月的无感，到1月初的略感严重，直到1月20日钟南山院士挂帅，在新闻联播说出确认人传人的事实，再到今天，2月4日，20471例确诊。罗马不是一天建成的，不过，公众对病毒或是对其他重大事件的认知很有可能只是短短几分钟专业人士的讲座，外加充沛的想象以及各种渠道的消息发酵。在家中持续自闭中，有很多想法，只能写写blog，聊以自慰。&lt;/p&gt;
+&lt;h2 id=&#34;无所不能的-脆弱如一根苇草的人类&#34;&gt;&lt;del&gt;无所不能的&lt;/del&gt; 脆弱如一根苇草的人类&lt;/h2&gt;
+&lt;p&gt;我小的时候有种人类是无所不能的这种错觉，觉得上至太空火箭发射，下到深海遨游，广至南北极探索，狭到粒子碰撞，人类都已经发展的相当成熟了。这一方面是因为我的阅历还尚浅，并没有得知很多失败案例，只是看了很多儿童科普书籍而盲目自信。另一方面也是在我对科学的迷信初步建立，觉得任何东西只要知晓了原理，那么驾驭它也是非常容易的，这一点也是直到前年我看了《Science Philosophy: A very short introduction》这本书才意识到的。&lt;/p&gt;
+&lt;p&gt;我第一次感受到这种幻想被狠狠刺穿来自于马航MH370的消失。很难想象一个近70米长，翼展也足有60多米的Boeing 777就带着200多位乘客堂而皇之地消失在了所有人的视野中，甚至5年多过去了毫无痕迹。原本想象中密集的雷达网络，或是环球卫星完全发现不了它消失的轨迹。再接下来就见怪不怪了，很多天灾或是人祸我们只能听闻它们的发生，无从得知背后的真相。&lt;/p&gt;
+&lt;p&gt;上了大学，学习了两年半的计算机科学与技术专业，也算是半个业内人士，对一句话，“内行看门道，外行看热闹”有了更深的理解。大创小挑群里不停地有同学发着各种奇思妙想，浓缩起来一句话：“万事俱备，只差一个程序员”。有些时候看到他们的需求就不由得想发笑，实在是太过离谱&amp;hellip;，如果知道其中的难处恐怕他们自己都会被自己的行为笑出声。&lt;/p&gt;
+&lt;p&gt;看了回形针的病毒科普视频，作为一名高中生物水平的普通人，再次感受到了面对未知的无力感。从病毒如何感染，如何复制，如何扩散，如何传播，我们已经知道的十分详尽了，它仍然可以明目张胆地在我们的面前传播，繁殖。它确实是个没有感情的杀手。&lt;/p&gt;
+&lt;h2 id=&#34;关于某些社会事件&#34;&gt;关于某些社会事件&lt;/h2&gt;
+&lt;p&gt;打狼人杀的时候，有个常用词语叫做愚民，游戏里指的是盲目跟着警长站票的平民。这个词在现实中的意思似乎也不差多少，真实世界中我们很多时候没有身份可选，都是愚民，不过是后天能否培养一点思考的能力的区别而已。&lt;/p&gt;
+&lt;p&gt;我不觉得自己是个很聪明的人，尤其是在关于政治的事情的认知上。时常被一篇文章就带了节奏，在看了很多其他观点的文章之后，才有所醒悟。再看周鼎老师一篇博文，这个时代每个人都太容易拥有自己的思想了。而有些人就过于固执，总是强迫他人去接受自己的思想，而激进地抵触别人的看法，我想网上很多所谓喷子的原因有部分也来自于此。他们只是想借机释放情绪，而非真正地想理解，解决问题。&lt;/p&gt;
+&lt;p&gt;胡主编之前的一些观点我还是颇为认同，不过他最近这篇胡编观察用一种居高临下的姿态评论人们对吹哨人的情绪宣泄，实在令人恶心。他轻描淡写几句带过先锋们用血的代价吹响的哨声，然后明吹一下制度之优越。我一点也不觉得这种潜规则式的反映意见的方式合理，我相信世上没有神，只有宣传能造神。&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E7%94%B1covid-19%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>知乎美赛Live笔记</title>
+        <link>http://www.hypermn.cn/posts/%E7%9F%A5%E4%B9%8E%E7%BE%8E%E8%B5%9Blive%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Thu, 30 Jan 2020 00:57:42 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E7%9F%A5%E4%B9%8E%E7%BE%8E%E8%B5%9Blive%E7%AC%94%E8%AE%B0/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E7%9F%A5%E4%B9%8E%E7%BE%8E%E8%B5%9Blive%E7%AC%94%E8%AE%B0/ -&lt;h1 id=&#34;题目介绍&#34;&gt;题目介绍&lt;/h1&gt;
+&lt;h2 id=&#34;a题微分方程模型&#34;&gt;A题：微分方程模型&lt;/h2&gt;
+&lt;p&gt;流体传热、浴缸、大坝、传染病等题目o奖都曾使用微分方程模型，连续性的问题用微分方程模型很适合。数学系的同学如果微分方程学的不错的话可以选择A题。&lt;/p&gt;
+&lt;h2 id=&#34;b题优化问题&#34;&gt;B题：优化问题&lt;/h2&gt;
+&lt;p&gt;但不一定总是优化问题&lt;/p&gt;
+&lt;h2 id=&#34;c题大数据问题&#34;&gt;C题：大数据问题&lt;/h2&gt;
+&lt;p&gt;往往跟统计有联系。数据不一定提供且不一定容易获得，数据获取和清洗可能会非常的累。&lt;/p&gt;
+&lt;h2 id=&#34;d题网络科学问题&#34;&gt;D题：网络科学问题&lt;/h2&gt;
+&lt;p&gt;交叉学科，复杂网络。&lt;/p&gt;
+&lt;h2 id=&#34;e题环境问题&#34;&gt;E题：环境问题&lt;/h2&gt;
+&lt;p&gt;有可能遇到评价类的问题，层次分析，熵权法，模糊评价。&lt;/p&gt;
+&lt;p&gt;也有可能遇到预测类问题，多元线性回归，灰色预测， 逐步回归，神经网络，机器学习。&lt;/p&gt;
+&lt;p&gt;随机性比较大，想做特别好非常难，O奖和MH区别不是很多&lt;/p&gt;
+&lt;h2 id=&#34;f题政策类问题&#34;&gt;F题：政策类问题&lt;/h2&gt;
+&lt;p&gt;有点吹水的感觉，文科同学包括经管的同学可以尝试一下。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/01/1580294922983.jpeg&#34; alt=&#34;&#34; title=&#34;美赛获奖比例统计&#34;&gt;&lt;/p&gt;
+&lt;p&gt;美赛论文的写作：&lt;/p&gt;
+&lt;p&gt;语言往往不是主要问题，翻译软件完全可以用，语法错误更正即可。论文规范与排版是最重要的。&lt;/p&gt;
+&lt;p&gt;摘要非常关键，不要出现语法错误和拼写错误。图、结果非常重要，不要抄袭保证美观，表面功夫一定要做到位。&lt;/p&gt;
+&lt;h1 id=&#34;美赛阅卷&#34;&gt;美赛阅卷：&lt;/h1&gt;
+&lt;p&gt;初评：现在所有美赛的评委都是中国评委。每个人在自己家按一定标准阅几百份卷子。7分值，大家一般都得2、3分，5分及以上非常少。两个评委打分，他们俩的平均分就是你的初评分。偶然性非常非常大，能4分一般就M奖，3分一般都H奖。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/01/1580294029976.jpeg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;13年a题初评标准&#34;&gt;13年A题初评标准&lt;/h2&gt;
+&lt;p&gt;终评：少于5%的论文（可能2%，3%）进入终评，评选是很严格的。前两轮也是7分值阅卷，筛选出10份很好的文章，第三轮百分制阅卷。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/01/1580294032845.jpeg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;13年终评标准&#34;&gt;13年终评标准&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/01/1580294035559.jpeg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;某个终评标准&#34;&gt;某个终评标准&lt;/h2&gt;
+&lt;p&gt;问题理解有偏差：热分布优化，空间优化，联合优化很多论文根本没做，花了大功夫在模型建立和实验上。&lt;/p&gt;
+&lt;p&gt;优缺点分析：一定要优缺点都写。尤其是缺点一定要写出来，不要隐瞒或者写写表面的缺点，甚至不写。多写点完全没问题，优点写5，6条，缺点写4，5条完全ok。&lt;/p&gt;
+&lt;p&gt;敏感性分析。&lt;/p&gt;
+&lt;p&gt;惜墨如金，所有的页面都写自己的东西，尽量少放无用的理论。在对一些广告设计等小问也要认真。&lt;/p&gt;
+&lt;h1 id=&#34;总结&#34;&gt;总结：&lt;/h1&gt;
+&lt;p&gt;写好摘要，目录，每节开头可以写段小概述大致干了什么，让评委更好地了解你的论文。假设、模型、评估一定要保持一致，不同的同学分工时可能会出现不一致的问题，尽量避免。模型的验证一定要用，注意图表规范性，简单图用三线表，想表达清楚自己的逻辑可以画框图。&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E7%9F%A5%E4%B9%8E%E7%BE%8E%E8%B5%9Blive%E7%AC%94%E8%AE%B0/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>开博碎碎念。</title>
+        <link>http://www.hypermn.cn/posts/%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%8D%9A%E7%9A%84%E9%A6%96%E7%AF%87%E6%96%87%E7%AB%A0/</link>
+        <pubDate>Sun, 26 Jan 2020 19:38:50 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%8D%9A%E7%9A%84%E9%A6%96%E7%AF%87%E6%96%87%E7%AB%A0/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%8D%9A%E7%9A%84%E9%A6%96%E7%AF%87%E6%96%87%E7%AB%A0/ -&lt;p&gt;从有写博客的念头开始，18年12月买了腾讯云服务器，同时注册了hypermn.cn这个域名，但因为懒惰、被其他纷纷扰扰的事情打搅，应该是过了快半年才在腾讯云配了lnmp环境，装了wordpress，然后就一直搁置，后来19年暑假备案了域名，开学换了wordpress主题，然后写了两篇博客，就又投入了下学期的课程，没怎么再管。11月末，不知道是不是因为域名和服务器即将到期，工信部又注销了备案&amp;hellip;&lt;/p&gt;
+&lt;p&gt;熬过了期末，寒假玩了一周多之后重新申请了备案，通过应该是年假过后的事了，由于之前的permalink，包括登陆wordpress后台的链接已经设为hypermn.cn开头的，无法访问，近来又表达欲十足，不想再等。检索了修改访问后台的网址的方法，想用navicat连接一下远程数据库，发现数据库密码忘了&amp;hellip;&lt;/p&gt;
+&lt;p&gt;sigh，重装大法好，重装了centos7.6，配了较新的lnmp和wordpress，主题还是延用之前的H-Siren，有了之前的经验，这次顺风顺水，2小时不到就完成了大体工作。&lt;/p&gt;
+&lt;p&gt;挑了半天theme，总归还是没有太满意的，大概只有以后有时间自己写了（现在我时间多的很也不想动这是为什么啊555）。最后沿用了之前使用的后宫学长修改的H-Siren主题，仔细研究了下还蛮好用的。&lt;/p&gt;
+&lt;p&gt;最后，赶在2020的1月末，&lt;strong&gt;开博大吉&lt;/strong&gt;&lt;del&gt;(雾)&lt;/del&gt;！&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%8D%9A%E7%9A%84%E9%A6%96%E7%AF%87%E6%96%87%E7%AB%A0/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+  </channel>
+</rss> 

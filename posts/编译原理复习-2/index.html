@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html><head>
+<title>编译原理复习-(2)</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="编译原理复习-(2)" />
+<meta property="og:description" content="算法、常见题目 保留字和标识符的识别 处理很像标识符的保留字的方式： 初始化时就将各个保留字填入符号表中 为每个保留字建立单独的状态转换图（构建词法分析器的时候就是这种状态）
+基于状态图的词法分析器的体系结构 用变量state保存状态图当前状态的编号 用switch语句根据state的状态将我们转到对应于各个可能状态的相应代码段 一些改进策略：
+ 我们可以让词法分析器顺序地尝试各个词法单元的状态转换图。（但每个关键字，每种表示符都用各自独立的状态图，效率还是不高，可能会对很多字符串不断地重复操作） 可以并行地运行各个状态转换图，将下一个输入字符提供给所有的状态转换图，并使得每个状态转换图作出它应该执行的转换。（但是这样的话，由于每种分析器特点的不同，对这个字符流的操作要求就挺多的。为了实现这种并行，代码设计上和对内存空间可能都另有要求。 更好的方法是，也是通常最普遍的方式，就是将所有状态转换图合并为一个图。允许合并后的转换图尽量读取输入，直到不存在下一个状态为止  构造NFA，DFA，最小化（按照算法做） 构造NFA（使用Thompson结构）: 将NFA转换成DFA（子集构造）： 子集构造：参见Chapter_two(2).ppt 相关题目：2.1，2.12，2.16 等价NFA的开始状态A是ε-closure(0),即A={0,1,2,4,7}。 首先，标记A，计算Dtran[A,a]=ε-closure(move(A,a))=closure({3,8})={1,2,3,4,6,7,8}，我们记为集合B。接着计算Dtran[A,b]=&hellip;=C。 然后继续计算Dtran[B,a],[B,b]&hellip; 直到所有DFA状态被标记，我们得到了Dtran。 最小化DFA 首先把DFA状态划分为非接受状态和接受状态两个集合，然后根据每个状态在各输入符号的转移，如果转移后的状态所属集合的不同，则划入不同集合，重复多次直到不能再划分。 RE直接构造DFA 龙书3.9.1
+写最左推导，最右推导，画分析树和抽象语法树 相关题目：3.3
+写出给定程序的语法树，抽象语法树 相关题目：3.3
+二义性、结合性、优先级 可生成带有两个不同分析树的串的文法称作二义性文法（ambiguousgrammar） 相关题目：3.2 常见的二义性:悬挂else问题，算符优先级问题 左递归：左结合 右递归：右结合 优先级：越靠近终结符的优先级越高
+写出给定程序的递归下降分析程序（可能用伪代码，C程序），构造语法树 注意事项：在处理产生式A→ε时，可以忽略，或者使用A的Follow集合。不要试图去匹配ε（不然要被拉去登记的） 相关题目：4.2，4.3，4.4
+给定文法：消除左递归，提取公因子，求First Set，Follow Set，说明是否是LL(1)文法，构造LL(1)分析表，给出一个输入分析的动作 相关题目：4.7，4.8，4.10 消除左递归 替换为 提取左公因子 FIRST集合 FIRST(α)被定义为可从α推导得到的串的首符号的集合 1) 如果X是终结符，FIRST(X) = X 2) 如果X是非终结符，且X-&gt;Y1Y2&hellip;Yk是一个产生式，首先把FIRST(Y1)加入FIRST(X)，如果Y1能推出ε，那么把FIRST(Y2)加入FIRST(X)&hellip;如果所有的Y1到Yk都能推出ε，那么我们把ε加入FIRST(X)。 3) 如果X-&gt;ε是一个产生式，那么把ε加入FIRST(X)中
+FOLLOW集合 FOLLOW(A)被定义为可能在某些句型中紧跟在A右边的终结符号的集合，如果A是某些句型的最右符号，那么dollor(S那个符号)也在FOLLOW(A)中 1) 首先把dollor(S那个符号)加入FOLLOW(S)，S是开始符号 2) 如果存在产生式A-&gt;αBβ，那么把{FIRST(β)-ε}加入FOLLOW(B) 3) 如果存在产生式A-&gt;αB，或A-&gt;αBβ且FIRST(β)包含ε，那么把FOLLOW(A)加入FOLLOW(B)
+LL1文法 构造 预测分析器，向前看一步。LL中第一个L表示从左向右扫描输入，第二个L表示产生最左推导。 LL1文法必须满足的条件： 接下来就是利用FIRST集合和FOLLOW集合的内容来构造预测分析表。我们可以进行如下处理 形如这个即可： 分析过程： 给定文法：求LR(0)的DFA，构造LR(0)和SLR(1)的分析表说明是否是LR(0)或SLR(1)文法（描述冲突）， 给定一个输入，写出LR(0),SLR(1)的分析步骤 相关题目：5." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-05-22T20:08:17+08:00" />
+<meta property="article:modified_time" content="2020-05-22T20:08:17+08:00" /><meta property="og:site_name" content="HyperMn&#39;s Notes" />
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="编译原理复习-(2)"/>
+<meta name="twitter:description" content="算法、常见题目 保留字和标识符的识别 处理很像标识符的保留字的方式： 初始化时就将各个保留字填入符号表中 为每个保留字建立单独的状态转换图（构建词法分析器的时候就是这种状态）
+基于状态图的词法分析器的体系结构 用变量state保存状态图当前状态的编号 用switch语句根据state的状态将我们转到对应于各个可能状态的相应代码段 一些改进策略：
+ 我们可以让词法分析器顺序地尝试各个词法单元的状态转换图。（但每个关键字，每种表示符都用各自独立的状态图，效率还是不高，可能会对很多字符串不断地重复操作） 可以并行地运行各个状态转换图，将下一个输入字符提供给所有的状态转换图，并使得每个状态转换图作出它应该执行的转换。（但是这样的话，由于每种分析器特点的不同，对这个字符流的操作要求就挺多的。为了实现这种并行，代码设计上和对内存空间可能都另有要求。 更好的方法是，也是通常最普遍的方式，就是将所有状态转换图合并为一个图。允许合并后的转换图尽量读取输入，直到不存在下一个状态为止  构造NFA，DFA，最小化（按照算法做） 构造NFA（使用Thompson结构）: 将NFA转换成DFA（子集构造）： 子集构造：参见Chapter_two(2).ppt 相关题目：2.1，2.12，2.16 等价NFA的开始状态A是ε-closure(0),即A={0,1,2,4,7}。 首先，标记A，计算Dtran[A,a]=ε-closure(move(A,a))=closure({3,8})={1,2,3,4,6,7,8}，我们记为集合B。接着计算Dtran[A,b]=&hellip;=C。 然后继续计算Dtran[B,a],[B,b]&hellip; 直到所有DFA状态被标记，我们得到了Dtran。 最小化DFA 首先把DFA状态划分为非接受状态和接受状态两个集合，然后根据每个状态在各输入符号的转移，如果转移后的状态所属集合的不同，则划入不同集合，重复多次直到不能再划分。 RE直接构造DFA 龙书3.9.1
+写最左推导，最右推导，画分析树和抽象语法树 相关题目：3.3
+写出给定程序的语法树，抽象语法树 相关题目：3.3
+二义性、结合性、优先级 可生成带有两个不同分析树的串的文法称作二义性文法（ambiguousgrammar） 相关题目：3.2 常见的二义性:悬挂else问题，算符优先级问题 左递归：左结合 右递归：右结合 优先级：越靠近终结符的优先级越高
+写出给定程序的递归下降分析程序（可能用伪代码，C程序），构造语法树 注意事项：在处理产生式A→ε时，可以忽略，或者使用A的Follow集合。不要试图去匹配ε（不然要被拉去登记的） 相关题目：4.2，4.3，4.4
+给定文法：消除左递归，提取公因子，求First Set，Follow Set，说明是否是LL(1)文法，构造LL(1)分析表，给出一个输入分析的动作 相关题目：4.7，4.8，4.10 消除左递归 替换为 提取左公因子 FIRST集合 FIRST(α)被定义为可从α推导得到的串的首符号的集合 1) 如果X是终结符，FIRST(X) = X 2) 如果X是非终结符，且X-&gt;Y1Y2&hellip;Yk是一个产生式，首先把FIRST(Y1)加入FIRST(X)，如果Y1能推出ε，那么把FIRST(Y2)加入FIRST(X)&hellip;如果所有的Y1到Yk都能推出ε，那么我们把ε加入FIRST(X)。 3) 如果X-&gt;ε是一个产生式，那么把ε加入FIRST(X)中
+FOLLOW集合 FOLLOW(A)被定义为可能在某些句型中紧跟在A右边的终结符号的集合，如果A是某些句型的最右符号，那么dollor(S那个符号)也在FOLLOW(A)中 1) 首先把dollor(S那个符号)加入FOLLOW(S)，S是开始符号 2) 如果存在产生式A-&gt;αBβ，那么把{FIRST(β)-ε}加入FOLLOW(B) 3) 如果存在产生式A-&gt;αB，或A-&gt;αBβ且FIRST(β)包含ε，那么把FOLLOW(A)加入FOLLOW(B)
+LL1文法 构造 预测分析器，向前看一步。LL中第一个L表示从左向右扫描输入，第二个L表示产生最左推导。 LL1文法必须满足的条件： 接下来就是利用FIRST集合和FOLLOW集合的内容来构造预测分析表。我们可以进行如下处理 形如这个即可： 分析过程： 给定文法：求LR(0)的DFA，构造LR(0)和SLR(1)的分析表说明是否是LR(0)或SLR(1)文法（描述冲突）， 给定一个输入，写出LR(0),SLR(1)的分析步骤 相关题目：5."/>
+
+
+
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+
+
+
+<link rel="icon" href="http://image.hypermn.cn/favicon.jpg">
+
+
+
+
+<link rel="stylesheet" href="http://www.hypermn.cn/scss/journal.min.c116bc90d171283f099f173854157ec8f183f9073b93443b2c8ad82899ee9025.css" integrity="sha256-wRa8kNFxKD8Jnxc4VBV&#43;yPGD&#43;Qc7k0Q7LIrYKJnukCU=" media="screen">
+
+
+
+<link rel="stylesheet" href="http://www.hypermn.cn/scss/dark-mode.min.552aae4638a84aa57cf0b195750a49ea9131d3bb621d1ed3ebc9b14b18166536.css" integrity="sha256-VSquRjioSqV88LGVdQpJ6pEx07tiHR7T68mxSxgWZTY=" media="screen">
+
+
+<script src="http://www.hypermn.cn//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://google-fonts.mirrors.sjtug.sjtu.edu.cn/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="http://www.hypermn.cn//js/toc-collapse.js"></script>
+  
+
+
+
+
+
+
+
+<script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://www.hypermn.cn/">
+    
+        <div class="nav-title">
+            个人随笔
+        </div>
+        
+        <div class="nav-subtitle">
+            只言片语，汇聚于此
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                归档
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/link-exchange">
+                友情链接
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about">
+                关于
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2018-2022 HyperMn
+	
+<br><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer noopener">蜀ICP备20002998</a>
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ae%97%e6%b3%95%e5%b8%b8%e8%a7%81%e9%a2%98%e7%9b%ae" onclick="onNavClick(`#算法常见题目-nav`)" id="算法常见题目-nav">
+									算法、常见题目
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%9f%ba%e4%ba%8e%e7%8a%b6%e6%80%81%e5%9b%be%e7%9a%84%e8%af%8d%e6%b3%95%e5%88%86%e6%9e%90%e5%99%a8%e7%9a%84%e4%bd%93%e7%b3%bb%e7%bb%93%e6%9e%84" onclick="onNavClick(`#基于状态图的词法分析器的体系结构-nav`)" id="基于状态图的词法分析器的体系结构-nav">
+									基于状态图的词法分析器的体系结构
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e6%9e%84%e9%80%a0nfadfa%e6%9c%80%e5%b0%8f%e5%8c%96%e6%8c%89%e7%85%a7%e7%ae%97%e6%b3%95%e5%81%9a" onclick="onNavClick(`#构造nfadfa最小化按照算法做-nav`)" id="构造nfadfa最小化按照算法做-nav">
+									构造NFA，DFA，最小化（按照算法做）
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e6%9e%84%e9%80%a0nfa%e4%bd%bf%e7%94%a8thompson%e7%bb%93%e6%9e%84" onclick="onNavClick(`#构造nfa使用thompson结构-nav`)" id="构造nfa使用thompson结构-nav">
+									构造NFA（使用Thompson结构）:
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%b0%86nfa%e8%bd%ac%e6%8d%a2%e6%88%90dfa%e5%ad%90%e9%9b%86%e6%9e%84%e9%80%a0" onclick="onNavClick(`#将nfa转换成dfa子集构造-nav`)" id="将nfa转换成dfa子集构造-nav">
+									将NFA转换成DFA（子集构造）：
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%9c%80%e5%b0%8f%e5%8c%96dfa" onclick="onNavClick(`#最小化dfa-nav`)" id="最小化dfa-nav">
+									最小化DFA
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#re%e7%9b%b4%e6%8e%a5%e6%9e%84%e9%80%a0dfa" onclick="onNavClick(`#re直接构造dfa-nav`)" id="re直接构造dfa-nav">
+									RE直接构造DFA
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%86%99%e6%9c%80%e5%b7%a6%e6%8e%a8%e5%af%bc%e6%9c%80%e5%8f%b3%e6%8e%a8%e5%af%bc%e7%94%bb%e5%88%86%e6%9e%90%e6%a0%91%e5%92%8c%e6%8a%bd%e8%b1%a1%e8%af%ad%e6%b3%95%e6%a0%91" onclick="onNavClick(`#写最左推导最右推导画分析树和抽象语法树-nav`)" id="写最左推导最右推导画分析树和抽象语法树-nav">
+									写最左推导，最右推导，画分析树和抽象语法树
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%86%99%e5%87%ba%e7%bb%99%e5%ae%9a%e7%a8%8b%e5%ba%8f%e7%9a%84%e8%af%ad%e6%b3%95%e6%a0%91%e6%8a%bd%e8%b1%a1%e8%af%ad%e6%b3%95%e6%a0%91" onclick="onNavClick(`#写出给定程序的语法树抽象语法树-nav`)" id="写出给定程序的语法树抽象语法树-nav">
+									写出给定程序的语法树，抽象语法树
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e4%b9%89%e6%80%a7%e7%bb%93%e5%90%88%e6%80%a7%e4%bc%98%e5%85%88%e7%ba%a7" onclick="onNavClick(`#二义性结合性优先级-nav`)" id="二义性结合性优先级-nav">
+									二义性、结合性、优先级
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%86%99%e5%87%ba%e7%bb%99%e5%ae%9a%e7%a8%8b%e5%ba%8f%e7%9a%84%e9%80%92%e5%bd%92%e4%b8%8b%e9%99%8d%e5%88%86%e6%9e%90%e7%a8%8b%e5%ba%8f%e5%8f%af%e8%83%bd%e7%94%a8%e4%bc%aa%e4%bb%a3%e7%a0%81c%e7%a8%8b%e5%ba%8f%e6%9e%84%e9%80%a0%e8%af%ad%e6%b3%95%e6%a0%91" onclick="onNavClick(`#写出给定程序的递归下降分析程序可能用伪代码c程序构造语法树-nav`)" id="写出给定程序的递归下降分析程序可能用伪代码c程序构造语法树-nav">
+									写出给定程序的递归下降分析程序（可能用伪代码，C程序），构造语法树
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%99%e5%ae%9a%e6%96%87%e6%b3%95%e6%b6%88%e9%99%a4%e5%b7%a6%e9%80%92%e5%bd%92%e6%8f%90%e5%8f%96%e5%85%ac%e5%9b%a0%e5%ad%90%e6%b1%82first-setfollow-set%e8%af%b4%e6%98%8e%e6%98%af%e5%90%a6%e6%98%afll1%e6%96%87%e6%b3%95%e6%9e%84%e9%80%a0ll1%e5%88%86%e6%9e%90%e8%a1%a8%e7%bb%99%e5%87%ba%e4%b8%80%e4%b8%aa%e8%be%93%e5%85%a5%e5%88%86%e6%9e%90%e7%9a%84%e5%8a%a8%e4%bd%9c-%e7%9b%b8%e5%85%b3%e9%a2%98%e7%9b%ae4748410" onclick="onNavClick(`#给定文法消除左递归提取公因子求first-setfollow-set说明是否是ll1文法构造ll1分析表给出一个输入分析的动作-相关题目4748410-nav`)" id="给定文法消除左递归提取公因子求first-setfollow-set说明是否是ll1文法构造ll1分析表给出一个输入分析的动作-相关题目4748410-nav">
+									给定文法：消除左递归，提取公因子，求First Set，Follow Set，说明是否是LL(1)文法，构造LL(1)分析表，给出一个输入分析的动作 相关题目：4.7，4.8，4.10
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e6%b6%88%e9%99%a4%e5%b7%a6%e9%80%92%e5%bd%92" onclick="onNavClick(`#消除左递归-nav`)" id="消除左递归-nav">
+									消除左递归
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%8f%90%e5%8f%96%e5%b7%a6%e5%85%ac%e5%9b%a0%e5%ad%90" onclick="onNavClick(`#提取左公因子-nav`)" id="提取左公因子-nav">
+									提取左公因子
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#first%e9%9b%86%e5%90%88" onclick="onNavClick(`#first集合-nav`)" id="first集合-nav">
+									FIRST集合
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#follow%e9%9b%86%e5%90%88" onclick="onNavClick(`#follow集合-nav`)" id="follow集合-nav">
+									FOLLOW集合
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#ll1%e6%96%87%e6%b3%95" onclick="onNavClick(`#ll1文法-nav`)" id="ll1文法-nav">
+									LL1文法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%99%e5%ae%9a%e6%96%87%e6%b3%95%e6%b1%82lr0%e7%9a%84dfa%e6%9e%84%e9%80%a0lr0%e5%92%8cslr1%e7%9a%84%e5%88%86%e6%9e%90%e8%a1%a8%e8%af%b4%e6%98%8e%e6%98%af%e5%90%a6%e6%98%aflr0%e6%88%96slr1%e6%96%87%e6%b3%95%e6%8f%8f%e8%bf%b0%e5%86%b2%e7%aa%81" onclick="onNavClick(`#给定文法求lr0的dfa构造lr0和slr1的分析表说明是否是lr0或slr1文法描述冲突-nav`)" id="给定文法求lr0的dfa构造lr0和slr1的分析表说明是否是lr0或slr1文法描述冲突-nav">
+									给定文法：求LR(0)的DFA，构造LR(0)和SLR(1)的分析表说明是否是LR(0)或SLR(1)文法（描述冲突），
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bd%bf%e7%94%a8lr%e8%af%ad%e6%b3%95%e5%88%86%e6%9e%90%e5%99%a8" onclick="onNavClick(`#为什么使用lr语法分析器-nav`)" id="为什么使用lr语法分析器-nav">
+									为什么使用LR语法分析器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#lr0" onclick="onNavClick(`#lr0-nav`)" id="lr0-nav">
+									LR(0)
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%9e%84%e9%80%a0slr%e8%af%ad%e6%b3%95%e5%88%86%e6%9e%90%e8%a1%a8" onclick="onNavClick(`#构造slr语法分析表-nav`)" id="构造slr语法分析表-nav">
+									构造SLR语法分析表
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%ae%97%e6%b3%95%e5%86%99%e4%bc%aa%e4%bb%a3%e7%a0%81" onclick="onNavClick(`#算法写伪代码-nav`)" id="算法写伪代码-nav">
+									算法（写伪代码）
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    归档
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/link-exchange">
+                    友情链接
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about">
+                    关于
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ae%97%e6%b3%95%e5%b8%b8%e8%a7%81%e9%a2%98%e7%9b%ae" onclick="onNavClick(`#算法常见题目-nav`)" id="算法常见题目-nav">
+									算法、常见题目
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%9f%ba%e4%ba%8e%e7%8a%b6%e6%80%81%e5%9b%be%e7%9a%84%e8%af%8d%e6%b3%95%e5%88%86%e6%9e%90%e5%99%a8%e7%9a%84%e4%bd%93%e7%b3%bb%e7%bb%93%e6%9e%84" onclick="onNavClick(`#基于状态图的词法分析器的体系结构-nav`)" id="基于状态图的词法分析器的体系结构-nav">
+									基于状态图的词法分析器的体系结构
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e6%9e%84%e9%80%a0nfadfa%e6%9c%80%e5%b0%8f%e5%8c%96%e6%8c%89%e7%85%a7%e7%ae%97%e6%b3%95%e5%81%9a" onclick="onNavClick(`#构造nfadfa最小化按照算法做-nav`)" id="构造nfadfa最小化按照算法做-nav">
+									构造NFA，DFA，最小化（按照算法做）
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e6%9e%84%e9%80%a0nfa%e4%bd%bf%e7%94%a8thompson%e7%bb%93%e6%9e%84" onclick="onNavClick(`#构造nfa使用thompson结构-nav`)" id="构造nfa使用thompson结构-nav">
+									构造NFA（使用Thompson结构）:
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%b0%86nfa%e8%bd%ac%e6%8d%a2%e6%88%90dfa%e5%ad%90%e9%9b%86%e6%9e%84%e9%80%a0" onclick="onNavClick(`#将nfa转换成dfa子集构造-nav`)" id="将nfa转换成dfa子集构造-nav">
+									将NFA转换成DFA（子集构造）：
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%9c%80%e5%b0%8f%e5%8c%96dfa" onclick="onNavClick(`#最小化dfa-nav`)" id="最小化dfa-nav">
+									最小化DFA
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#re%e7%9b%b4%e6%8e%a5%e6%9e%84%e9%80%a0dfa" onclick="onNavClick(`#re直接构造dfa-nav`)" id="re直接构造dfa-nav">
+									RE直接构造DFA
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%86%99%e6%9c%80%e5%b7%a6%e6%8e%a8%e5%af%bc%e6%9c%80%e5%8f%b3%e6%8e%a8%e5%af%bc%e7%94%bb%e5%88%86%e6%9e%90%e6%a0%91%e5%92%8c%e6%8a%bd%e8%b1%a1%e8%af%ad%e6%b3%95%e6%a0%91" onclick="onNavClick(`#写最左推导最右推导画分析树和抽象语法树-nav`)" id="写最左推导最右推导画分析树和抽象语法树-nav">
+									写最左推导，最右推导，画分析树和抽象语法树
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%86%99%e5%87%ba%e7%bb%99%e5%ae%9a%e7%a8%8b%e5%ba%8f%e7%9a%84%e8%af%ad%e6%b3%95%e6%a0%91%e6%8a%bd%e8%b1%a1%e8%af%ad%e6%b3%95%e6%a0%91" onclick="onNavClick(`#写出给定程序的语法树抽象语法树-nav`)" id="写出给定程序的语法树抽象语法树-nav">
+									写出给定程序的语法树，抽象语法树
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e4%b9%89%e6%80%a7%e7%bb%93%e5%90%88%e6%80%a7%e4%bc%98%e5%85%88%e7%ba%a7" onclick="onNavClick(`#二义性结合性优先级-nav`)" id="二义性结合性优先级-nav">
+									二义性、结合性、优先级
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%86%99%e5%87%ba%e7%bb%99%e5%ae%9a%e7%a8%8b%e5%ba%8f%e7%9a%84%e9%80%92%e5%bd%92%e4%b8%8b%e9%99%8d%e5%88%86%e6%9e%90%e7%a8%8b%e5%ba%8f%e5%8f%af%e8%83%bd%e7%94%a8%e4%bc%aa%e4%bb%a3%e7%a0%81c%e7%a8%8b%e5%ba%8f%e6%9e%84%e9%80%a0%e8%af%ad%e6%b3%95%e6%a0%91" onclick="onNavClick(`#写出给定程序的递归下降分析程序可能用伪代码c程序构造语法树-nav`)" id="写出给定程序的递归下降分析程序可能用伪代码c程序构造语法树-nav">
+									写出给定程序的递归下降分析程序（可能用伪代码，C程序），构造语法树
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%99%e5%ae%9a%e6%96%87%e6%b3%95%e6%b6%88%e9%99%a4%e5%b7%a6%e9%80%92%e5%bd%92%e6%8f%90%e5%8f%96%e5%85%ac%e5%9b%a0%e5%ad%90%e6%b1%82first-setfollow-set%e8%af%b4%e6%98%8e%e6%98%af%e5%90%a6%e6%98%afll1%e6%96%87%e6%b3%95%e6%9e%84%e9%80%a0ll1%e5%88%86%e6%9e%90%e8%a1%a8%e7%bb%99%e5%87%ba%e4%b8%80%e4%b8%aa%e8%be%93%e5%85%a5%e5%88%86%e6%9e%90%e7%9a%84%e5%8a%a8%e4%bd%9c-%e7%9b%b8%e5%85%b3%e9%a2%98%e7%9b%ae4748410" onclick="onNavClick(`#给定文法消除左递归提取公因子求first-setfollow-set说明是否是ll1文法构造ll1分析表给出一个输入分析的动作-相关题目4748410-nav`)" id="给定文法消除左递归提取公因子求first-setfollow-set说明是否是ll1文法构造ll1分析表给出一个输入分析的动作-相关题目4748410-nav">
+									给定文法：消除左递归，提取公因子，求First Set，Follow Set，说明是否是LL(1)文法，构造LL(1)分析表，给出一个输入分析的动作 相关题目：4.7，4.8，4.10
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e6%b6%88%e9%99%a4%e5%b7%a6%e9%80%92%e5%bd%92" onclick="onNavClick(`#消除左递归-nav`)" id="消除左递归-nav">
+									消除左递归
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%8f%90%e5%8f%96%e5%b7%a6%e5%85%ac%e5%9b%a0%e5%ad%90" onclick="onNavClick(`#提取左公因子-nav`)" id="提取左公因子-nav">
+									提取左公因子
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#first%e9%9b%86%e5%90%88" onclick="onNavClick(`#first集合-nav`)" id="first集合-nav">
+									FIRST集合
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#follow%e9%9b%86%e5%90%88" onclick="onNavClick(`#follow集合-nav`)" id="follow集合-nav">
+									FOLLOW集合
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#ll1%e6%96%87%e6%b3%95" onclick="onNavClick(`#ll1文法-nav`)" id="ll1文法-nav">
+									LL1文法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%99%e5%ae%9a%e6%96%87%e6%b3%95%e6%b1%82lr0%e7%9a%84dfa%e6%9e%84%e9%80%a0lr0%e5%92%8cslr1%e7%9a%84%e5%88%86%e6%9e%90%e8%a1%a8%e8%af%b4%e6%98%8e%e6%98%af%e5%90%a6%e6%98%aflr0%e6%88%96slr1%e6%96%87%e6%b3%95%e6%8f%8f%e8%bf%b0%e5%86%b2%e7%aa%81" onclick="onNavClick(`#给定文法求lr0的dfa构造lr0和slr1的分析表说明是否是lr0或slr1文法描述冲突-nav`)" id="给定文法求lr0的dfa构造lr0和slr1的分析表说明是否是lr0或slr1文法描述冲突-nav">
+									给定文法：求LR(0)的DFA，构造LR(0)和SLR(1)的分析表说明是否是LR(0)或SLR(1)文法（描述冲突），
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bd%bf%e7%94%a8lr%e8%af%ad%e6%b3%95%e5%88%86%e6%9e%90%e5%99%a8" onclick="onNavClick(`#为什么使用lr语法分析器-nav`)" id="为什么使用lr语法分析器-nav">
+									为什么使用LR语法分析器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#lr0" onclick="onNavClick(`#lr0-nav`)" id="lr0-nav">
+									LR(0)
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%9e%84%e9%80%a0slr%e8%af%ad%e6%b3%95%e5%88%86%e6%9e%90%e8%a1%a8" onclick="onNavClick(`#构造slr语法分析表-nav`)" id="构造slr语法分析表-nav">
+									构造SLR语法分析表
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%ae%97%e6%b3%95%e5%86%99%e4%bc%aa%e4%bb%a3%e7%a0%81" onclick="onNavClick(`#算法写伪代码-nav`)" id="算法写伪代码-nav">
+									算法（写伪代码）
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="http://www.hypermn.cn/">
+            个人随笔
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://www.hypermn.cn/">
+        <div class="single-column-header-title">个人随笔</div>
+        
+        <div class="single-column-header-subtitle">只言片语，汇聚于此</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    编译原理复习-(2)
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-05-22 20:08
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/">[理论]</a>
+                                &nbsp;
+                        
+
+                        
+                        
+                            <i class="material-icons" style="">schedule</i>
+                            
+
+                            
+                            
+
+                            
+                            14 min
+                            
+                            22 s.
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="算法常见题目">算法、常见题目</h1>
+<p>保留字和标识符的识别 处理很像标识符的保留字的方式： 初始化时就将各个保留字填入符号表中 为每个保留字建立单独的状态转换图（构建词法分析器的时候就是这种状态）</p>
+<h4 id="基于状态图的词法分析器的体系结构">基于状态图的词法分析器的体系结构</h4>
+<p>用变量state保存状态图当前状态的编号 用switch语句根据state的状态将我们转到对应于各个可能状态的相应代码段 <img src="/2020/05/relop%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%9B%BE%E7%9A%84%E6%A6%82%E8%A6%81%E5%AE%9E%E4%B9%A0.png" alt=""> 一些改进策略：</p>
+<ul>
+<li>我们可以让词法分析器顺序地尝试各个词法单元的状态转换图。（但每个关键字，每种表示符都用各自独立的状态图，效率还是不高，可能会对很多字符串不断地重复操作）</li>
+<li>可以并行地运行各个状态转换图，将下一个输入字符提供给所有的状态转换图，并使得每个状态转换图作出它应该执行的转换。（但是这样的话，由于每种分析器特点的不同，对这个字符流的操作要求就挺多的。为了实现这种并行，代码设计上和对内存空间可能都另有要求。</li>
+<li>更好的方法是，也是通常最普遍的方式，就是将所有状态转换图合并为一个图。允许合并后的转换图尽量读取输入，直到不存在下一个状态为止</li>
+</ul>
+<h3 id="构造nfadfa最小化按照算法做">构造NFA，DFA，最小化（按照算法做）</h3>
+<h4 id="构造nfa使用thompson结构">构造NFA（使用Thompson结构）:</h4>
+<p><img src="/2020/05/%E6%B1%A4%E6%99%AE%E6%A3%AE%E7%AE%97%E6%B3%95.png" alt=""></p>
+<h4 id="将nfa转换成dfa子集构造">将NFA转换成DFA（子集构造）：</h4>
+<p>子集构造：参见Chapter_two(2).ppt 相关题目：2.1，2.12，2.16 <img src="/2020/05/nfa%E7%8A%B6%E6%80%81%E9%9B%86%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C.png" alt=""> <img src="/2020/05/a%E6%88%96b%E6%98%9F%E5%8F%B7abb%E7%9A%84nfa.png" alt=""> 等价NFA的开始状态A是ε-closure(0),即A={0,1,2,4,7}。 首先，标记A，计算Dtran[A,a]=ε-closure(move(A,a))=closure({3,8})={1,2,3,4,6,7,8}，我们记为集合B。接着计算Dtran[A,b]=&hellip;=C。 然后继续计算Dtran[B,a],[B,b]&hellip; 直到所有DFA状态被标记，我们得到了Dtran。 <img src="/2020/05/Dtran.png" alt=""></p>
+<h4 id="最小化dfa">最小化DFA</h4>
+<p>首先把DFA状态划分为非接受状态和接受状态两个集合，然后根据每个状态在各输入符号的转移，如果转移后的状态所属集合的不同，则划入不同集合，重复多次直到不能再划分。 <img src="/2020/05/minimizeDFA.png" alt=""></p>
+<h3 id="re直接构造dfa">RE直接构造DFA</h3>
+<p>龙书3.9.1</p>
+<h3 id="写最左推导最右推导画分析树和抽象语法树">写最左推导，最右推导，画分析树和抽象语法树</h3>
+<p>相关题目：3.3</p>
+<h3 id="写出给定程序的语法树抽象语法树">写出给定程序的语法树，抽象语法树</h3>
+<p>相关题目：3.3</p>
+<h3 id="二义性结合性优先级">二义性、结合性、优先级</h3>
+<p>可生成带有两个不同分析树的串的文法称作二义性文法（ambiguousgrammar） 相关题目：3.2 常见的二义性:悬挂else问题，算符优先级问题 左递归：左结合 右递归：右结合 优先级：越靠近终结符的优先级越高</p>
+<h3 id="写出给定程序的递归下降分析程序可能用伪代码c程序构造语法树">写出给定程序的递归下降分析程序（可能用伪代码，C程序），构造语法树</h3>
+<p>注意事项：在处理产生式A→ε时，可以忽略，或者使用A的Follow集合。不要试图去匹配ε（不然要被拉去登记的） 相关题目：4.2，4.3，4.4</p>
+<h3 id="给定文法消除左递归提取公因子求first-setfollow-set说明是否是ll1文法构造ll1分析表给出一个输入分析的动作-相关题目4748410">给定文法：消除左递归，提取公因子，求First Set，Follow Set，说明是否是LL(1)文法，构造LL(1)分析表，给出一个输入分析的动作 相关题目：4.7，4.8，4.10</h3>
+<h4 id="消除左递归">消除左递归</h4>
+<p><img src="/2020/05/%E5%B7%A6%E9%80%92%E5%BD%921.png" alt=""> 替换为 <img src="/2020/05/%E5%B7%A6%E9%80%92%E5%BD%922.png" alt=""></p>
+<h4 id="提取左公因子">提取左公因子</h4>
+<p><img src="/2020/05/%E6%8F%90%E5%8F%96%E5%B7%A6%E5%85%AC%E5%9B%A0%E5%AD%90.png" alt=""></p>
+<h4 id="first集合">FIRST集合</h4>
+<p>FIRST(α)被定义为可从α推导得到的串的首符号的集合 1) 如果X是终结符，FIRST(X) = X 2) 如果X是非终结符，且X-&gt;Y1Y2&hellip;Yk是一个产生式，首先把FIRST(Y1)加入FIRST(X)，如果Y1能推出ε，那么把FIRST(Y2)加入FIRST(X)&hellip;如果所有的Y1到Yk都能推出ε，那么我们把ε加入FIRST(X)。 3) 如果X-&gt;ε是一个产生式，那么把ε加入FIRST(X)中</p>
+<h4 id="follow集合">FOLLOW集合</h4>
+<p>FOLLOW(A)被定义为可能在某些句型中紧跟在A右边的终结符号的集合，如果A是某些句型的最右符号，那么dollor(S那个符号)也在FOLLOW(A)中 1) 首先把dollor(S那个符号)加入FOLLOW(S)，S是开始符号 2) 如果存在产生式A-&gt;αBβ，那么把{FIRST(β)-ε}加入FOLLOW(B) 3) 如果存在产生式A-&gt;αB，或A-&gt;αBβ且FIRST(β)包含ε，那么把FOLLOW(A)加入FOLLOW(B)</p>
+<h4 id="ll1文法">LL1文法</h4>
+<p>构造 预测分析器，向前看一步。LL中第一个L表示从左向右扫描输入，第二个L表示产生最左推导。 LL1文法必须满足的条件： <img src="/2020/05/LL1-1.png" alt=""> <img src="/2020/05/LL1-2.png" alt=""> 接下来就是利用FIRST集合和FOLLOW集合的内容来构造预测分析表。我们可以进行如下处理 <img src="/2020/05/LL1-3.png" alt=""> 形如这个即可： <img src="/2020/05/LL1-4.png" alt=""> 分析过程： <img src="/2020/05/LL1-5.png" alt=""></p>
+<h3 id="给定文法求lr0的dfa构造lr0和slr1的分析表说明是否是lr0或slr1文法描述冲突">给定文法：求LR(0)的DFA，构造LR(0)和SLR(1)的分析表说明是否是LR(0)或SLR(1)文法（描述冲突），</h3>
+<p>给定一个输入，写出LR(0),SLR(1)的分析步骤 相关题目：5.1，5.3 使用dollar符号来标记栈的底部以及输入的右端</p>
+<h4 id="为什么使用lr语法分析器">为什么使用LR语法分析器</h4>
+<p>直接来说：只要存在这样一个左到右扫描的移入-规约语法分析器，它总是能够在某文法的最右句型的句柄出现在栈顶时识别出这个句柄，那么就是LR文法。 吸引力所在：</p>
+<ul>
+<li>几乎所有程序设计语言，只要能够写出构造该文法的上下文无关文法，就能够构造出识别该构造的LR语法分析器。</li>
+<li>LR语法分析方法是已知的最通用的无回溯移入-规约分析技术，并且它的实现可以喝其他更原始的移入 - 规约方法一样高效。</li>
+<li>一个LR语法分析器可以在对输入进行从左到右扫描时尽可能早地检测到错误。</li>
+<li>可以使用LR方法进行语法分析的文法类是可以使用预测方法或LL方法进行语法分析的文法类的真超类。 缺点就是手工构造LR分析器工作量非常大。</li>
+</ul>
+<h4 id="lr0">LR(0)</h4>
+<p>一个LR语法分析器通过维护一些状态，用这些状态来表明在语法分析过程中所处的位置，从而做出移入 - 规约决定。这些状态代表了“项” item集合。 一个文法G的一个LR（0）项是G的一个产生式再加上一个位于它的 体 中某处的点。所以产生式A -&gt; XYZ 就有四个项： A-&gt;·XYZ A-&gt;X·YZ A-&gt;XY·Z A-&gt;XYZ· 注意：产生式A-&gt;ε 只生成一个项A-&gt;·</p>
+<h5 id="增广文法">增广文法</h5>
+<blockquote>
+<p>如果G是一个以S为开始符号的文法，那么G的增广文法G&rsquo;就是在G中加入新开始符号S&rsquo;进而产生式S'-&gt;S而得到的文法。</p>
+</blockquote>
+<p>引入新开始产生式的目的是告诉语法分析器何时应该停止语法分析并宣称接受输入符号串。</p>
+<h5 id="clousre项集的闭包">CLOUSRE,项集的闭包</h5>
+<blockquote>
+<p>如果I是文法G的一个项集，那么CLOSURE(I)就是根据下面的两个规则从I构造得到的项集： 1) 一开始，将I中的各个项加入到CLOSURE(I)中。 2) 如果A-&gt;α·Bβ在CLOSURE(I)中，B-&gt;γ是一个产生式，并且项B-&gt;·γ不在CLOSURE(I)中，就将这个项加入其中。不断应用这个规则，直到没有新项可以加入CLOSURE(I)中为止。</p>
+</blockquote>
+<h5 id="goto函数">GOTO函数</h5>
+<blockquote>
+<p>GOTO(I,X)，其中I是一个项集而X是一个文法符号。GOTO(I,X)被定义为I中刑如[A-&gt;α·Xβ]的项所对应的项[A-&gt;αX·β]的集合的闭包。直观地讲，GOTO函数用于定义一个文法的LR(0)自动机的转换。这个自动机的状态对应于项集，而GOTO(I,X)描述了当输入为X时离开状态I的转换。</p>
+</blockquote>
+<p><strong>一个完整的分析例子</strong> <img src="/2020/05/LR0%E5%88%86%E6%9E%90%E4%BE%8B%E5%AD%90.png" alt=""> <strong>LR语法分析算法</strong> <img src="/2020/05/LR0-1.png" alt=""> <img src="/2020/05/LR0-2.png" alt=""> 在已知语法分析表的情况下 <img src="/2020/05/LR0-3.png" alt=""> 我们可以通过输入串，得到一个分析过程： <img src="/2020/05/LR0-4.png" alt=""></p>
+<h4 id="构造slr语法分析表">构造SLR语法分析表</h4>
+<p><img src="/2020/05/SLR.png" alt=""></p>
+<h3 id="算法写伪代码">算法（写伪代码）</h3>
+<p>模拟DFA、NFA 3种DFA代码，LL(1)算法，LR(0)算法，SLR(1)算法，消左递归，提公因子，构造First，Follow集合 DFA代码（英文书P63，中文P42） LL（1）算法（英文书P155，中文P115） LR（0）算法（英文书P207，中文P158） SLR(1) 算法（英文书P210，中文P160） 左递归（英文书P159，中文P119） 公因子（英文书P164，中文P122） 构造First Set（英文书P168，中文P126） 构造Follow Set（英文书P173，中文P130） 参见书本</p>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2020-05-22</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="http://www.hypermn.cn/posts/hypermn%E5%9C%A8%E6%9C%AC%E7%A7%91%E6%9C%9F%E9%97%B4%E7%9A%84%E6%84%BF%E6%9C%9B%E6%B8%85%E5%8D%95/">
+			下回<br>HyperMn在本科期间的愿望清单
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-1/">
+			上回<br>编译原理复习-(1)
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+  <span id="/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-2/" class="leancloud_visitors" data-flag-title="编译原理复习-(2)">
+    <span class="post-meta-item-text">本文被阅读了</span>
+    <span class="leancloud-visitors-count">-1</span>
+    <span class="post-meta-item-text">次</span>
+    <p></p>
+  </span>
+<div id="vcomments"></div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2018-2022 HyperMn
+	
+<br><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer noopener">蜀ICP备20002998</a></div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+            new Valine({
+                el: '#vcomments',
+                appId: "z8RPLrUV3Mg90N0lQhn2Hh2O-gzGzoHsz",
+                appKey: "8vyFp2xk0ykpK907xTWwf2zv",
+		avatar_cdn: 'https:\/\/cdn.v2ex.com\/gravatar\/',
+                requiredFields: ['nick'],
+                enableQQ: true,
+                recordIP: true,
+		avatar: 'mp',
+		visitor:  true ,
+		placeholder: '说点什么吧...',
+		notify:  false ,
+		verify:  false 
+            })
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="http://www.hypermn.cn//js/journal.js"></script>
+    </body>
+</html>

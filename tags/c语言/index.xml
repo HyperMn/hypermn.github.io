@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C语言 on 个人随笔</title>
+    <link>http://www.hypermn.cn/tags/c%E8%AF%AD%E8%A8%80/</link>
+    <description>Recent content in C语言 on 个人随笔</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2018-2022 HyperMn</copyright>
+    <lastBuildDate>Tue, 14 Sep 2021 19:19:42 +0800</lastBuildDate><atom:link href="http://www.hypermn.cn/tags/c%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C语言学习一些推荐的IDE</title>
+      <link>http://www.hypermn.cn/posts/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%BA%9B%E6%8E%A8%E8%8D%90%E7%9A%84ide/</link>
+      <pubDate>Tue, 14 Sep 2021 19:19:42 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/posts/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%BA%9B%E6%8E%A8%E8%8D%90%E7%9A%84ide/</guid>
+      <description>前言 工欲善其事，必先利其器。集成开发环境 (Integrated development environment)，简称IDE，是一种辅助程序开发人员编写程序的软件。在学习C语言的过程中我使用过很多不同的IDE，下面根据我的个人使用感受做一些C语言的IDE推荐。不过，无论大家使用怎样的IDE，多动手写代码才是最关键的，不必在IDE上的选择上过多纠结。
+C语言推荐的IDE 下文中轻量、项目只是我个人对它们的理解。
+win10系统： 轻量：适合编写简单程序 dev-cpp和code blocks是两款很有年头的软件了，用于写简单的程序非常方便，缺点也是功能比较少，界面不够现代化，胜在简单好用。
+VSCode，微软的一款编辑器，在扩展的加持下功能强大，也是我的主力编辑器。不过使用它编写各种程序需要自己折腾，配置一下编译器、扩展等设置。
+ Dev-Cpp：Dev-C++ download | SourceForge.net Code Blocks：Code::Blocks download | SourceForge.net VSCode：可以参考win10系统使用VSCode配置C语言环境： https://zhuanlan.zhihu.com/p/298168673  项目：功能强大，用起来也比上面的IDE麻烦一些 CLion，JetBrains全家桶中的一员，功能非常非常强大，对学生免费，需要自行注册。
+Visual Studio，被很多人称为宇宙第一IDE，很适合用来写C/C++/C#等程序。
+ CLion：CLion: A Cross-Platform IDE for C and C++ by JetBrains VS2019：Visual Studio IDE: 面向开发人员的一体式编程工具 (microsoft.com)  Mac系统： 对MacOS不是很熟悉，所以只能推荐上面软件的mac版了。
+轻量：VSCode  可以参考mac下使用VSCode配置C语言环境： mac vscode c++ 环境配置及异常的语法提示 - SegmentFault 思否  项目：CLion or XCode   CLion：对学生免费，需要自行注册CLion: A Cross-Platform IDE for C and C++ by JetBrains</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>coturn on 个人随笔</title>
+    <link>http://www.hypermn.cn/tags/coturn/</link>
+    <description>Recent content in coturn on 个人随笔</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2018-2022 HyperMn</copyright>
+    <lastBuildDate>Tue, 17 Aug 2021 12:49:05 +0800</lastBuildDate><atom:link href="http://www.hypermn.cn/tags/coturn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置</title>
+      <link>http://www.hypermn.cn/posts/centos7%E4%B8%8A%E8%BF%9B%E8%A1%8C%E5%85%AC%E7%BD%91%E5%8D%95%E5%AE%9E%E4%BE%8B%E7%9A%84coturn&#43;pixel-streaming%E7%9A%84%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 17 Aug 2021 12:49:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/posts/centos7%E4%B8%8A%E8%BF%9B%E8%A1%8C%E5%85%AC%E7%BD%91%E5%8D%95%E5%AE%9E%E4%BE%8B%E7%9A%84coturn&#43;pixel-streaming%E7%9A%84%E9%85%8D%E7%BD%AE/</guid>
+      <description>博主使用的服务器操作系统：CentOS7 x86_64  coturn安装与配置 安装需要的依赖包 GCC G++ OpenSSL Libevent-devel等 libevent   在http://libevent.org/下载libevent-2.1.8-stable.tar.gz（最新版即可，不必完全一致，但和coturn、openssl版本有一些对应关系）
+  tar -zxvf libevent-2.1.8-stable.tar.gz
+  cd libevent-2.1.8-stable
+  /configure
+  make
+  make install
+  默认安装在/usr/local/lib，也会输出“Libraries have been installed in: Path Name”，表明已经安装在了Path Name下。
+安装Coturn 其他博主多数推荐从GitHub下载coturn源码编译的方法，但是编译经常会报各种各样的错误，所以对于要求不高的用户，直接采用通过yum等方式安装本地包，在下方的网址下载对应的二进制包文件后本地安装即可。
+Coturn Download (APK, DEB, RPM, TXZ, XZ, ZST) (pkgs.org)
+Ubuntu系统自带apt-get，或者在安装了apt包管理器的情况下，也可以通过apt-get install coturn的方式直接安装，可能需要更换镜像源或apt-get upgrade来更新仓库。
+Coturn配置 参考了coturn穿透服务器搭建 - 简书 (jianshu.com)的做法
+  使用ifconfig命令检查网卡和私网地址
+  使用openssl req -x509 -newkey rsa:2048 -keyout /etc/turn_server_pkey.</description>
+    </item>
+    
+  </channel>
+</rss>

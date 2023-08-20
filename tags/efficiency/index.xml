@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>efficiency on 个人随笔</title>
+    <link>http://www.hypermn.cn/tags/efficiency/</link>
+    <description>Recent content in efficiency on 个人随笔</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2018-2022 HyperMn</copyright>
+    <lastBuildDate>Sun, 22 Aug 2021 00:50:05 +0800</lastBuildDate><atom:link href="http://www.hypermn.cn/tags/efficiency/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>推荐一些提高工作效率的PC端软件</title>
+      <link>http://www.hypermn.cn/posts/%E6%8E%A8%E8%8D%90%E4%B8%80%E4%BA%9B%E6%8F%90%E9%AB%98%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E7%9A%84pc%E7%AB%AF%E8%BD%AF%E4%BB%B6/</link>
+      <pubDate>Sun, 22 Aug 2021 00:50:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/posts/%E6%8E%A8%E8%8D%90%E4%B8%80%E4%BA%9B%E6%8F%90%E9%AB%98%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E7%9A%84pc%E7%AB%AF%E8%BD%AF%E4%BB%B6/</guid>
+      <description>前言 一直很想写这篇文章，来推荐我常用的一些非常好用的软件。主要基于以下两个理由：
+ 这类软件让我相见恨晚，极大地提高了我使用电脑的效率。 这类软件多数是免费软件，我想对于一款免费又好用的软件来说，最大的尊重就是向身边的朋友推荐它们。  由于博主使用的是Windows系统，所以只体验过这些软件在Windows下的使用，并且有些软件只有Windows版本。
+考虑到受众，文章主要分为通用软件和编程相关两个部分。
+通用软件推荐 Listary 亲测比Everything更好用的搜索工具！
+增强版的Windows剪切板 Snipate 小丸工具箱 Internet Download Manager wiztree Typora MathPix 编程相关软件推荐 MobaXTerm Windows Terminal Visual Studio Code </description>
+    </item>
+    
+  </channel>
+</rss>

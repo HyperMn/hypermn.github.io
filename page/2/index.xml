@@ -1,0 +1,483 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>个人随笔</title>
+    <link>http://www.hypermn.cn/</link>
+    <description>Recent content on 个人随笔</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2018-2022 HyperMn</copyright>
+    <lastBuildDate>Wed, 10 Aug 2022 23:59:59 +0800</lastBuildDate>
+    
+        <atom:link href="http://www.hypermn.cn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>友情链接</title>
+        <link>http://www.hypermn.cn/link-exchange/</link>
+        <pubDate>Mon, 30 Nov 2020 11:25:50 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/link-exchange/</guid>
+        <description>个人随笔 http://www.hypermn.cn/link-exchange/ -&lt;p&gt;一个兆基 | 王兆基写字的地方 &lt;a href=&#34;https://zhaoji.wang/&#34;&gt;https://zhaoji.wang/&lt;/a&gt;&lt;/p&gt;
+- http://www.hypermn.cn/link-exchange/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>关于</title>
+        <link>http://www.hypermn.cn/about/</link>
+        <pubDate>Sun, 29 Nov 2020 19:58:50 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/about/</guid>
+        <description>个人随笔 http://www.hypermn.cn/about/ -&lt;p&gt;HyperMn，生于西北某边陲小镇，最后一批韭零后，现求学于蓉。&lt;/p&gt;
+&lt;p&gt;爱好广泛：&lt;code&gt;跑步/健身/守望先锋/音乐...&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;掌握的一些乱七八糟的技能：&lt;code&gt;前端开发，图片视频后期&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;目前的研究方向：&lt;code&gt;计算机图形学&lt;/code&gt;&lt;/p&gt;
+- http://www.hypermn.cn/about/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>blog从wordpress迁移到了hugo</title>
+        <link>http://www.hypermn.cn/posts/%E8%BF%81%E7%A7%BB%E4%BA%86blog/</link>
+        <pubDate>Sat, 28 Nov 2020 23:03:50 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E8%BF%81%E7%A7%BB%E4%BA%86blog/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E8%BF%81%E7%A7%BB%E4%BA%86blog/ -&lt;h1 id=&#34;hello-hugo-goodbye-wordpress&#34;&gt;Hello Hugo, Goodbye WordPress&lt;/h1&gt;
+&lt;p&gt;又闲置了半年博客，终于想起上来写点什么。在保研的期间看了很多前人的博客，颇有感触。然后9月初以为无书可读之时，计划找一份前端开发的工作，于是恶补了半个月JavaScript知识，其间读过一篇BYVoid神牛的文章。他是第一个用中文写关于Node.js书的人，在&lt;a href=&#34;https://byvoid.com/zht/&#34;&gt;他的博客&lt;/a&gt;翻阅，发现了很多有意思的文章。其中有一篇&lt;a href=&#34;https://byvoid.com/zhs/blog/treasure-young-days/&#34;&gt;劝君惜取少年时&lt;/a&gt;，在大四时读来尤为唏嘘。&lt;/p&gt;
+&lt;p&gt;也拜访过其他同学的博客，用WordPress作为CMS已经越来越少，多是Typecho、Jekyll或是Hexo。于是我也萌发了换框架的想法，那么干脆和神牛换同款算了。&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;号称自己是世界上最快的静态网站生成器，对比Hexo生成十几篇博客就要超过&lt;code&gt;1s&lt;/code&gt;的速度，确实有理由相信golang比Node.js要快（笑）。于是就花了一天时间从WordPress迁移到Hugo，迁移倒并不是件麻烦事，其间卡我最久的竟然是给服务器装V2Ray。而装V2Ray的原因是由于不可描述（&lt;del&gt;懂得都懂&lt;/del&gt;）的原因，Git的速度慢的惊人，为了便于今后的版本管理，还是一劳永逸给服务器也挂个代理吧。而V2Ray的文档实在是年久失修，提供的安装配置方法多已经和当时不太一致了，于是就自己摸索了一个多小时才跑起来，之后就是把图片和文章搬运一下就完工了。&lt;/p&gt;
+&lt;p&gt;主题的评论区支持了主流的几个评论服务，本站采用了Valine。图床计划用七牛云，不过目前图片还是从站点的静态文件里读取。主题的字体出于作者的存储考虑，仍然是从GoogleFonts加载的，这又苦了国内用户。还好，目前借助USTC镜像站可以暂时解决这个问题。换了框架确实可以体会到加载主页的速度有了显著提升，不过也失去了WordPress丰富的插件以及手机客户端管理网站等等强大的功能，这就是所谓自由的代价吧。&lt;/p&gt;
+&lt;p&gt;引用&lt;a href=&#34;https://byvoid.com/zhs/blog/treasure-young-days/&#34;&gt;劝君惜取少年时&lt;/a&gt;中的一段话做结尾吧，希望以后勤奋更新blog。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一个朋友在他29岁生日的时候，给过他年轻的朋友们一句话：「Gaudeāmus igitur, iuvenēs dum sumus（拉丁文）」，翻译是「在我们还年轻的时候，让我们快乐吧。」，换成一首诗就是「花开堪折直须折，莫待无花空折枝。」想想看，我们正当人生中最美好的岁月，为什么不去做自己喜欢的事情呢？不要被所谓的现实羁绊，试想人在年轻的时候如果还有如此多的「不能」，那么将来的「不能」祗会更多。所以，大胆去做吧，无需后悔。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;ps&#34;&gt;P.S.&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;神牛：类似大佬，OI梗，于BYVoid的评论区发现。&lt;/code&gt;&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E8%BF%81%E7%A7%BB%E4%BA%86blog/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>记一条感触良多的微博</title>
+        <link>http://www.hypermn.cn/posts/%E8%AE%B0%E4%B8%80%E6%9D%A1%E6%84%9F%E8%A7%A6%E8%89%AF%E5%A4%9A%E7%9A%84%E5%BE%AE%E5%8D%9A/</link>
+        <pubDate>Tue, 28 Jul 2020 22:25:01 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E8%AE%B0%E4%B8%80%E6%9D%A1%E6%84%9F%E8%A7%A6%E8%89%AF%E5%A4%9A%E7%9A%84%E5%BE%AE%E5%8D%9A/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E8%AE%B0%E4%B8%80%E6%9D%A1%E6%84%9F%E8%A7%A6%E8%89%AF%E5%A4%9A%E7%9A%84%E5%BE%AE%E5%8D%9A/ -&lt;p&gt;不知从什么时候开始，家乡新疆在我眼里开始变得不再那么可爱。 不论是繁琐的安检、不再那么便捷的快递、粗犷的交流方式、甚至是某些热情过头的人，都让时常在内地的我回来后感觉有诸多不适。不过不适归不适，但这里的瓜果依旧香甜，家人朋友依旧可爱，我也是一次假期没有落下的每每往返于学校和家乡之间。不过我想很多人和我一样，在疫情后对新疆的印象又要打个折扣。&lt;/p&gt;
+&lt;p&gt;每次回家时，都要经过数道必然会经过的安检卡口。走在小区的路上，我经常想：已经记不得不设保安亭，不围着重重栅栏的小区是什么样的了。近十年，不断加多的栅栏，减少的小区出口，高强度的安检力度，慢慢地给生活带来了一些麻烦。当然，这些“麻烦”，新疆人都能理解，为了安全、稳定。我想每次重点检查对象——少数民族同胞们，做出的牺牲比我们还要多很多。家里有不少在行政单位国企或是学校上班的亲戚们，已经数年如一日的过着上六休一的日子。新疆人，压力真的很大。高压之下，日常生活又难免放松，于是很多场所的安检流于表面形式。领导们偶尔抽查，查出了松懈的情况，便又过几天认真安检的日子，如此往复。 疫情爆发以来，新疆又一直处于最严厉的管控状态。一同封城，然后等到全国最严重的区域武汉都解封一阵后，才慢慢解除封禁。然后先是办了所谓“小区通行证”，只能进出自己所在的小区，但很多机构又分布在不同的小区，办事异常困难，然后过了短短一天后又可以随意出入所有小区了。然后又把中小学生中午关在学校，学校又没有食堂，只能让街上多家饭店一同做大锅饭送到学校，表弟表妹反映难吃至极。也不许中小学生和老师进商店饭店，美其名曰保持抵抗力差的儿童们。于是就出现了早上家长带孩子出来吃饭，家长进早餐店吃饭，孩子在外面眼巴巴地等着家长带出来东西的滑稽场面。那么既然孩子的家长可以进这些“危险场所”，那家长自然经常接触孩子，所以这条需要满街站满志愿者来维持的滑稽政策又保护了谁呢。甚至在所谓“领导”来检查期间，商场的保安不允许我们这类看起来像学生的大学生们进入商场，问其原因，只是不停地说“领导要求，不满意去县政府找领导”。好说歹说只是不停重复这一句话，大概是他们一贯以来取胜的说辞吧，我无可奈何出门的时候，感觉我并不是在和人沟通，而是在和提前输入好规则的机器说话。&lt;/p&gt;
+&lt;p&gt;7月16日浙江先通报了乌鲁木齐输入一例病例，随后乌鲁木齐便开始了一路狂飙的增长病例。各地开始把近一个月去过乌市的人全部进行医学观察，核酸检测。小区恢复了“通行证”+行程码的双检查措施，口罩自不必说，满街都有人提醒你带好。更是从昨天（7月27日）开始，北疆大部分地区开始封城，恢复2月份的高压管控，居民不能出单元门，进出小区。凌晨3点通知大家10点封城，应该是终身难遇了。讽刺的是，国务院小程序仍然显示除乌鲁木齐外的北疆城市是低风险地区。于是愤怒的我去发布了一条微博，质问为什么十几天来不公布患者的流调结果，让居民提高警惕。为什么明明前天昨天还在辟谣不会封城的官方通告今天却“全境封锁”。为什么半夜通知大家封城，不留给居民准备食物的时间。微博挂了话题，一时间沸反盈天，三天时间就有300评论1200+赞，影响力已经超过了我一开始的想象。&lt;/p&gt;
+&lt;p&gt;很多网友、朋友提醒我小心被打电话喝茶。我自然心里是有一些害怕。毕竟我自己不怕，但家里有人在行政单位工作，不想因为我一时口快而影响了别人的生活。不过所幸微博绑定的是成都的号码，至今也没有人打电话给我勒令我删除微博。难能可贵，拥有了短暂的“言论自由”。 微博里大多数人是支持我的看法，对这种没有理由，没有准备的封城表达了不解，生气。但也有一些“爱疆网友”，公务员，甚至粉蛆认为我损害了新疆形象，不配做新疆人，甚至破口大骂。我心理承受能力是挺强的，毕竟从小打游戏和队友敌人对线到大，一般的辱骂我只当是耳旁风，没法破防。愿意友好交流那我也乐意和他们辩论一下，看他们支持这高规格封城的理由在哪。这条微博不知道什么时候会被删掉，或者有幸和数据库一同消失在使命尽头。我在我这片自留地为它提前立好墓碑。希望新疆能越来越好，希望中国能越来越好。希望这个世界，会好。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;7月31日更新：微博已经被国安勒令删除，新疆只有正能量。&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E8%AE%B0%E4%B8%80%E6%9D%A1%E6%84%9F%E8%A7%A6%E8%89%AF%E5%A4%9A%E7%9A%84%E5%BE%AE%E5%8D%9A/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>健身计划笔记</title>
+        <link>http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%A1%E5%88%92%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Fri, 17 Jul 2020 11:48:11 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%A1%E5%88%92%E7%AC%94%E8%AE%B0/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%A1%E5%88%92%E7%AC%94%E8%AE%B0/ -&lt;p&gt;整理了一些b站up主视频中的动作和要点。&lt;/p&gt;
+&lt;h1 id=&#34;腿&#34;&gt;腿&lt;/h1&gt;
+&lt;h3 id=&#34;热身&#34;&gt;热身&lt;/h3&gt;
+&lt;p&gt;器械腿屈伸+仰卧腿屈伸3x12 （建议最后几个顶峰收缩3秒，会加强感觉） 1. 深蹲（轻重量适应两组后）4x12（主股四，股二，臀） 2. 器械腿屈伸4x12（股四） 3. 倒蹬机4x12（主股四，股二，臀） 4. （股二做两个动作，器械不全就做直腿硬拉8组4x12）可以做 1.仰卧腿屈伸 2.腿下压 3.直腿硬拉 5. 练小腿，小腿粗的人不用做，直接做第六个动作，小腿细的人练完小腿结束训练 提踵4x15 6. 史密斯单腿箭步蹲4x12（股四股二臀部）&lt;/p&gt;
+&lt;h1 id=&#34;手臂&#34;&gt;手臂&lt;/h1&gt;
+&lt;h3 id=&#34;热身-1&#34;&gt;热身&lt;/h3&gt;
+&lt;p&gt;牧师椅二头弯举 + 直杆下压 窄握 控制好大臂 1. 牧师椅二头弯举 + 直杆下压 2. 弯把弯举 + v字把下压 3. 单臂哑铃弯举 + 绳索下压 4. 正握哑铃弯举 + 哑铃提拉（不推荐新手做）&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%A1%E5%88%92%E7%AC%94%E8%AE%B0/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>HyperMn在本科期间的愿望清单</title>
+        <link>http://www.hypermn.cn/posts/hypermn%E5%9C%A8%E6%9C%AC%E7%A7%91%E6%9C%9F%E9%97%B4%E7%9A%84%E6%84%BF%E6%9C%9B%E6%B8%85%E5%8D%95/</link>
+        <pubDate>Tue, 30 Jun 2020 13:39:03 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/hypermn%E5%9C%A8%E6%9C%AC%E7%A7%91%E6%9C%9F%E9%97%B4%E7%9A%84%E6%84%BF%E6%9C%9B%E6%B8%85%E5%8D%95/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/hypermn%E5%9C%A8%E6%9C%AC%E7%A7%91%E6%9C%9F%E9%97%B4%E7%9A%84%E6%84%BF%E6%9C%9B%E6%B8%85%E5%8D%95/ -&lt;p&gt;为了激励自己努力学习，决定把希望在本科实现的事或者想买的东西列一份清单，争取可以实现。&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;继续读研 目前是失学儿童orz&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;单反相机 高中就学了些摄影的皮毛不过一直没太用到（说到底我是真·装备党&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;半程马拉松突破PB200 感觉短时间内膝盖应该支持不了我跑全马了，之前PB208，希望能突破一下吧&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;做一个鬼畜视频 高中开始常年看b站鬼畜区，一直很感兴趣不过没有下定决心去做。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;脱单 （这个就不强求了233）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;换一台MacBook Pro 做视频的时候渲染速度很折磨人啊，最近水果准备换自己的芯了来着&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;学吉他 之前弹过一点烧火棍不过迅速放弃了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;练成可以撑起来Under Armour 超级英雄系列的紧身衣的身材 似乎是一个略主观的评价，不过至少暑假期间坚持健身吧&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+- http://www.hypermn.cn/posts/hypermn%E5%9C%A8%E6%9C%AC%E7%A7%91%E6%9C%9F%E9%97%B4%E7%9A%84%E6%84%BF%E6%9C%9B%E6%B8%85%E5%8D%95/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>编译原理复习-(2)</title>
+        <link>http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-2/</link>
+        <pubDate>Fri, 22 May 2020 20:08:17 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-2/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-2/ -&lt;h1 id=&#34;算法常见题目&#34;&gt;算法、常见题目&lt;/h1&gt;
+&lt;p&gt;保留字和标识符的识别 处理很像标识符的保留字的方式： 初始化时就将各个保留字填入符号表中 为每个保留字建立单独的状态转换图（构建词法分析器的时候就是这种状态）&lt;/p&gt;
+&lt;h4 id=&#34;基于状态图的词法分析器的体系结构&#34;&gt;基于状态图的词法分析器的体系结构&lt;/h4&gt;
+&lt;p&gt;用变量state保存状态图当前状态的编号 用switch语句根据state的状态将我们转到对应于各个可能状态的相应代码段 &lt;img src=&#34;http://www.hypermn.cn/2020/05/relop%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%9B%BE%E7%9A%84%E6%A6%82%E8%A6%81%E5%AE%9E%E4%B9%A0.png&#34; alt=&#34;&#34;&gt; 一些改进策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;我们可以让词法分析器顺序地尝试各个词法单元的状态转换图。（但每个关键字，每种表示符都用各自独立的状态图，效率还是不高，可能会对很多字符串不断地重复操作）&lt;/li&gt;
+&lt;li&gt;可以并行地运行各个状态转换图，将下一个输入字符提供给所有的状态转换图，并使得每个状态转换图作出它应该执行的转换。（但是这样的话，由于每种分析器特点的不同，对这个字符流的操作要求就挺多的。为了实现这种并行，代码设计上和对内存空间可能都另有要求。&lt;/li&gt;
+&lt;li&gt;更好的方法是，也是通常最普遍的方式，就是将所有状态转换图合并为一个图。允许合并后的转换图尽量读取输入，直到不存在下一个状态为止&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;构造nfadfa最小化按照算法做&#34;&gt;构造NFA，DFA，最小化（按照算法做）&lt;/h3&gt;
+&lt;h4 id=&#34;构造nfa使用thompson结构&#34;&gt;构造NFA（使用Thompson结构）:&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E6%B1%A4%E6%99%AE%E6%A3%AE%E7%AE%97%E6%B3%95.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;将nfa转换成dfa子集构造&#34;&gt;将NFA转换成DFA（子集构造）：&lt;/h4&gt;
+&lt;p&gt;子集构造：参见Chapter_two(2).ppt 相关题目：2.1，2.12，2.16 &lt;img src=&#34;http://www.hypermn.cn/2020/05/nfa%E7%8A%B6%E6%80%81%E9%9B%86%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/a%E6%88%96b%E6%98%9F%E5%8F%B7abb%E7%9A%84nfa.png&#34; alt=&#34;&#34;&gt; 等价NFA的开始状态A是ε-closure(0),即A={0,1,2,4,7}。 首先，标记A，计算Dtran[A,a]=ε-closure(move(A,a))=closure({3,8})={1,2,3,4,6,7,8}，我们记为集合B。接着计算Dtran[A,b]=&amp;hellip;=C。 然后继续计算Dtran[B,a],[B,b]&amp;hellip; 直到所有DFA状态被标记，我们得到了Dtran。 &lt;img src=&#34;http://www.hypermn.cn/2020/05/Dtran.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;最小化dfa&#34;&gt;最小化DFA&lt;/h4&gt;
+&lt;p&gt;首先把DFA状态划分为非接受状态和接受状态两个集合，然后根据每个状态在各输入符号的转移，如果转移后的状态所属集合的不同，则划入不同集合，重复多次直到不能再划分。 &lt;img src=&#34;http://www.hypermn.cn/2020/05/minimizeDFA.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;re直接构造dfa&#34;&gt;RE直接构造DFA&lt;/h3&gt;
+&lt;p&gt;龙书3.9.1&lt;/p&gt;
+&lt;h3 id=&#34;写最左推导最右推导画分析树和抽象语法树&#34;&gt;写最左推导，最右推导，画分析树和抽象语法树&lt;/h3&gt;
+&lt;p&gt;相关题目：3.3&lt;/p&gt;
+&lt;h3 id=&#34;写出给定程序的语法树抽象语法树&#34;&gt;写出给定程序的语法树，抽象语法树&lt;/h3&gt;
+&lt;p&gt;相关题目：3.3&lt;/p&gt;
+&lt;h3 id=&#34;二义性结合性优先级&#34;&gt;二义性、结合性、优先级&lt;/h3&gt;
+&lt;p&gt;可生成带有两个不同分析树的串的文法称作二义性文法（ambiguousgrammar） 相关题目：3.2 常见的二义性:悬挂else问题，算符优先级问题 左递归：左结合 右递归：右结合 优先级：越靠近终结符的优先级越高&lt;/p&gt;
+&lt;h3 id=&#34;写出给定程序的递归下降分析程序可能用伪代码c程序构造语法树&#34;&gt;写出给定程序的递归下降分析程序（可能用伪代码，C程序），构造语法树&lt;/h3&gt;
+&lt;p&gt;注意事项：在处理产生式A→ε时，可以忽略，或者使用A的Follow集合。不要试图去匹配ε（不然要被拉去登记的） 相关题目：4.2，4.3，4.4&lt;/p&gt;
+&lt;h3 id=&#34;给定文法消除左递归提取公因子求first-setfollow-set说明是否是ll1文法构造ll1分析表给出一个输入分析的动作-相关题目4748410&#34;&gt;给定文法：消除左递归，提取公因子，求First Set，Follow Set，说明是否是LL(1)文法，构造LL(1)分析表，给出一个输入分析的动作 相关题目：4.7，4.8，4.10&lt;/h3&gt;
+&lt;h4 id=&#34;消除左递归&#34;&gt;消除左递归&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E5%B7%A6%E9%80%92%E5%BD%921.png&#34; alt=&#34;&#34;&gt; 替换为 &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E5%B7%A6%E9%80%92%E5%BD%922.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;提取左公因子&#34;&gt;提取左公因子&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E6%8F%90%E5%8F%96%E5%B7%A6%E5%85%AC%E5%9B%A0%E5%AD%90.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;first集合&#34;&gt;FIRST集合&lt;/h4&gt;
+&lt;p&gt;FIRST(α)被定义为可从α推导得到的串的首符号的集合 1) 如果X是终结符，FIRST(X) = X 2) 如果X是非终结符，且X-&amp;gt;Y1Y2&amp;hellip;Yk是一个产生式，首先把FIRST(Y1)加入FIRST(X)，如果Y1能推出ε，那么把FIRST(Y2)加入FIRST(X)&amp;hellip;如果所有的Y1到Yk都能推出ε，那么我们把ε加入FIRST(X)。 3) 如果X-&amp;gt;ε是一个产生式，那么把ε加入FIRST(X)中&lt;/p&gt;
+&lt;h4 id=&#34;follow集合&#34;&gt;FOLLOW集合&lt;/h4&gt;
+&lt;p&gt;FOLLOW(A)被定义为可能在某些句型中紧跟在A右边的终结符号的集合，如果A是某些句型的最右符号，那么dollor(S那个符号)也在FOLLOW(A)中 1) 首先把dollor(S那个符号)加入FOLLOW(S)，S是开始符号 2) 如果存在产生式A-&amp;gt;αBβ，那么把{FIRST(β)-ε}加入FOLLOW(B) 3) 如果存在产生式A-&amp;gt;αB，或A-&amp;gt;αBβ且FIRST(β)包含ε，那么把FOLLOW(A)加入FOLLOW(B)&lt;/p&gt;
+&lt;h4 id=&#34;ll1文法&#34;&gt;LL1文法&lt;/h4&gt;
+&lt;p&gt;构造 预测分析器，向前看一步。LL中第一个L表示从左向右扫描输入，第二个L表示产生最左推导。 LL1文法必须满足的条件： &lt;img src=&#34;http://www.hypermn.cn/2020/05/LL1-1.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/LL1-2.png&#34; alt=&#34;&#34;&gt; 接下来就是利用FIRST集合和FOLLOW集合的内容来构造预测分析表。我们可以进行如下处理 &lt;img src=&#34;http://www.hypermn.cn/2020/05/LL1-3.png&#34; alt=&#34;&#34;&gt; 形如这个即可： &lt;img src=&#34;http://www.hypermn.cn/2020/05/LL1-4.png&#34; alt=&#34;&#34;&gt; 分析过程： &lt;img src=&#34;http://www.hypermn.cn/2020/05/LL1-5.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;给定文法求lr0的dfa构造lr0和slr1的分析表说明是否是lr0或slr1文法描述冲突&#34;&gt;给定文法：求LR(0)的DFA，构造LR(0)和SLR(1)的分析表说明是否是LR(0)或SLR(1)文法（描述冲突），&lt;/h3&gt;
+&lt;p&gt;给定一个输入，写出LR(0),SLR(1)的分析步骤 相关题目：5.1，5.3 使用dollar符号来标记栈的底部以及输入的右端&lt;/p&gt;
+&lt;h4 id=&#34;为什么使用lr语法分析器&#34;&gt;为什么使用LR语法分析器&lt;/h4&gt;
+&lt;p&gt;直接来说：只要存在这样一个左到右扫描的移入-规约语法分析器，它总是能够在某文法的最右句型的句柄出现在栈顶时识别出这个句柄，那么就是LR文法。 吸引力所在：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;几乎所有程序设计语言，只要能够写出构造该文法的上下文无关文法，就能够构造出识别该构造的LR语法分析器。&lt;/li&gt;
+&lt;li&gt;LR语法分析方法是已知的最通用的无回溯移入-规约分析技术，并且它的实现可以喝其他更原始的移入 - 规约方法一样高效。&lt;/li&gt;
+&lt;li&gt;一个LR语法分析器可以在对输入进行从左到右扫描时尽可能早地检测到错误。&lt;/li&gt;
+&lt;li&gt;可以使用LR方法进行语法分析的文法类是可以使用预测方法或LL方法进行语法分析的文法类的真超类。 缺点就是手工构造LR分析器工作量非常大。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;lr0&#34;&gt;LR(0)&lt;/h4&gt;
+&lt;p&gt;一个LR语法分析器通过维护一些状态，用这些状态来表明在语法分析过程中所处的位置，从而做出移入 - 规约决定。这些状态代表了“项” item集合。 一个文法G的一个LR（0）项是G的一个产生式再加上一个位于它的 体 中某处的点。所以产生式A -&amp;gt; XYZ 就有四个项： A-&amp;gt;·XYZ A-&amp;gt;X·YZ A-&amp;gt;XY·Z A-&amp;gt;XYZ· 注意：产生式A-&amp;gt;ε 只生成一个项A-&amp;gt;·&lt;/p&gt;
+&lt;h5 id=&#34;增广文法&#34;&gt;增广文法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果G是一个以S为开始符号的文法，那么G的增广文法G&amp;rsquo;就是在G中加入新开始符号S&amp;rsquo;进而产生式S&#39;-&amp;gt;S而得到的文法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;引入新开始产生式的目的是告诉语法分析器何时应该停止语法分析并宣称接受输入符号串。&lt;/p&gt;
+&lt;h5 id=&#34;clousre项集的闭包&#34;&gt;CLOUSRE,项集的闭包&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果I是文法G的一个项集，那么CLOSURE(I)就是根据下面的两个规则从I构造得到的项集： 1) 一开始，将I中的各个项加入到CLOSURE(I)中。 2) 如果A-&amp;gt;α·Bβ在CLOSURE(I)中，B-&amp;gt;γ是一个产生式，并且项B-&amp;gt;·γ不在CLOSURE(I)中，就将这个项加入其中。不断应用这个规则，直到没有新项可以加入CLOSURE(I)中为止。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;goto函数&#34;&gt;GOTO函数&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GOTO(I,X)，其中I是一个项集而X是一个文法符号。GOTO(I,X)被定义为I中刑如[A-&amp;gt;α·Xβ]的项所对应的项[A-&amp;gt;αX·β]的集合的闭包。直观地讲，GOTO函数用于定义一个文法的LR(0)自动机的转换。这个自动机的状态对应于项集，而GOTO(I,X)描述了当输入为X时离开状态I的转换。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;一个完整的分析例子&lt;/strong&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/LR0%E5%88%86%E6%9E%90%E4%BE%8B%E5%AD%90.png&#34; alt=&#34;&#34;&gt; &lt;strong&gt;LR语法分析算法&lt;/strong&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/LR0-1.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/LR0-2.png&#34; alt=&#34;&#34;&gt; 在已知语法分析表的情况下 &lt;img src=&#34;http://www.hypermn.cn/2020/05/LR0-3.png&#34; alt=&#34;&#34;&gt; 我们可以通过输入串，得到一个分析过程： &lt;img src=&#34;http://www.hypermn.cn/2020/05/LR0-4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;构造slr语法分析表&#34;&gt;构造SLR语法分析表&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/SLR.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;算法写伪代码&#34;&gt;算法（写伪代码）&lt;/h3&gt;
+&lt;p&gt;模拟DFA、NFA 3种DFA代码，LL(1)算法，LR(0)算法，SLR(1)算法，消左递归，提公因子，构造First，Follow集合 DFA代码（英文书P63，中文P42） LL（1）算法（英文书P155，中文P115） LR（0）算法（英文书P207，中文P158） SLR(1) 算法（英文书P210，中文P160） 左递归（英文书P159，中文P119） 公因子（英文书P164，中文P122） 构造First Set（英文书P168，中文P126） 构造Follow Set（英文书P173，中文P130） 参见书本&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-2/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>编译原理复习-(1)</title>
+        <link>http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-1/</link>
+        <pubDate>Mon, 18 May 2020 16:47:06 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-1/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-1/ -&lt;h1 id=&#34;理论知识&#34;&gt;理论知识&lt;/h1&gt;
+&lt;h3 id=&#34;编译的各个阶段&#34;&gt;编译的各个阶段&lt;/h3&gt;
+&lt;h5 id=&#34;扫描程序scanner&#34;&gt;扫描程序(scanner)&lt;/h5&gt;
+&lt;p&gt;在这个阶段编译器实际阅读源程序（通常以字符流的形式表示）。扫描程序执行词法分析（Lexical analysis）：它将字符序列收集到称作记号(token）的有意义单元中，记号同自然语言，如英语中的字词相似。&lt;/p&gt;
+&lt;h5 id=&#34;语法分析程序parser&#34;&gt;语法分析程序(parser)&lt;/h5&gt;
+&lt;p&gt;语法分析程序从扫描程序中获取记号形式的源代码，并完成定义程序结构的语法分析（syntax analysis），这与自然语言中句子的语法分析类似。语法分析定义了程序的结构元素及其关系。通常将语法分析的结果表示为分析树（parse tree）或语法树（syntax tree）。&lt;/p&gt;
+&lt;h5 id=&#34;语义分析程序semantic-analyzer&#34;&gt;语义分析程序（semantic analyzer)&lt;/h5&gt;
+&lt;p&gt;分析程序的静态语义，包括声明和类型检查。&lt;/p&gt;
+&lt;h5 id=&#34;源代码优化程序source-code-optimizer代码生成器code-generator目标代码优化程序target-code-optimizer&#34;&gt;源代码优化程序（source code optimizer），代码生成器（code generator），目标代码优化程序（target code optimizer）&lt;/h5&gt;
+&lt;h3 id=&#34;编译器的前端front-end后端back-end-趟passes&#34;&gt;编译器的前端(front end),后端(back end), 趟(passes)&lt;/h3&gt;
+&lt;p&gt;扫描程序、分析程序和语义分析程序是前端，代码生成器是后端。 在一个特定的实现中，多个步骤的活动可以被组合成一趟（pass）。每趟读入一个输入文件并产生一个输出文件。&lt;/p&gt;
+&lt;h3 id=&#34;编译器&#34;&gt;编译器&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;它是一种程序，能把源语言（高级语言）编写的程序翻译成等价的以目标语言（低级语言eg:汇编语言）编写的程序。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;优点： 在将输入映射到输出时，由编译器生成的机器语言目标程序通常比解释器快得多。&lt;/p&gt;
+&lt;h3 id=&#34;解释器&#34;&gt;解释器&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;根据用户提供的输入直接执行源程序中指定的操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;优点： 与编译器相比，解释器通常可以提供更好的错误诊断，因为它按语句执行源程序语句。&lt;/p&gt;
+&lt;h3 id=&#34;串&#34;&gt;串&lt;/h3&gt;
+&lt;p&gt;以banana为例 前缀 ba 后缀 na 子串 ana 真前缀、真后缀、真子串 去除了ε和s本身 子序列 bnn&lt;/p&gt;
+&lt;h3 id=&#34;上下文无关文法最左推导bnfebnf乔姆斯基文法层次&#34;&gt;上下文无关文法，最左推导，BNF，EBNF，乔姆斯基文法层次&lt;/h3&gt;
+&lt;p&gt;一个上下文无关分发由终结符号、非终结符号、一个开始符号和一组产生式组成&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;终结符号是组成串的基本符号。注意，术语”词法单元名字“是”终结符号“的同义词。&lt;/li&gt;
+&lt;li&gt;非终结符号是表示串的集合的语法变量&lt;/li&gt;
+&lt;li&gt;在一个文法中，某个非终结符号被指定为开始符号。且这个符号表示的串集合就是这个文法生成的语言&lt;/li&gt;
+&lt;li&gt;一个文法的产生式描述了将终结符号和非终结符号组成串的方法。每个产生式由下列元素组成 &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E4%BA%A7%E7%94%9F%E5%BC%8F.png&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;上下文无关文法说明程序设计语言的语法结构，利用了与正则表达式中极为类似的命名惯例和运算。&lt;/li&gt;
+&lt;li&gt;二者的主要区别在于上下文无关文法的规则是递归的（recursive）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;符号表示的约定&#34;&gt;符号表示的约定&lt;/h4&gt;
+&lt;p&gt;终结符号：小写字母、运算符号、标点符号、数字、黑体字符串 非终结符：大写字母、字母S、小写斜体名 字母表中排在后面的大写字母表示文法符号。可表示非终结符号或终结符号，如XYZ。 字母表中排在后面的小写字母表示终结符号。 小写的希腊字母，α，β，γ表示文法符号串。 产生式可以分开写也可以并列 除非特别说明，第一个产生式的头就是开始符号。&lt;/p&gt;
+&lt;h4 id=&#34;推导&#34;&gt;推导&lt;/h4&gt;
+&lt;p&gt;一步或多步推导=&amp;gt;+ 句型：可能既包含终结符又包含非终结符号，也可能是空串 句子：不包含非终结符号的句型 一个文法生成的语言是它的所有句子的集合。&lt;/p&gt;
+&lt;h5 id=&#34;最左推导-leftmost-derivation&#34;&gt;最左推导（ leftmost derivation）&lt;/h5&gt;
+&lt;p&gt;是指它的每一步中最左的非终结符都要被替换的推导&lt;/p&gt;
+&lt;h5 id=&#34;最右推导-rightmost-derivation&#34;&gt;最右推导（ rightmost derivation）&lt;/h5&gt;
+&lt;p&gt;则是指它的每一步中最右的非终结符都要被替换的推导。&lt;/p&gt;
+&lt;h5 id=&#34;最左推导和与其相关的分析树的内部节点的前序编号相对应而最右推导则和后序编号相对应&#34;&gt;最左推导和与其相关的分析树的内部节点的前序编号相对应；而最右推导则和后序编号相对应&lt;/h5&gt;
+&lt;p&gt;最左推导的一个例子：书p73 相关题目：3.3 EBNF中注意重复和可选的表示方法，语法图 A-&amp;gt;AaB 改写成B{a} A-&amp;gt;aAB 改写成{a}B []表示可选，对应递归下降里的if&lt;/p&gt;
+&lt;h3 id=&#34;分析树抽象语法树&#34;&gt;分析树，抽象语法树&lt;/h3&gt;
+&lt;p&gt;分析树：推导过程的树状图形式 抽象语法树： &lt;img src=&#34;http://www.hypermn.cn/2020/05/AST%E7%9A%84%E6%9E%84%E9%80%A0-1.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/AST%E7%9A%84%E6%9E%84%E9%80%A0-2.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/AST%E7%9A%84%E6%9E%84%E9%80%A0-3.png&#34; alt=&#34;&#34;&gt; 采用自底向上的构造方法创建时，语法分析树和抽象语法树的结构可以比较接近。但是如果使用一个为自顶向下的语法分析设计的文法，那么得到的抽象语法树是相同的，但是语法分析树结构和抽象语法树结构会有很大的不同。&lt;img src=&#34;http://www.hypermn.cn/2020/05/AST%E7%9A%84%E6%9E%84%E9%80%A0-4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;自顶向下自底向上语法分析&#34;&gt;自顶向下，自底向上语法分析&lt;/h3&gt;
+&lt;p&gt;自顶向下（top-down）的分析算法通过在最左推导中描述出各个步骤来分析记号串输入。之所以称这样的算法为自顶向下是由于分析树隐含的编号是一个前序编号，而且其顺序是由根到叶。 分为两类：回溯分析程序（ backtracking parser）和预测分析程序（ predictive parser） 自底向上的分析程序有两种可能的动作(除“接受”之外)： 1) 将终结符从输入的开头移进到栈的顶部。 2) 假设有BNF选择A→a，将栈顶部的串a归约为非终结符A。&lt;/p&gt;
+&lt;h4 id=&#34;规约&#34;&gt;规约&lt;/h4&gt;
+&lt;p&gt;将自底向上的语法分析过程看成将一个串 w 规约为文法开始符号的过程。 在每个规约reduction步骤中，一个与某产生式体匹配的特定子串将被替代为该产生式头部的非终结符号。 一次规约是一个推导步骤的反向操作。自底向上语法分析的目标是反向构造一个推导过程。&lt;/p&gt;
+&lt;h4 id=&#34;句柄句柄剪枝&#34;&gt;句柄，句柄剪枝&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E5%8F%A5%E6%9F%84.png&#34; alt=&#34;&#34;&gt; 句柄剪枝，或者说找句柄，可以形象的理解为是一个最左规约的过程，即这个过程也能得到一个反向的最右推导。 从输入的串开始，我们找一个产生式，能够完成规约的话，则该产生式的右部可记录为其句柄。&lt;/p&gt;
+&lt;h3 id=&#34;为什么要解决公因子左递归&#34;&gt;为什么要解决公因子，左递归&lt;/h3&gt;
+&lt;p&gt;当有公因子存在时，不能立即区分出文法规则右边的选择 当有左递归时，将导致一个无限循环。&lt;/p&gt;
+&lt;h3 id=&#34;正则表达式&#34;&gt;正则表达式&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;递归定义&lt;/em&gt; 假设r和s都是正则表达式，分别表示语言L(r)和L(s) 1) (r)(s)是一个正则表达式，表示语言L(r)∪L(s) 2) (r)(s)是一个正则表达式，表示语言L(r)L(s) 3) (r)* 是一个正则表达式，表示语言(L(r))* 4) (r）是一个正则表达式，表示语言L(r)。即表达式的两边加上括号并不影响表达式所表示的语言。&lt;/p&gt;
+&lt;h5 id=&#34;可以用如下的约定去掉一些括号&#34;&gt;可以用如下的约定，去掉一些括号:&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;一元运算符*具有最高的优先级，并且是左结合的 2) 连接具有次高的优先级，也是左结合的 3) 的优先级最低，也是左结合的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;正则表达式满足一些代数定律&#34;&gt;正则表达式满足一些代数定律&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E4%BB%A3%E6%95%B0%E5%AE%9A%E5%BE%8B.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;正则表达式的扩展&#34;&gt;正则表达式的扩展&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;一个或多个实例 单目后缀运算符+表示一个正则表达式及其语言的正闭包，即(r)+表示(L(r))+，它的优先级和结合性与_相同 2) 零个或一个实例 单目后缀运算符?表示零个或一个出现。也就是说，r?等价于rε，L(r?) = L(r)∪{ε}。它的优先级和结合性与_和+相同 3) 字符类。[abc]是abc的缩写，当形成逻辑上连续的序列时（如连续的大写字母、小写字母或数位），可以只写第一个和最后一个符号，中间用连词符隔开。如[a-z]是ab&amp;hellip;z的缩写。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;状态转换图&#34;&gt;状态转换图&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;状态转换图transition diagram有一组称为状态的结点或圆圈&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;接受状态或最终状态。用双层的圈来表示，如果该状态要执行一个动作的话——把动作附加在该接受状态上。&lt;/li&gt;
+&lt;li&gt;如果需要回退一个位置，在该接受状态的附近加一个_。如果需要回退多个位置，加相应数目的_。&lt;/li&gt;
+&lt;li&gt;开始状态或初始状态，该状态由一条没有出发结点的、标号为&amp;quot;start&amp;quot;的边指名。在读入任何输入符号之前，状态转换图总是位于它的开始状态。 &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E8%AF%8D%E6%B3%95%E5%8D%95%E5%85%83relop%E7%9A%84%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE.png&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;有穷自动机finite-automata&#34;&gt;有穷自动机（Finite Automata）&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;有穷自动机是识别器(recognizer)，它们只能对每个可能的输入串简单地回答“是”或“否”。 2) 有穷自动机分为两类： * 不确定的有穷自动机(Nondeterministic Finite Automata, NFA)对其边上的标号没有任何限制。一个符号标记离开同一状态的多条边，并且空串ε也可以作为标号。 * 对于每个状态及自动机输入字母表中的每个符号，确定的有穷自动机(Deterministic Finite Automata, DFA)有且只有一条离开该状态、以该符号为标号的边。 NFA、DFA能识别的语言的集合是相同的,刚好是能用正则表达式描述的语言的集合，这个集合中的语言被称为正则语言。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;nfa&#34;&gt;NFA&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NFA由以下五个部分组成 * 一个有穷的状态集合S _一个输入符号集合Σ，即输入字母表，假定ε不是Σ中的元素 *一个转换函数q,它为每个状态和Σ∪{ε}中的每个符号都给出了后继状态的集合 *开始状态s0，它是S中的某一个状态 *接受状态F,它是S的一个子集 &lt;img src=&#34;http://www.hypermn.cn/2020/05/nfa%E8%BD%AC%E6%8D%A2%E5%9B%BE.png&#34; alt=&#34;&#34;&gt; (ab)_abb的NFA转换图 &lt;img src=&#34;http://www.hypermn.cn/2020/05/nfa%E8%BD%AC%E6%8D%A2%E8%A1%A8.png&#34; alt=&#34;&#34;&gt; 对应的NFA转换表&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;dfa&#34;&gt;DFA&lt;/h4&gt;
+&lt;p&gt;DFA是NFA的一个特例，其特点在于： * 没有输入空串的转换动作 * 对于每个状态s和每个输入符号a，有且只有一条标号为a的边离开s&lt;/p&gt;
+&lt;h3 id=&#34;语法制导的翻译&#34;&gt;语法制导的翻译&lt;/h3&gt;
+&lt;h4 id=&#34;语法制导定义&#34;&gt;语法制导定义&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;语法制导定义SDD，是一个上下文无关文法和属性及规则的结合。属性和文法符号相关联，而规则和产生式相互关联。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;继承属性和综合属性&#34;&gt;继承属性和综合属性&lt;/h4&gt;
+&lt;p&gt;我们处理的通常是非终结符的两种属性 * 综合属性syn：在分析树节点N上的非终结符号A的综合属性是由N上的产生式所关联的语义规则来定义的。且这个产生式的头一定是A。节点N上的综合属性只能通过N的子节点或者N本身的属性值来定义。 * 继承属性inh：在分析树节点N上的非终结符号B的继承属性是由N的父节点上的产生式缩管刘安的语义规则来定义的。这个产生式体中必然包含符号B。结点N上的继承属性只能通过N的父节点，N本身和N的兄弟节点上的属性值来定义。 一个SDD的例子： &lt;img src=&#34;http://www.hypermn.cn/2020/05/SDD%E4%BE%8B%E5%AD%90.png&#34; alt=&#34;&#34;&gt; 注意，只包含综合属性的SDD称为S属性的SDD，上图便是如此。 不要忽视SDD副作用的存在，即类似打印等功能都可能是副作用。 一个没有副作用的SDD也称为属性文法。&lt;/p&gt;
+&lt;h4 id=&#34;在语法分析树的结点上对sdd求值&#34;&gt;在语法分析树的结点上对SDD求值&lt;/h4&gt;
+&lt;p&gt;一个显示了其各个属性的值的语法分析树称为注释语法分析树annotated parse tree 精髓：要对某个结点的一个属性求值之前，必须首先求出这个属性值所依赖的所有属性值。（求某个节点综合属性，必然要先求出其所有子结点的综合属性值） 有的时候语法可以和生成的语法分析树结构匹配上，但有的时候我们得到的结果是不匹配的，此时就要考虑到使用继承属性。（因为文法不是为了翻译而定义的，而是以语法分析为目的进行定义的。 &lt;img src=&#34;http://www.hypermn.cn/2020/05/SDD-1.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/SDD-2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;sdd的求值顺序&#34;&gt;SDD的求值顺序&lt;/h4&gt;
+&lt;p&gt;依赖图（dependency graph）它可以确定一颗给定的语法分析树中的各个属性实例的求值顺序。求依赖图的过程，即理解综合属性和继承属性的值相互之间求得的实际顺序 &lt;img src=&#34;http://www.hypermn.cn/2020/05/sdd%E6%B1%82%E5%80%BC1.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/sdd%E6%B1%82%E5%80%BC2.png&#34; alt=&#34;&#34;&gt; 对于我们遇到的SDD，能求值的都是无环的，即我们应该可以得到一个拓扑排序（可能有不止一种求值顺序） 如果一个SDD的每个属性都是综合属性，它就是S属性的。 如果一个SDD是S属性的，我们可以按照语法分析树结点的任何自底向上顺序来计算它的各个属性值。才用后根遍历是一个不错的选择。 L属性 一个产生式体所关联的各个属性之间，依赖图的边总是从左到右而不能从右到左。 更准确地来说每个属性必须要么是 * 一个综合属性 * 一个继承属性，但是它的规则具有如下限制。假设存在一个产生式A-&amp;gt;X1X2&amp;hellip;Xn，并且有一个通过这个产生式所关联的规则计算得到的继承属性Xi.a。那么这个规则只能使用： 1) 和产生式头A关联的继承属性。 2) 位于Xi左边的文法符号实例X1、X2、&amp;hellip;、Xi-1相关的继承属性或者综合属性。 3) 和这个Xi的实例本身相关的继承属性或综合属性，但是在由这个Xi的全部属性组成的依赖图中不存在环。&lt;/p&gt;
+&lt;h3 id=&#34;语法制导的翻译方案-syntax-directed-translation-scheme&#34;&gt;语法制导的翻译方案 syntax-directed translation scheme&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;语法制导的翻译方案（SDT）&lt;/em&gt; 是在其产生式体重嵌入了程序片段的一个上下文无关文法。这些程序片段称为语义动作。它们可以出现在产生式体重的任何地方。 &lt;img src=&#34;http://www.hypermn.cn/2020/05/SDT-1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;后缀翻译方案&#34;&gt;后缀翻译方案&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/SDT-2.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/SDT-3.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/SDT-4.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/SDT-5.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/SDT-6.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;l属性定义的sdt&#34;&gt;L属性定义的SDT&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/L-SDT-1.png&#34; alt=&#34;&#34;&gt; 注意前提条件，只有s-sdd转换后的SDT，同时保证基础文法是LR的，才可以进行自底向上进行语法分析和翻译&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;LR（0）文法判定：如果文法对应的自动机中不存在移进-归约冲突和归约-归约冲突则为 LR(0)文法。换句话说LR(0)文法分析不能解决这两种冲突，所以范围最小。移进-归约冲突就是在同一个项集族中同时出现了可以移进的产生式和可以归约的产生式。归约-归约冲突类似。 &lt;img src=&#34;http://www.hypermn.cn/2020/05/L-SDT-2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;中间代码生成&#34;&gt;中间代码生成&lt;/h3&gt;
+&lt;p&gt;不同编译器对中间表示的选择和设计各有不同。中间表示可以使一种真正的语言，也可以由编译器的各个处理阶段共享的多个内部数据结构组成。&lt;/p&gt;
+&lt;h4 id=&#34;语法树的变体&#34;&gt;语法树的变体&lt;/h4&gt;
+&lt;h5 id=&#34;表达式的有向无环图&#34;&gt;表达式的有向无环图&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/DAG.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/DAG%E7%9A%84SDD.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/DAG-1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;构造dag的值编码方法&#34;&gt;构造DAG的值编码方法&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/DAG-2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;三地址码&#34;&gt;三地址码&lt;/h4&gt;
+&lt;p&gt;三地址码基于两个基本概念：&lt;strong&gt;地址和指令&lt;/strong&gt; 地址的形式： * 名字。允许源程序的名字作为三地址码中的地址。 * 常量。 * 编译器临时生成的临时变量。 几种常见的三地址指令形式： 1) x=y op z x,y,z是地址 2) x=op y 3) x=y 4) goto L 下一步要执行的指令是带有标号L的三地址指令 5) if x goto L或 if False x goto L的条件转移指令 6) if x relop y goto L 7) 过程调用和返回：param x 传参，call p,n 过程调用，y=call p,n 函数调用。 return y 返回（其中y表示返回值） 8) 带下标的复制指令x=y[i]和x[i]=y。x=y[i]指令将把距离位置y处i个内存单元的位置中存放的值赋给x。后者类似 9) x=&amp;amp;y、x=* y或* x=y的地址及指针赋值指令。指令x=&amp;amp;y将x的右值设置为y的地址（左值）。智哥y通常是一个名字，也可能是一个临时变量。它表示一个诸如A[i][j]这样具有左值的表达式。x是一个指针名字或临时变量。在指令x=* y中，假定y是一个指针，或是一个其右值表示内存位置的临时变量。这个指令使得x的右值等于存储在这个位置中的值。最后，指令* x=y则把y的右值赋给由x指向的目标的右值。 eg:一个do while &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E4%B8%89%E5%9C%B0%E5%9D%80%E7%A0%81.png&#34; alt=&#34;&#34;&gt; 注意，乘法运算i* 8适用于每个元素占8个存储单元的数组。&lt;/p&gt;
+&lt;h4 id=&#34;四元式表示&#34;&gt;四元式表示&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E5%9B%9B%E5%85%83%E5%BC%8F.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E5%9B%9B%E5%85%83%E5%BC%8F-1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;三元式表示&#34;&gt;三元式表示&lt;/h4&gt;
+&lt;p&gt;一个三元式triple只有三个字段，分别为op、arg1和arg2. &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E4%B8%89%E5%85%83%E5%BC%8F.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E9%97%B4%E6%8E%A5%E4%B8%89%E5%85%83%E5%BC%8F.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;类型和声明&#34;&gt;类型和声明&lt;/h4&gt;
+&lt;p&gt;可以把类型的应用划分为类型检查和翻译： * 类型检查 type checking。类型检查利用一组逻辑规则来推理一个程序在运行时刻的行为。更为明确的讲，类型检查保证运算分量的类型和运算符的预期类型相匹配。 * 翻译时的应用 translation application。 根据一个名字的类型，编译器可以确定这个名字在运行时刻需要多大的存储空间。&lt;/p&gt;
+&lt;h5 id=&#34;类型表达式&#34;&gt;类型表达式&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E7%B1%BB%E5%9E%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;类型等价&#34;&gt;类型等价&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E7%B1%BB%E5%9E%8B%E7%AD%89%E4%BB%B7.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;声明&#34;&gt;声明&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E5%A3%B0%E6%98%8E.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;表达式的翻译&#34;&gt;表达式的翻译&lt;/h4&gt;
+&lt;h5 id=&#34;表达式中的运算&#34;&gt;表达式中的运算&lt;/h5&gt;
+&lt;p&gt;下图中，使用S的属性code以及表达式E的属性addr和code，为一个赋值语句S生成三地址码。注意code属性对应着各表达式的三地址码。属性E.addr则表示存放E的值的地址。 &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%971.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;增量翻译&#34;&gt;增量翻译&lt;/h5&gt;
+&lt;p&gt;增量翻译的时候就不用显示的构造code了，gen这条指令在利用地址进行运算的时候已经把它依赖的addr都得到了。 &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E5%A2%9E%E9%87%8F%E7%BF%BB%E8%AF%91.png&#34; alt=&#34;&#34;&gt; 注意。属性addr表示的是一个结点的地址，而不是某个变量或常量&lt;/p&gt;
+&lt;h4 id=&#34;控制流&#34;&gt;控制流&lt;/h4&gt;
+&lt;p&gt;if-else语句、while语句这类语句的翻译和对布尔表达式的翻译是结合在一起的。且要注意到程序设计语言中，布尔表达式经常用来： * 改变控制流 * 计算逻辑值&lt;/p&gt;
+&lt;h5 id=&#34;布尔表达式&#34;&gt;布尔表达式&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E5%B8%83%E5%B0%94%E8%A1%A8%E8%BE%BE%E5%BC%8F.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;短路代码&#34;&gt;短路代码&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E7%9F%AD%E8%B7%AF%E4%BB%A3%E7%A0%81.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;控制流语句&#34;&gt;控制流语句&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.hypermn.cn/2020/05/%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A51.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A52.png&#34; alt=&#34;&#34;&gt; 注意label的用法 &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A53.png&#34; alt=&#34;&#34;&gt; &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A54.png&#34; alt=&#34;&#34;&gt; 布尔表达式的控制流翻译 &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A55.png&#34; alt=&#34;&#34;&gt; 解释 &lt;img src=&#34;http://www.hypermn.cn/2020/05/%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%A4%8D%E4%B9%A0-1/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>SCU疫情防控每日填报助手</title>
+        <link>http://www.hypermn.cn/posts/scu%E7%96%AB%E6%83%85%E9%98%B2%E6%8E%A7%E6%AF%8F%E6%97%A5%E5%A1%AB%E6%8A%A5%E5%8A%A9%E6%89%8B/</link>
+        <pubDate>Tue, 21 Apr 2020 14:00:37 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/scu%E7%96%AB%E6%83%85%E9%98%B2%E6%8E%A7%E6%AF%8F%E6%97%A5%E5%A1%AB%E6%8A%A5%E5%8A%A9%E6%89%8B/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/scu%E7%96%AB%E6%83%85%E9%98%B2%E6%8E%A7%E6%AF%8F%E6%97%A5%E5%A1%AB%E6%8A%A5%E5%8A%A9%E6%89%8B/ -&lt;h1 id=&#34;川大疫情防控每日填报助手&#34;&gt;川大疫情防控每日填报助手&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/HyperMn/scu-covid19&#34;&gt;GitHub仓库地址&lt;/a&gt; 川大疫情防控每日填报助手，用于解决忘记填写微信中身体状况每日打卡的问题。 本人不对因为滥用此程序造成的后果负责，&lt;strong&gt;请在合理且合法的范围内使用本程序&lt;/strong&gt;。 &lt;strong&gt;本程序仅用于解决忘记打卡这一问题，如果身体状况发生变化或者地点发生变化，请务必在程序运行之前手动打卡。&lt;/strong&gt; 理论上来说本程序适用于&lt;strong&gt;国内大多数高校&lt;/strong&gt;的每日打卡，只需要替换代码中的提交网址并完成其他的适配性工作即可，其他学校有需求的同学可以修改本代码，但请遵守&lt;code&gt;CC BY-NC-SA 3.0&lt;/code&gt; 许可协议。&lt;/p&gt;
+&lt;h1 id=&#34;用法&#34;&gt;用法&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;修改脚本内的账号和密码&lt;/li&gt;
+&lt;li&gt;（可选）填写&lt;a href=&#34;http://sc.ftqq.com/3.version&#34;&gt;server酱&lt;/a&gt;的api，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用&lt;/li&gt;
+&lt;li&gt;放到服务器上，修改crontab，设定为每天八点半运行，注意需要修改以下命令的路径为实际路径。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;30 8 * * * /usr/bin/python3  /root/ncov-scu/sub.py &amp;gt;&amp;gt;/tmp/yqfk.log
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;建议&#34;&gt;建议&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;定时时间设定到8:30，每天如果记起来了就手工填写，如果忘记了就由程序定时填写。填写的内容会和昨天的一致，地点也会保持昨天的地点不变。&lt;/li&gt;
+&lt;li&gt;脚本运行所在的服务器的地理位置不会影响打卡的位置。&lt;/li&gt;
+&lt;li&gt;如果手工完成了打卡，程序会显示今日已经打卡，不会影响之前手工打卡的结果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;注意&#34;&gt;注意&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;crontab会读取&lt;code&gt;/etc/localtime&lt;/code&gt;的时区，而不是当前用户的时区，所以crontab里面的定时八点可能并不是UTC+8的早晨八点，解决方案是设置系统时区为UTC+8即可&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;TZ&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;Asia/Shanghai
+ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; echo $TZ &amp;gt; /etc/timezone
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;使用-github-actions推荐&#34;&gt;使用 GitHub Actions（推荐）&lt;/h1&gt;
+&lt;p&gt;没有服务器的同学可以使用 GitHub Action 来进行运行, 使用步骤: - 克隆这个仓库到你名下 - fork的仓库默认禁用了&lt;code&gt;workflow&lt;/code&gt;，需要手动打开：点击 &lt;code&gt;actions&lt;/code&gt;选项卡，点击&lt;code&gt;I understand my workflows, go ahead rand run them&lt;/code&gt;。 - 在仓库设置里面, 设置 secrets 如下 - &lt;code&gt;SEP_USER_NAME&lt;/code&gt;: 你的账号 - &lt;code&gt;SEP_PASSWD&lt;/code&gt;: 你的密码 - &lt;code&gt;API_KEY&lt;/code&gt;: 你的通知 api key (强烈建议设置, 因为不设置这个 api key 你无法及时知晓运行状态) &lt;img src=&#34;http://www.hypermn.cn/2020/04/setting.png&#34; alt=&#34;&#34;&gt; 参考截图设定以上三个secrets，&lt;code&gt;API_KEY&lt;/code&gt;可选。 &lt;img src=&#34;setting.png&#34; alt=&#34;&#34;&gt; 完成之后, 每天 UTC 0 点会触发github actions进行填报, (北京时间 8 点)。&lt;/p&gt;
+&lt;h1 id=&#34;serverless&#34;&gt;serverless&lt;/h1&gt;
+&lt;p&gt;如果你没有服务器，但是仍然想使用本程序，可以使用 serverless function，这里以腾讯云云函数为例。 1. 登录注册腾讯云 2. 打开&lt;code&gt;https://console.cloud.tencent.com/scf/&lt;/code&gt;控制台的云函数页面，任选地区，点击&lt;code&gt;新建&lt;/code&gt; 3. 输入函数名称&lt;code&gt;covid&lt;/code&gt;，运行环境python3.6，创建方式空白函数 4. 全选然后删除下面cloud studio中正在编辑的&lt;code&gt;index.py&lt;/code&gt;的文件的全部内容，然后将本项目中&lt;code&gt;serverless.py&lt;/code&gt;的内容粘贴进去，同时修改自己的账号信息，如果有server酱api的可以填key没有的可以不写 5. 点击完成 6. 点击触发方式，选择添加触发方式，输入定时任务名称daily，触发周期为自定义触发周期， cron表达式 &lt;code&gt;0 30 8 * * * *&lt;/code&gt;，点击完成 使用腾讯云的云函数打卡的计算量和调用量极低，不会收费。&lt;/p&gt;
+&lt;h1 id=&#34;跋&#34;&gt;跋&lt;/h1&gt;
+&lt;p&gt;只接受PR，不接受需求。&lt;/p&gt;
+&lt;h1 id=&#34;changelog&#34;&gt;changelog&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;2020年4月20日 在ucas-covid的基础上做了scu的适配工作&lt;/li&gt;
+&lt;li&gt;2020年4月15日 添加了随机等待&lt;code&gt;10-600&lt;/code&gt;秒之后再进行填报&lt;/li&gt;
+&lt;li&gt;2020年4月15日 添加了&lt;code&gt;user-agent&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;2020年4月15日 更新了README，添加了设定secrets页面的截图&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;致谢&#34;&gt;致谢&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;感谢 &lt;a href=&#34;https://github.com/IanSmith123/ucas-covid19/pull/1&#34;&gt;karuboniru&lt;/a&gt; 提供的github actions 支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;http://creativecommons.org/licenses/by-nc-sa/3.0/&#34;&gt;&lt;img src=&#34;https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png&#34; alt=&#34;知识共享许可协议&#34;&gt;&lt;/a&gt;&lt;br&gt;
+本作品采用&lt;a href=&#34;http://creativecommons.org/licenses/by-nc-sa/3.0/&#34;&gt;知识共享署名-非商业性使用-相同方式共享 3.0 未本地化版本许可协议&lt;/a&gt;进行许可。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;scu-daily-health-基于autojs的安卓打包脚本程序并不推荐&#34;&gt;scu-daily-health 基于Auto.js的安卓打包脚本程序（并不推荐）&lt;/h1&gt;
+&lt;p&gt;利用autojs写了一个32行的脚本程序，隐含bug较多，不一定可用，想体验一下使用安卓脚本的同学可以尝试，js源码如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;auto&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;waitFor&lt;/span&gt;();
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;str&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;device&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;device&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;str&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;屏幕宽度:&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt;;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;str&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\n屏幕高度:&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;toast&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;str&lt;/span&gt;);
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;app&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;launchApp&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;微信&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#a6e22e&#34;&gt;toast&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;打开微信...&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;);
+&lt;span style=&#34;color:#a6e22e&#34;&gt;className&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;android.view.View&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;text&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;四川大学微服务&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;findOne&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;();
+&lt;span style=&#34;color:#a6e22e&#34;&gt;className&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;android.widget.TextView&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;text&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;微服务&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;findOne&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;();
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;);
+&lt;span style=&#34;color:#a6e22e&#34;&gt;text&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;健康每日报&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;findOne&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;();
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;);
+&lt;span style=&#34;color:#a6e22e&#34;&gt;swipe&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;600&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;);
+&lt;span style=&#34;color:#a6e22e&#34;&gt;runtime&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;requestPermissions&lt;/span&gt;([&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;access_fine_location&amp;#34;&lt;/span&gt;])
+&lt;span style=&#34;color:#a6e22e&#34;&gt;text&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;所在地点（请打开手机位置功能，并在手机权限设置中选择允许微信访问位置信息）&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;findOne&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;();
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;5000&lt;/span&gt;);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;text&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;确定&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;exists&lt;/span&gt;()){
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;text&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;确定&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;findOne&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;();
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;){
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;swipe&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;600&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;width&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;);
+}
+&lt;span style=&#34;color:#a6e22e&#34;&gt;text&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;提交信息&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;findOne&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;();
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;);
+&lt;span style=&#34;color:#a6e22e&#34;&gt;text&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;确定&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;findOne&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;();
+&lt;span style=&#34;color:#a6e22e&#34;&gt;toast&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;结束&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;打包后的安卓apk下载链接：&lt;a href=&#34;https://share.weiyun.com/5Qet1Mn&#34;&gt;腾讯微云&lt;/a&gt; 使用前确保微信打开后处于下图界面，且“四川大学微服务”出现在了界面中（建议置顶公众号），确保微信能够正确获取你的地理位置（开启了GPS，并授予微信获取位置的权限，没有使用fakeGPS，VPN等导致定位异常的软件）。 &lt;img src=&#34;http://www.hypermn.cn/2020/04/Screenshot_20200421-133747.jpg&#34; alt=&#34;&#34;&gt; 打开软件后会自动请求无障碍权限，授予&lt;code&gt;scu-daily-health&lt;/code&gt;无障碍权限后，如果一切正常，约20秒能自动完成打卡。&lt;/p&gt;
+- http://www.hypermn.cn/posts/scu%E7%96%AB%E6%83%85%E9%98%B2%E6%8E%A7%E6%AF%8F%E6%97%A5%E5%A1%AB%E6%8A%A5%E5%8A%A9%E6%89%8B/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>健身训练计划(转)</title>
+        <link>http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92%E8%BD%AC/</link>
+        <pubDate>Fri, 20 Mar 2020 14:27:17 +0800</pubDate>
+        
+        <guid>http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92%E8%BD%AC/</guid>
+        <description>个人随笔 http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92%E8%BD%AC/ -&lt;h5 id=&#34;内容转自微信公众号卓叔增重&#34;&gt;内容转自微信公众号『卓叔增重』&lt;/h5&gt;
+&lt;h3 id=&#34;大肌群胸肩背腿小肌群手臂小腿腰腹-优先把大肌群练起来顺便把小肌群带上&#34;&gt;大肌群：胸、肩、背、腿，小肌群：手臂、小腿、腰腹。 优先把大肌群练起来，顺便把小肌群带上。&lt;/h3&gt;
+&lt;p&gt;周一：胸+肱三头肌 周三：背部+肱二头肌 周四：胸+肩 周五：背阔肌+大腿+小腿 每天的训练计划清单 每块肌肉的第一个动作，必须至少用15~20RM的小重量热身两组，并且适当拉伸肌肉，才能开始训练。 动作名称 组数，每组次数（力竭）&lt;/p&gt;
+&lt;h2 id=&#34;周一胸肱三头肌&#34;&gt;周一：胸、肱三头肌&lt;/h2&gt;
+&lt;p&gt;哑铃卧推 4组 8RM 上斜哑铃卧推 4组 12RM 平板哑铃飞鸟 4组 12RM 屈臂撑 3组 做到力竭 俯卧撑 3组 做到力竭 坐姿哑铃颈后臂屈伸 4组 8RM 背后屈臂撑 3组 做到力竭&lt;/p&gt;
+&lt;h2 id=&#34;周三背部肱二头肌&#34;&gt;周三：背部、肱二头肌&lt;/h2&gt;
+&lt;p&gt;宽握正手引体向上 共做30个，可分多组 斜凳哑铃划船 4组 8RM 俯身单臂哑铃划船 4组 12RM 反向划船 4组 12RM 哑铃硬拉 4组 8RM 哑铃弯举 3组 12RM 斜托哑铃弯举 3组 12RM&lt;/p&gt;
+&lt;h2 id=&#34;周四胸肩&#34;&gt;周四：胸、肩&lt;/h2&gt;
+&lt;p&gt;哑铃卧推 4组 12RM 上斜哑铃卧推 4组 12RM 坐姿哑铃推举 4组 8RM 阿诺德推举 4组 12RM 哑铃直立划船 4组 12RM 侧平举 3组 递减组 俯身侧平举 3组 递减组&lt;/p&gt;
+&lt;h2 id=&#34;周五背阔肌大腿小腿&#34;&gt;周五：背阔肌、大腿、小腿&lt;/h2&gt;
+&lt;p&gt;宽握引体向上 共30个，可分多组 哑铃深蹲 6组 12RM 哑铃相扑深蹲 4组 12RM 哑铃箭步蹲 4组 12RM 哑铃直腿硬拉 4组 12RM 哑铃站姿提踵 4组 12RM 骑驴提踵 4组 做到力竭 腹肌训练：每天训练完后练两组卷腹和侧卷腹即可，这个阶段不需要花过多时间专攻腹肌。 PS：这样的计划分配只是建议，如果你没经验，就按照计划来练；当你有一定训练心得，有经验了，按照自己的实际情况调整计划。 动作简述及文章原文见 &lt;a href=&#34;https://www.zhihu.com/question/22716525/answer/22778058&#34;&gt;知乎回答&lt;/a&gt; 另外除训练篇幅里推荐的动作，我列一些在宿舍训练时，各部位可行的动作清单，如果你有需要突破，可以按照自己的实际情况选择，自行百度学习。&lt;/p&gt;
+&lt;p&gt;胸：哑铃卧推（平板、上斜、下斜）、哑铃飞鸟（平板、上斜、下斜）、俯卧撑（超宽距、宽距、中距、窄距、手垫高、脚垫高、反手）、屈臂撑、仰卧直臂上拉、拉力绳夹胸（往上、往下、水平）；&lt;/p&gt;
+&lt;p&gt;背：引体向上（宽距、窄距、正手、反手、颈前、颈后）、哑铃俯身划船、斜凳划船、反向划船、单臂哑铃划船、拉力绳坐姿划船、拉力绳窄距高位下拉、拉力绳反向飞鸟、拉力绳俯身高位下拉、哑铃硬拉、哑铃躬身、哑铃俯卧挺身；&lt;/p&gt;
+&lt;p&gt;肩：哑铃推举、阿诺德推举、反手哑铃推举、前平举、侧平举、俯身侧平举、哑铃直立划船、侧卧侧平举、哑铃耸肩、拉力绳肩上推举、拉力绳侧平举、拉力绳俯身侧平举；&lt;/p&gt;
+&lt;p&gt;肱三：坐姿颈后哑铃臂屈伸、哑铃臂屈伸、仰卧哑铃臂屈伸、仰卧窄距哑铃推举、俯身哑铃臂屈伸、屈臂撑（后倾）、背后屈臂撑、拉力绳臂屈伸；&lt;/p&gt;
+&lt;p&gt;肱二：哑铃弯举、交替哑铃弯举、锤式弯举、仰卧哑铃弯举、斜托哑铃弯举、集中弯举、拉力绳弯举；&lt;/p&gt;
+&lt;p&gt;臀腿：哑铃深蹲（/跳）、哑铃箭步蹲（/跳）、哑铃相扑深蹲（/跳）、哑铃直腿硬拉、单腿硬拉、负重臀桥、俯身腿弯举（双脚勾着哑铃）、坐姿腿屈伸（双脚勾着哑铃）、哑铃箱式深蹲、拉力绳深蹲；&lt;/p&gt;
+&lt;p&gt;小腿：哑铃站姿提踵、骑驴提踵、哑铃单腿提踵、哑铃坐姿提踵、反向提踵。&lt;/p&gt;
+&lt;p&gt;腹肌：各类卷腹变式、各类抬腿变式、腹肌撕裂者视频。&lt;/p&gt;
+- http://www.hypermn.cn/posts/%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92%E8%BD%AC/ - 2018-2022 HyperMn</description>
+        </item>
+    
+    
+  </channel>
+</rss> 

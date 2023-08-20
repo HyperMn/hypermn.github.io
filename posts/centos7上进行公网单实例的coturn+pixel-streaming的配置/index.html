@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html><head>
+<title>CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置" />
+<meta property="og:description" content="CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.hypermn.cn/posts/centos7%E4%B8%8A%E8%BF%9B%E8%A1%8C%E5%85%AC%E7%BD%91%E5%8D%95%E5%AE%9E%E4%BE%8B%E7%9A%84coturn&#43;pixel-streaming%E7%9A%84%E9%85%8D%E7%BD%AE/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-17T12:49:05+08:00" />
+<meta property="article:modified_time" content="2021-08-17T12:49:05+08:00" /><meta property="og:site_name" content="HyperMn&#39;s Notes" />
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置"/>
+<meta name="twitter:description" content="CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置"/>
+
+
+
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+
+
+
+<link rel="icon" href="http://image.hypermn.cn/favicon.jpg">
+
+
+
+
+<link rel="stylesheet" href="http://www.hypermn.cn/scss/journal.min.c116bc90d171283f099f173854157ec8f183f9073b93443b2c8ad82899ee9025.css" integrity="sha256-wRa8kNFxKD8Jnxc4VBV&#43;yPGD&#43;Qc7k0Q7LIrYKJnukCU=" media="screen">
+
+
+
+<link rel="stylesheet" href="http://www.hypermn.cn/scss/dark-mode.min.552aae4638a84aa57cf0b195750a49ea9131d3bb621d1ed3ebc9b14b18166536.css" integrity="sha256-VSquRjioSqV88LGVdQpJ6pEx07tiHR7T68mxSxgWZTY=" media="screen">
+
+
+<script src="http://www.hypermn.cn//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://google-fonts.mirrors.sjtug.sjtu.edu.cn/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="http://www.hypermn.cn//js/toc-collapse.js"></script>
+  
+
+
+
+
+
+
+
+<script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://www.hypermn.cn/">
+    
+        <div class="nav-title">
+            个人随笔
+        </div>
+        
+        <div class="nav-subtitle">
+            只言片语，汇聚于此
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                归档
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/link-exchange">
+                友情链接
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about">
+                关于
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2018-2022 HyperMn
+	
+<br><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer noopener">蜀ICP备20002998</a>
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#coturn%e5%ae%89%e8%a3%85%e4%b8%8e%e9%85%8d%e7%bd%ae" onclick="onNavClick(`#coturn安装与配置-nav`)" id="coturn安装与配置-nav">
+									coturn安装与配置
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%ae%89%e8%a3%85%e9%9c%80%e8%a6%81%e7%9a%84%e4%be%9d%e8%b5%96%e5%8c%85" onclick="onNavClick(`#安装需要的依赖包-nav`)" id="安装需要的依赖包-nav">
+									安装需要的依赖包
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#gcc-g-openssl-libevent-devel%e7%ad%89" onclick="onNavClick(`#gcc-g-openssl-libevent-devel等-nav`)" id="gcc-g-openssl-libevent-devel等-nav">
+									GCC G&#43;&#43; OpenSSL Libevent-devel等
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#libevent" onclick="onNavClick(`#libevent-nav`)" id="libevent-nav">
+									libevent
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%ae%89%e8%a3%85coturn" onclick="onNavClick(`#安装coturn-nav`)" id="安装coturn-nav">
+									安装Coturn
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#coturn%e9%85%8d%e7%bd%ae" onclick="onNavClick(`#coturn配置-nav`)" id="coturn配置-nav">
+									Coturn配置
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#stunturn%e9%85%8d%e7%bd%ae%e6%b5%8b%e8%af%95" onclick="onNavClick(`#stunturn配置测试-nav`)" id="stunturn配置测试-nav">
+									STUN/TURN配置测试
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e9%85%8d%e7%bd%aepixel-streaming%e7%9a%84%e4%bf%a1%e4%bb%a4%e6%9c%8d%e5%8a%a1%e5%99%a8" onclick="onNavClick(`#配置pixel-streaming的信令服务器-nav`)" id="配置pixel-streaming的信令服务器-nav">
+									配置Pixel Streaming的信令服务器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%ae%89%e8%a3%85node%e6%9c%8d%e5%8a%a1%e5%99%a8" onclick="onNavClick(`#安装node服务器-nav`)" id="安装node服务器-nav">
+									安装node服务器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%85%8d%e7%bd%aeue4%e6%8f%90%e4%be%9b%e7%9a%84%e4%bf%a1%e4%bb%a4%e6%9c%8d%e5%8a%a1%e5%99%a8" onclick="onNavClick(`#配置ue4提供的信令服务器-nav`)" id="配置ue4提供的信令服务器-nav">
+									配置UE4提供的信令服务器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%8c%81%e4%b9%85%e5%8c%96%e8%bf%90%e8%a1%8cnode" onclick="onNavClick(`#持久化运行node-nav`)" id="持久化运行node-nav">
+									持久化运行node
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    归档
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/link-exchange">
+                    友情链接
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about">
+                    关于
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#coturn%e5%ae%89%e8%a3%85%e4%b8%8e%e9%85%8d%e7%bd%ae" onclick="onNavClick(`#coturn安装与配置-nav`)" id="coturn安装与配置-nav">
+									coturn安装与配置
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%ae%89%e8%a3%85%e9%9c%80%e8%a6%81%e7%9a%84%e4%be%9d%e8%b5%96%e5%8c%85" onclick="onNavClick(`#安装需要的依赖包-nav`)" id="安装需要的依赖包-nav">
+									安装需要的依赖包
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#gcc-g-openssl-libevent-devel%e7%ad%89" onclick="onNavClick(`#gcc-g-openssl-libevent-devel等-nav`)" id="gcc-g-openssl-libevent-devel等-nav">
+									GCC G&#43;&#43; OpenSSL Libevent-devel等
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#libevent" onclick="onNavClick(`#libevent-nav`)" id="libevent-nav">
+									libevent
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%ae%89%e8%a3%85coturn" onclick="onNavClick(`#安装coturn-nav`)" id="安装coturn-nav">
+									安装Coturn
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#coturn%e9%85%8d%e7%bd%ae" onclick="onNavClick(`#coturn配置-nav`)" id="coturn配置-nav">
+									Coturn配置
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#stunturn%e9%85%8d%e7%bd%ae%e6%b5%8b%e8%af%95" onclick="onNavClick(`#stunturn配置测试-nav`)" id="stunturn配置测试-nav">
+									STUN/TURN配置测试
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e9%85%8d%e7%bd%aepixel-streaming%e7%9a%84%e4%bf%a1%e4%bb%a4%e6%9c%8d%e5%8a%a1%e5%99%a8" onclick="onNavClick(`#配置pixel-streaming的信令服务器-nav`)" id="配置pixel-streaming的信令服务器-nav">
+									配置Pixel Streaming的信令服务器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%ae%89%e8%a3%85node%e6%9c%8d%e5%8a%a1%e5%99%a8" onclick="onNavClick(`#安装node服务器-nav`)" id="安装node服务器-nav">
+									安装node服务器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%85%8d%e7%bd%aeue4%e6%8f%90%e4%be%9b%e7%9a%84%e4%bf%a1%e4%bb%a4%e6%9c%8d%e5%8a%a1%e5%99%a8" onclick="onNavClick(`#配置ue4提供的信令服务器-nav`)" id="配置ue4提供的信令服务器-nav">
+									配置UE4提供的信令服务器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%8c%81%e4%b9%85%e5%8c%96%e8%bf%90%e8%a1%8cnode" onclick="onNavClick(`#持久化运行node-nav`)" id="持久化运行node-nav">
+									持久化运行node
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="http://www.hypermn.cn/">
+            个人随笔
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://www.hypermn.cn/">
+        <div class="single-column-header-title">个人随笔</div>
+        
+        <div class="single-column-header-subtitle">只言片语，汇聚于此</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置
+                    
+                    <div class="post-subtitle">
+                        CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2021-08-17 12:49
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/">[技术]</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/pixelstreaming">pixelstreaming</a>
+                                &nbsp;
+                            
+                                <a href="/tags/coturn">coturn</a>
+                                &nbsp;
+                            
+                                <a href="/tags/turnserver">turnserver</a>
+                                &nbsp;
+                            
+                                <a href="/tags/stun">stun</a>
+                                &nbsp;
+                            
+                                <a href="/tags/turn">turn</a>
+                                &nbsp;
+                            
+                        
+                        
+                            <i class="material-icons" style="">schedule</i>
+                            
+
+                            
+                            
+
+                            
+                            5 min
+                            
+                            30 s.
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <ul>
+<li>博主使用的服务器操作系统：CentOS7 x86_64</li>
+</ul>
+<h1 id="coturn安装与配置">coturn安装与配置</h1>
+<h2 id="安装需要的依赖包">安装需要的依赖包</h2>
+<h3 id="gcc-g-openssl-libevent-devel等">GCC G++ OpenSSL Libevent-devel等</h3>
+<h3 id="libevent">libevent</h3>
+<ol>
+<li>
+<p>在http://libevent.org/下载libevent-2.1.8-stable.tar.gz（最新版即可，不必完全一致，但和coturn、openssl版本有一些对应关系）</p>
+</li>
+<li>
+<p>tar -zxvf libevent-2.1.8-stable.tar.gz</p>
+</li>
+<li>
+<p>cd libevent-2.1.8-stable</p>
+</li>
+<li>
+<p>/configure</p>
+</li>
+<li>
+<p>make</p>
+</li>
+<li>
+<p>make install</p>
+</li>
+</ol>
+<p>默认安装在/usr/local/lib，也会输出“Libraries have been installed in:   Path Name”，表明已经安装在了Path Name下。</p>
+<h2 id="安装coturn">安装Coturn</h2>
+<p>其他博主多数推荐从GitHub下载coturn源码编译的方法，但是编译经常会报各种各样的错误，所以对于要求不高的用户，直接采用通过yum等方式安装本地包，在下方的网址下载对应的二进制包文件后本地安装即可。</p>
+<p><a href="https://pkgs.org/download/coturn">Coturn Download (APK, DEB, RPM, TXZ, XZ, ZST) (pkgs.org)</a></p>
+<p>Ubuntu系统自带apt-get，或者在安装了apt包管理器的情况下，也可以通过<code>apt-get install coturn</code>的方式直接安装，可能需要更换镜像源或apt-get upgrade来更新仓库。</p>
+<h2 id="coturn配置">Coturn配置</h2>
+<p>参考了<a href="https://www.jianshu.com/p/915eab39476d">coturn穿透服务器搭建 - 简书 (jianshu.com)</a>的做法</p>
+<ul>
+<li>
+<p>使用<code>ifconfig</code>命令检查网卡和私网地址</p>
+</li>
+<li>
+<p>使用<code>openssl req -x509 -newkey rsa:2048 -keyout /etc/turn_server_pkey.pem -out /etc/turn_server_cert.pem -days 99999 -nodes</code></p>
+<p>来在/etc/下生成公钥和私钥，中间的信息可以不填，一路回车即可。</p>
+</li>
+<li>
+<p>修改配置文件<code>turnserver.conf</code>，可以使用命令<code>whereis turnserver</code>来查看turnserver.conf的所在路径，一般在<code>/etc/</code>下或是<code>/etc/coturn/</code>下，listening-ip与relay-ip采用内网ip，external-ip是外网的ip</p>
+</li>
+<li>
+<pre><code class="language-conf" data-lang="conf">relay-device=eth0   #与前ifconfig查到的网卡名称一致
+listening-ip=172.18.77.60    #内网IP
+listening-port=3478
+tls-listening-port=5349
+relay-ip=172.18.77.60
+external-ip=47.107.110.xxx    #公网IP
+relay-threads=50
+lt-cred-mech
+cert=/etc/turn_server_cert.pem
+pkey=/etc/turn_server_pkey.pem
+pidfile=”/var/run/turnserver.pid”
+min-port=49000
+max-port=50000
+user=user:12345678    #用户名密码，创建IceServer时用
+cli-password=123456 #
+</code></pre></li>
+</ul>
+<p>记得删除所有#注释内容</p>
+<h3 id="stunturn配置测试">STUN/TURN配置测试</h3>
+<p>输入以下命令开启turnserver进行测试</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">turnserver -a -f -user<span style="color:#f92672">=</span>user:12345678
+</code></pre></div><p>具体参数可以参考<a href="https://www.cnblogs.com/mobilecard/p/6542294.html">turnserver 配置说明记录 - 磨叽开发者 - 博客园 (cnblogs.com)</a></p>
+<p>然后在google提供的如下地址可以进行stun/turn连通性的测试</p>
+<p><a href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/">Trickle ICE (webrtc.github.io)</a></p>
+<h1 id="配置pixel-streaming的信令服务器">配置Pixel Streaming的信令服务器</h1>
+<h3 id="安装node服务器">安装node服务器</h3>
+<h3 id="配置ue4提供的信令服务器">配置UE4提供的信令服务器</h3>
+<p>从<code>C:\Program Files\Epic Games\UE_4.26\Engine\Source\Programs\PixelStreaming\WebServers\SignallingWebServer</code>下复制全部内容至服务器上</p>
+<p>修改config.json中的stun/turn的ip:port以及user,pswd为自己所配置的内容。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+	<span style="color:#f92672">&#34;UseFrontend&#34;</span>: <span style="color:#66d9ef">false</span>,
+	<span style="color:#f92672">&#34;UseMatchmaker&#34;</span>: <span style="color:#66d9ef">false</span>,
+	<span style="color:#f92672">&#34;UseHTTPS&#34;</span>: <span style="color:#66d9ef">false</span>,
+	<span style="color:#f92672">&#34;UseAuthentication&#34;</span>: <span style="color:#66d9ef">false</span>,
+	<span style="color:#f92672">&#34;LogToFile&#34;</span>: <span style="color:#66d9ef">true</span>,
+	<span style="color:#f92672">&#34;HomepageFile&#34;</span>: <span style="color:#e6db74">&#34;player.htm&#34;</span>,
+	<span style="color:#f92672">&#34;AdditionalRoutes&#34;</span>: {},
+	<span style="color:#f92672">&#34;EnableWebserver&#34;</span>: <span style="color:#66d9ef">true</span>,
+	<span style="color:#f92672">&#34;peerConnectionOptions&#34;</span>: <span style="color:#e6db74">&#34;{\&#34;offerExtmapAllowMixed\&#34;: false, \&#34;iceServers\&#34;: [{\&#34;urls\&#34;: [\&#34;stun:42.193.xxx.xxx:3478\&#34;,\&#34;turn:42.193.xxx.xxx:3478\&#34;], \&#34;username\&#34;: \&#34;user\&#34;, \&#34;credential\&#34;: \&#34;pswd\&#34;}] }&#34;</span>,
+	<span style="color:#f92672">&#34;steamerPort&#34;</span>: <span style="color:#ae81ff">18888</span>,
+	<span style="color:#f92672">&#34;httpPort&#34;</span>: <span style="color:#ae81ff">66</span>,
+	<span style="color:#f92672">&#34;publicIp&#34;</span>: <span style="color:#e6db74">&#34;47.98.xxx.xxx&#34;</span>
+}
+</code></pre></div><p>测试一下信令服务器运行<code>node cirrus --configFile='./config.json'</code></p>
+<h3 id="持久化运行node">持久化运行node</h3>
+<p>如果想持久运行node，可以参考另一篇文章</p>
+<p><a href="http://www.hypermn.cn/posts/%E4%BD%BF%E7%94%A8pm2%E8%BF%90%E8%A1%8Cnode.js%E6%9C%8D%E5%8A%A1/">使用PM2运行node.js服务 (hypermn.cn)</a></p>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2021-08-17</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="http://www.hypermn.cn/posts/%E6%8E%A8%E8%8D%90%E4%B8%80%E4%BA%9B%E6%8F%90%E9%AB%98%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E7%9A%84pc%E7%AB%AF%E8%BD%AF%E4%BB%B6/">
+			下回<br>推荐一些提高工作效率的PC端软件
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://www.hypermn.cn/posts/%E4%BD%BF%E7%94%A8pm2%E8%BF%90%E8%A1%8Cnode.js%E6%9C%8D%E5%8A%A1/">
+			上回<br>使用PM2运行node.js服务
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+  <span id="/posts/centos7%E4%B8%8A%E8%BF%9B%E8%A1%8C%E5%85%AC%E7%BD%91%E5%8D%95%E5%AE%9E%E4%BE%8B%E7%9A%84coturn&#43;pixel-streaming%E7%9A%84%E9%85%8D%E7%BD%AE/" class="leancloud_visitors" data-flag-title="CentOS7上进行公网单实例的Coturn &#43; Pixel Streaming的配置">
+    <span class="post-meta-item-text">本文被阅读了</span>
+    <span class="leancloud-visitors-count">-1</span>
+    <span class="post-meta-item-text">次</span>
+    <p></p>
+  </span>
+<div id="vcomments"></div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2018-2022 HyperMn
+	
+<br><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer noopener">蜀ICP备20002998</a></div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+            new Valine({
+                el: '#vcomments',
+                appId: "z8RPLrUV3Mg90N0lQhn2Hh2O-gzGzoHsz",
+                appKey: "8vyFp2xk0ykpK907xTWwf2zv",
+		avatar_cdn: 'https:\/\/cdn.v2ex.com\/gravatar\/',
+                requiredFields: ['nick'],
+                enableQQ: true,
+                recordIP: true,
+		avatar: 'mp',
+		visitor:  true ,
+		placeholder: '说点什么吧...',
+		notify:  false ,
+		verify:  false 
+            })
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="http://www.hypermn.cn//js/journal.js"></script>
+    </body>
+</html>

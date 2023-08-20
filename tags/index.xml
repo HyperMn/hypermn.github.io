@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 个人随笔</title>
+    <link>http://www.hypermn.cn/tags/</link>
+    <description>Recent content in Tags on 个人随笔</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2018-2022 HyperMn</copyright>
+    <lastBuildDate>Tue, 14 Sep 2021 19:19:42 +0800</lastBuildDate><atom:link href="http://www.hypermn.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C语言</title>
+      <link>http://www.hypermn.cn/tags/c%E8%AF%AD%E8%A8%80/</link>
+      <pubDate>Tue, 14 Sep 2021 19:19:42 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/c%E8%AF%AD%E8%A8%80/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IDE</title>
+      <link>http://www.hypermn.cn/tags/ide/</link>
+      <pubDate>Tue, 14 Sep 2021 19:19:42 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/ide/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>efficiency</title>
+      <link>http://www.hypermn.cn/tags/efficiency/</link>
+      <pubDate>Sun, 22 Aug 2021 00:50:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/efficiency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>http://www.hypermn.cn/tags/tools/</link>
+      <pubDate>Sun, 22 Aug 2021 00:50:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coturn</title>
+      <link>http://www.hypermn.cn/tags/coturn/</link>
+      <pubDate>Tue, 17 Aug 2021 12:49:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/coturn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pixelstreaming</title>
+      <link>http://www.hypermn.cn/tags/pixelstreaming/</link>
+      <pubDate>Tue, 17 Aug 2021 12:49:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/pixelstreaming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stun</title>
+      <link>http://www.hypermn.cn/tags/stun/</link>
+      <pubDate>Tue, 17 Aug 2021 12:49:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/stun/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>turn</title>
+      <link>http://www.hypermn.cn/tags/turn/</link>
+      <pubDate>Tue, 17 Aug 2021 12:49:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/turn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>turnserver</title>
+      <link>http://www.hypermn.cn/tags/turnserver/</link>
+      <pubDate>Tue, 17 Aug 2021 12:49:05 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/turnserver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>link-exchange</title>
+      <link>http://www.hypermn.cn/tags/link-exchange/</link>
+      <pubDate>Mon, 30 Nov 2020 11:25:50 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/link-exchange/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://www.hypermn.cn/tags/about/</link>
+      <pubDate>Sun, 29 Nov 2020 19:58:50 +0800</pubDate>
+      
+      <guid>http://www.hypermn.cn/tags/about/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
